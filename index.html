@@ -5,22 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>欣媒體 — Curated Visual Portal</title>
 
-<!-- Open Graph -->
+<!-- Favicon & OG -->
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<meta name="theme-color" content="#08080A">
 <meta property="og:title" content="欣媒體 — 欣媒體版圖">
 <meta property="og:description" content="欣媒體旗下六大網站入口——藝品藝廊、入梯毛孩、毛毛邏輯、順寵圖鑑、安寵好好學、九回房地。">
 <meta property="og:image" content="assets/og-image.png">
+<meta property="og:url" content="https://9return.com.tw/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="欣媒體">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="欣媒體 — Curated Visual Portal">
 <meta name="twitter:image" content="assets/og-image.png">
 
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
-<link rel="preload" as="image" href="https://aka.doubaocdn.com/s/l9TnXUQNvp" type="image/webp">
-<link rel="preload" as="image" href="https://aka.doubaocdn.com/s/2UNMAy1OAh">
-<style>
-/* ===== Reset ===== */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+<style>
+/* ===== Reset & Variables ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg: #08080A;
   --bg-2: #0E0E12;
@@ -36,9 +39,7 @@
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 html { scroll-behavior: smooth; }
-
 body {
   background: var(--bg);
   color: var(--white);
@@ -47,58 +48,23 @@ body {
   line-height: 1.5;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  cursor: none;
 }
+a { color: inherit; text-decoration: none; }
 
-/* ===== Custom Cursor ===== */
-.cursor-dot {
-  position: fixed;
-  width: 8px; height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10000;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s var(--ease);
-  mix-blend-mode: difference;
-}
-.cursor-ring {
-  position: fixed;
-  width: 36px; height: 36px;
-  border: 1px solid rgba(232, 200, 75, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s var(--ease), height 0.4s var(--ease), border-color 0.4s var(--ease), background 0.4s var(--ease);
-}
-.cursor-ring.hover {
-  width: 72px; height: 72px;
-  border-color: var(--accent);
-  background: rgba(232, 200, 75, 0.08);
-}
-.cursor-dot.hover { width: 0; height: 0; }
-
-/* ===== Animated Background Orbs ===== */
+/* ===== Background Orbs ===== */
 .bg-orbs {
-  position: fixed;
-  top: 0; left: 0;
+  position: fixed; top: 0; left: 0;
   width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
+  pointer-events: none; z-index: 0; overflow: hidden;
 }
 .orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.15;
+  position: absolute; border-radius: 50%;
+  filter: blur(100px); opacity: 0.15;
   animation: orb-float 20s var(--ease) infinite alternate;
 }
 .orb-1 { width: 500px; height: 500px; background: var(--accent); top: -10%; left: -5%; animation-duration: 25s; }
 .orb-2 { width: 400px; height: 400px; background: var(--accent-2); top: 40%; right: -8%; animation-duration: 30s; animation-delay: -5s; }
 .orb-3 { width: 350px; height: 350px; background: var(--accent-3); bottom: -10%; left: 30%; animation-duration: 22s; animation-delay: -10s; }
-
 @keyframes orb-float {
   0% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(60px, -40px) scale(1.1); }
@@ -106,14 +72,11 @@ body {
   100% { transform: translate(40px, 20px) scale(1.05); }
 }
 
-/* ===== Grain Overlay ===== */
+/* ===== Grain ===== */
 .grain {
-  position: fixed;
-  top: -50%; left: -50%;
+  position: fixed; top: -50%; left: -50%;
   width: 200%; height: 200%;
-  pointer-events: none;
-  z-index: 9998;
-  opacity: 0.04;
+  pointer-events: none; z-index: 9998; opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain-shift 0.5s steps(4) infinite;
 }
@@ -127,540 +90,285 @@ body {
 
 /* ===== Navigation ===== */
 .nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
+  position: fixed; top: 0; left: 0; right: 0;
   z-index: 100;
-  padding: 24px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 18px 40px;
+  display: flex; justify-content: space-between; align-items: center;
   backdrop-filter: blur(20px);
-  background: rgba(8, 8, 10, 0.4);
+  background: rgba(8, 8, 10, 0.45);
   border-bottom: 1px solid rgba(242, 240, 235, 0.06);
 }
 .nav-logo {
   font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 17px; font-weight: 700;
+  letter-spacing: 0.01em;
+  display: flex; align-items: center; gap: 10px;
 }
 .nav-logo-dot {
-  width: 10px; height: 10px;
-  background: var(--accent);
-  border-radius: 50%;
+  width: 9px; height: 9px;
+  background: var(--accent); border-radius: 50%;
   animation: pulse-dot 2s var(--ease) infinite;
 }
 @keyframes pulse-dot {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.4); opacity: 0.6; }
 }
-.nav-logo em { font-style: normal; color: var(--accent); font-weight: 400; margin: 0 2px; }
-
-.nav-tags { display: flex; gap: 8px; }
-.nav-tag {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 6px 14px;
-  border: 1px solid var(--white-faint);
-  border-radius: 100px;
-  color: var(--white-dim);
-  transition: all 0.3s var(--ease);
-  text-decoration: none;
+.nav-logo em { font-style: normal; color: var(--accent); font-weight: 400; margin: 0 3px; }
+.nav-right {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 13px;
 }
-.nav-tag:hover { border-color: var(--accent); color: var(--accent); }
-.nav-contact { display: flex; align-items: center; }
-.nav-contact-link {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--white-dim);
-  text-decoration: none;
-  letter-spacing: 0.03em;
-  transition: color 0.3s var(--ease);
-}
-.nav-contact-link:hover { color: var(--accent); }
-.nav-contact-link svg { width: 14px; height: 14px; }
+.nav-right a { transition: color 0.3s var(--ease); }
+.nav-right a:hover { color: var(--accent); }
+.nav-sep { color: var(--white-faint); font-weight: 300; }
+.nav-phone { display: flex; align-items: center; gap: 5px; }
+.nav-phone svg { width: 13px; height: 13px; }
 
 /* ===== Hero ===== */
 .hero {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 28px 40px 0;
-  z-index: 2;
+  position: relative; z-index: 2;
+  padding: 100px 40px 0;
   background-image:
-    linear-gradient(180deg, rgba(8,8,10,0.5) 0%, rgba(8,8,10,0.7) 50%, rgba(8,8,10,0.95) 100%),
+    linear-gradient(180deg, rgba(8,8,10,0.45) 0%, rgba(8,8,10,0.7) 60%, rgba(8,8,10,0.95) 100%),
     url('https://aka.doubaocdn.com/s/2UNMAy1OAh');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: cover; background-position: center; background-repeat: no-repeat;
 }
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(48px, 7vw, 110px);
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(52px, 9vw, 130px);
+  font-weight: 800; line-height: 0.92; letter-spacing: -0.03em;
 }
 .hero-title .line { display: block; overflow: hidden; }
-.hero-title .line:nth-child(1) { margin-bottom: 0.12em; }
+.hero-title .line:nth-child(1) { margin-bottom: 0.1em; }
 .hero-title .line-inner {
-  display: block;
-  opacity: 0;
-  transform: translateY(110%);
+  display: block; opacity: 0; transform: translateY(110%);
   animation: title-rise 1s var(--ease-out) forwards;
 }
 .hero-title .line:nth-child(1) .line-inner { animation-delay: 0.3s; }
 .hero-title .line:nth-child(2) .line-inner { animation-delay: 0.45s; }
 .hero-title em {
-  font-style: italic;
-  font-weight: 400;
+  font-style: italic; font-weight: 400;
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .hero-title .hero-orange {
   -webkit-text-stroke: 1.5px var(--accent-2);
-  -webkit-text-fill-color: transparent;
-  font-weight: 400;
-}
-.hero-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-top: 14px;
-  padding-bottom: 20px;
+  -webkit-text-fill-color: transparent; font-weight: 400;
 }
 .hero-desc {
-  max-width: 460px;
+  max-width: 480px; margin-top: 18px; padding-bottom: 28px;
   font-family: var(--font-tc);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.8;
-  color: var(--white);
-  opacity: 0;
-  animation: fade-up 0.8s var(--ease-out) 0.7s forwards;
+  font-size: 14px; font-weight: 400; line-height: 1.85; color: var(--white);
+  opacity: 0; animation: fade-up 0.8s var(--ease-out) 0.7s forwards;
+}
+@keyframes title-rise {
+  from { opacity: 0; transform: translateY(110%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ===== Marquee ===== */
 .marquee {
-  position: relative;
-  z-index: 2;
-  padding: 10px 0;
+  position: relative; z-index: 2;
+  padding: 12px 0;
   border-top: 1px solid rgba(242, 240, 235, 0.06);
   border-bottom: 1px solid rgba(242, 240, 235, 0.06);
-  overflow: hidden;
-  white-space: nowrap;
+  overflow: hidden; white-space: nowrap;
 }
 .marquee-track {
-  display: inline-flex;
-  align-items: center;
-  gap: 48px;
-  animation: marquee-scroll 15s linear infinite;
+  display: inline-flex; align-items: center; gap: 48px;
+  animation: marquee-scroll 14s linear infinite;
 }
 .marquee-item {
   font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 500;
-  font-style: normal;
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  gap: 48px;
-  text-decoration: none;
+  font-size: 14px; font-weight: 500; font-style: normal; color: var(--white);
+  display: flex; align-items: center; gap: 48px;
   transition: color 0.3s var(--ease);
 }
 .marquee-item:hover { color: var(--accent); }
 .marquee-item::after {
-  content: '';
-  width: 8px; height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-  flex-shrink: 0;
+  content: ''; width: 7px; height: 7px;
+  background: var(--accent); border-radius: 50%; flex-shrink: 0;
 }
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 
-/* ===== Bento Grid Section ===== */
+/* ===== Bento Grid ===== */
 .grid-section {
-  position: relative;
-  padding: 80px 40px 100px;
-  z-index: 2;
+  position: relative; z-index: 2;
+  padding: 56px 40px 72px;
 }
 .section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 48px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 32px;
 }
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(32px, 5vw, 64px);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 600; letter-spacing: -0.02em; line-height: 1;
 }
 .section-title em { font-style: italic; font-weight: 400; color: var(--accent); }
 .section-sub {
-  font-size: 13px;
-  color: var(--white-dim);
-  max-width: 300px;
-  text-align: right;
-  line-height: 1.6;
+  font-size: 12px; color: var(--white-dim); max-width: 280px; text-align: right; line-height: 1.6;
 }
-
-/* Bento Grid — first version layout */
 .bento {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 280px;
-  gap: 16px;
+  grid-auto-rows: 260px;
+  gap: 14px;
 }
-
-/* Card Base */
 .card {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  cursor: none;
-  opacity: 0;
-  transform: translateY(40px) scale(0.97);
-  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  content-visibility: auto;
-  contain-intrinsic-size: 280px;
+  position: relative; border-radius: 16px; overflow: hidden;
+  opacity: 0; transform: translateY(30px) scale(0.97);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
 }
-.card.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
+.card.visible { opacity: 1; transform: translateY(0) scale(1); }
 .card-img {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 1.2s var(--ease-out), filter 0.6s var(--ease-out);
-  animation: kenburns 20s var(--ease) infinite alternate;
-  filter: saturate(0.85) brightness(0.8);
-  background: var(--bg-2);
-  transform: translateZ(0);
+  transition: transform 1s var(--ease-out), filter 0.5s var(--ease-out);
+  filter: saturate(0.85) brightness(0.75);
 }
-@keyframes kenburns {
-  0% { transform: scale(1) translate(0, 0); }
-  100% { transform: scale(1.15) translate(-2%, -2%); }
-}
-.card:hover .card-img {
-  transform: scale(1.2);
-  filter: saturate(1.1) brightness(0.55);
-  animation-play-state: paused;
-}
-
+.card:hover .card-img { transform: scale(1.12); filter: saturate(1.05) brightness(0.5); }
 .card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.85) 0%,
-    rgba(0,0,0,0.3) 40%,
-    rgba(0,0,0,0) 70%
-  );
-  transition: background 0.5s var(--ease-out);
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0) 70%);
+  transition: background 0.4s var(--ease-out);
 }
-.card:hover .card-overlay {
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.92) 0%,
-    rgba(0,0,0,0.5) 50%,
-    rgba(0,0,0,0.1) 100%
-  );
-}
-
-.card-content {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 28px;
-  z-index: 2;
-}
+.card:hover .card-overlay { background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.08) 100%); }
+.card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; z-index: 2; }
 .card-num {
-  position: absolute;
-  top: 20px; right: 24px;
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 500;
-  font-style: italic;
-  color: var(--white-faint);
-  z-index: 2;
-  transition: color 0.4s var(--ease);
+  position: absolute; top: 18px; right: 20px;
+  font-family: var(--font-display); font-size: 13px; font-weight: 500; font-style: italic;
+  color: var(--white-faint); z-index: 2; transition: color 0.3s var(--ease);
 }
 .card:hover .card-num { color: var(--accent); }
-
 .card-cat {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 10px;
-  padding: 4px 10px;
-  border: 1px solid rgba(232, 200, 75, 0.3);
-  border-radius: 100px;
-  backdrop-filter: blur(8px);
-  background: rgba(0,0,0,0.2);
-  transform: translateY(10px);
-  opacity: 0;
-  transition: all 0.4s var(--ease-out) 0.05s;
+  display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px; padding: 3px 9px;
+  border: 1px solid rgba(232, 200, 75, 0.3); border-radius: 100px;
+  backdrop-filter: blur(6px); background: rgba(0,0,0,0.2);
+  transform: translateY(8px); opacity: 0; transition: all 0.35s var(--ease-out) 0.05s;
 }
 .card:hover .card-cat { transform: translateY(0); opacity: 1; }
-
 .card-name {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 1.1;
-  margin-bottom: 6px;
-  transform: translateY(0);
-  transition: transform 0.4s var(--ease-out);
+  font-family: var(--font-display); font-size: 22px; font-weight: 700; line-height: 1.1; margin-bottom: 5px;
+  transition: transform 0.35s var(--ease-out);
 }
-.card:hover .card-name { transform: translateY(-4px); }
+.card:hover .card-name { transform: translateY(-3px); }
 .card-name .sub {
-  display: block;
-  font-family: var(--font-tc);
-  font-size: 0.5em;
-  font-weight: 400;
-  color: var(--white-dim);
-  margin-top: 4px;
-  letter-spacing: 0.08em;
+  display: block; font-family: var(--font-tc); font-size: 0.48em; font-weight: 400;
+  color: var(--white-dim); margin-top: 3px; letter-spacing: 0.06em;
 }
-
 .card-desc {
-  font-size: 13px;
-  font-weight: 300;
-  color: var(--white-dim);
-  line-height: 1.5;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.5s var(--ease-out), opacity 0.4s var(--ease-out) 0.1s, margin 0.4s var(--ease-out);
+  font-size: 12px; font-weight: 300; color: var(--white-dim); line-height: 1.5;
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.45s var(--ease-out), opacity 0.35s var(--ease-out) 0.08s, margin 0.35s var(--ease-out);
 }
-.card:hover .card-desc {
-  max-height: 80px;
-  opacity: 1;
-  margin-top: 8px;
-}
-
+.card:hover .card-desc { max-height: 70px; opacity: 1; margin-top: 7px; }
 .card-url {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 14px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--accent);
-  letter-spacing: 0.04em;
-  transform: translateY(10px);
-  opacity: 0;
-  transition: all 0.4s var(--ease-out) 0.15s;
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 12px;
+  font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 0.03em;
+  transform: translateY(8px); opacity: 0; transition: all 0.35s var(--ease-out) 0.12s;
 }
 .card:hover .card-url { transform: translateY(0); opacity: 1; }
-.card-url svg { width: 14px; height: 14px; transition: transform 0.3s var(--ease); }
-.card:hover .card-url svg { transform: translateX(4px); }
-
+.card-url svg { width: 13px; height: 13px; transition: transform 0.3s var(--ease); }
+.card:hover .card-url svg { transform: translateX(3px); }
 .card-corner {
-  position: absolute;
-  top: 0; left: 0;
-  width: 0; height: 3px;
+  position: absolute; top: 0; left: 0; width: 0; height: 3px;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  transition: width 0.5s var(--ease-out);
-  z-index: 3;
+  transition: width 0.45s var(--ease-out); z-index: 3;
 }
 .card:hover .card-corner { width: 100%; }
 
-/* ===== First version Bento Spans ===== */
+/* Bento spans */
 .card-1 { grid-column: span 2; grid-row: span 2; }
-.card-2 { grid-column: span 1; grid-row: span 1; }
-.card-3 { grid-column: span 1; grid-row: span 1; }
-.card-4 { grid-column: span 1; grid-row: span 1; }
-.card-5 { grid-column: span 1; grid-row: span 1; }
+.card-2, .card-3, .card-4, .card-5 { grid-column: span 1; grid-row: span 1; }
 .card-6 { grid-column: span 4; grid-row: span 1; }
-
-.card-1 .card-name { font-size: 40px; }
-.card-1 .card-desc { font-size: 14px; max-width: 380px; }
-.card-6 .card-name { font-size: 34px; }
-.card-6 .card-desc { font-size: 14px; max-width: 500px; }
+.card-1 .card-name { font-size: 36px; }
+.card-1 .card-desc { font-size: 13px; max-width: 360px; }
+.card-6 .card-name { font-size: 30px; }
+.card-6 .card-desc { font-size: 13px; max-width: 480px; }
 
 /* ===== Footer ===== */
 .footer {
-  position: relative;
-  z-index: 2;
-  padding: 56px 40px 32px;
+  position: relative; z-index: 2;
+  padding: 40px 40px 24px;
   border-top: 1px solid rgba(242, 240, 235, 0.06);
 }
 .footer-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 32px;
+  max-width: 1400px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 28px;
 }
 .footer-brand {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
 }
 .footer-brand em { font-style: italic; color: var(--accent); }
-.footer-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 36px;
-}
-.footer-info-item {
-  font-size: 13px;
-  color: var(--white-dim);
-  line-height: 1.8;
-}
+.footer-info { display: flex; flex-wrap: wrap; gap: 32px; }
+.footer-info-item { font-size: 13px; color: var(--white-dim); line-height: 1.8; }
 .footer-info-item strong {
-  color: var(--white);
-  font-weight: 500;
-  display: block;
-  margin-bottom: 4px;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  opacity: 0.7;
+  color: var(--white); font-weight: 500; display: block; margin-bottom: 3px;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.65;
 }
-.footer-info-item a {
-  color: var(--white-dim);
-  text-decoration: none;
-  transition: color 0.3s var(--ease);
-}
+.footer-info-item a { transition: color 0.3s var(--ease); }
 .footer-info-item a:hover { color: var(--accent); }
-.footer-social {
-  display: flex;
-  gap: 10px;
-  margin-top: 4px;
-}
+.footer-social { display: flex; gap: 9px; margin-top: 3px; }
 .footer-social a {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
+  width: 36px; height: 36px; border-radius: 50%;
   border: 1px solid var(--white-faint);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white-dim);
-  text-decoration: none;
-  transition: all 0.3s var(--ease);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white-dim); transition: all 0.3s var(--ease);
 }
-.footer-social a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
-}
-.footer-social svg { width: 16px; height: 16px; }
+.footer-social a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.footer-social svg { width: 15px; height: 15px; }
 .footer-bottom {
-  width: 100%;
-  text-align: center;
-  margin-top: 36px;
-  padding-top: 20px;
+  width: 100%; text-align: center; margin-top: 28px; padding-top: 16px;
   border-top: 1px solid rgba(242, 240, 235, 0.06);
-  font-size: 11px;
-  color: var(--white-faint);
-  letter-spacing: 0.08em;
-}
-
-/* ===== Animations ===== */
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes title-rise {
-  from { opacity: 0; transform: translateY(110%); }
-  to { opacity: 1; transform: translateY(0); }
+  font-size: 11px; color: var(--white-faint); letter-spacing: 0.06em;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
-  .bento {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 260px;
-  }
+  .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 240px; }
   .card-1 { grid-column: span 2; grid-row: span 2; }
   .card-6 { grid-column: span 2; }
   .card-2, .card-3, .card-4, .card-5 { grid-column: span 1; }
 }
-
-@media (max-width: 640px) {
-  body { cursor: auto; }
-  .cursor-dot, .cursor-ring { display: none; }
-  .nav { padding: 16px 20px; }
-  .nav-tags { display: none; }
-  .nav-contact { display: none; }
-  .hero { padding: 100px 20px 60px; min-height: 90vh; background-position: center top; }
-  .hero-top { flex-direction: column; gap: 12px; }
-  .hero-meta { text-align: left; }
-  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 32px; }
-  .grid-section { padding: 50px 20px 70px; }
-  .section-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+@media (max-width: 768px) {
+  .nav { padding: 14px 20px; }
+  .nav-logo { font-size: 14px; }
+  .nav-right .nav-home { display: none; }
+  .nav-right .nav-sep { display: none; }
+  .hero { padding: 84px 20px 0; }
+  .hero-desc { font-size: 13px; padding-bottom: 22px; }
+  .grid-section { padding: 40px 20px 56px; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
   .section-sub { text-align: left; }
-  .bento {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 280px;
-  }
+  .bento { grid-template-columns: 1fr; grid-auto-rows: 260px; }
   .card-1, .card-6 { grid-column: span 1; grid-row: span 1; }
   .card-1 .card-name { font-size: 28px; }
-  .card-6 .card-name { font-size: 26px; }
-  .footer { padding: 40px 20px 30px; }
+  .card-6 .card-name { font-size: 24px; }
+  .footer { padding: 32px 20px 20px; }
   .footer-inner { flex-direction: column; text-align: center; }
+  .footer-info { justify-content: center; }
+  .footer-social { justify-content: center; }
 }
-
-/* ===== Reduced Motion ===== */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .card, .hero-label, .hero-meta, .hero-desc, .hero-scroll-indicator {
-    opacity: 1 !important; transform: none !important;
-  }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .card, .hero-desc { opacity: 1 !important; transform: none !important; }
   .card-img { animation: none !important; }
 }
 </style>
 </head>
 <body>
 
-<!-- Custom Cursor -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- Background Orbs -->
-<div class="bg-orbs">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-</div>
-
-<!-- Grain -->
+<!-- Background -->
+<div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
 <div class="grain"></div>
 
 <!-- ===== Navigation ===== -->
@@ -669,10 +377,10 @@ body {
     <span class="nav-logo-dot"></span>
     欣媒體<em>｜</em>沒有做不到，只有想不到
   </a>
-  <div class="nav-contact">
-    <a href="./index.html" class="nav-contact-link">回首頁</a>
-    <span style="color:rgba(242,240,235,.25);margin:0 10px;font-weight:300">｜</span>
-    <a href="tel:0968222201" class="nav-contact-link">
+  <div class="nav-right">
+    <a href="./index.html" class="nav-home">回首頁</a>
+    <span class="nav-sep">｜</span>
+    <a href="tel:0968222201" class="nav-phone">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       0968-222201
     </a>
@@ -685,12 +393,9 @@ body {
     <span class="line"><span class="line-inner">Digital</span></span>
     <span class="line"><span class="line-inner"><em>Estate</em> <span class="hero-orange">欣媒體</span></span></span>
   </h1>
-
-  <div class="hero-bottom">
-    <p class="hero-desc">
-      欣媒體旗下六大網站入口——從藝品藝廊到毛孩生活，從房地資訊到寵物知識，每一個連結都是一個獨立的內容世界。點擊畫作，進入對應網站。
-    </p>
-  </div>
+  <p class="hero-desc">
+    欣媒體旗下六大網站入口——從藝品藝廊到毛孩生活，從房地資訊到寵物知識，每一個連結都是一個獨立的內容世界。點擊畫作，進入對應網站。
+  </p>
 </section>
 
 <!-- ===== Marquee ===== -->
@@ -717,11 +422,10 @@ body {
     <h2 class="section-title">The <em>Gallery</em></h2>
     <p class="section-sub">滑鼠移至畫作上窺見細節，點擊進入對應網站</p>
   </div>
-
   <div class="bento" id="bento">
 
-    <!-- Card 01: 藝品藝廊 — large 2x2 -->
-    <a class="card card-1" href="https://331.today" target="_blank" rel="noopener noreferrer" data-tilt>
+    <!-- Card 01: 藝品藝廊 -->
+    <a class="card card-1" href="https://331.today" target="_blank" rel="noopener noreferrer">
       <div class="card-corner"></div>
       <img class="card-img" src="https://aka.doubaocdn.com/s/l9TnXUQNvp" alt="藝品藝廊 331 Gallery" loading="eager" decoding="async" fetchpriority="high" width="1024" height="1024">
       <div class="card-overlay"></div>
@@ -730,95 +434,77 @@ body {
         <span class="card-cat">Art Gallery</span>
         <h3 class="card-name">藝品藝廊<span class="sub">331.today</span></h3>
         <p class="card-desc">當代藝品展售與藝術家平台，以數位畫廊的形式呈現精品藝術收藏，匯聚兩岸三地新銳與資深藝術家作品。</p>
-        <span class="card-url">
-          331.today
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
+        <span class="card-url">331.today <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
 
     <!-- Card 02: 入梯毛孩 -->
-    <a class="card card-2" href="https://zootecture.com" target="_blank" rel="noopener noreferrer" data-tilt>
+    <a class="card card-2" href="https://zootecture.com" target="_blank" rel="noopener noreferrer">
       <div class="card-corner"></div>
-      <img class="card-img" src="https://aka.doubaocdn.com/s/1fDSnavrAl" alt="入梯毛孩 Zootecture" loading="lazy" decoding="async" fetchpriority="low" width="1024" height="1024">
+      <img class="card-img" src="https://aka.doubaocdn.com/s/1fDSnavrAl" alt="入梯毛孩 Zootecture" loading="lazy" decoding="async" width="1024" height="1024">
       <div class="card-overlay"></div>
       <span class="card-num">02</span>
       <div class="card-content">
         <span class="card-cat">Pet Architecture</span>
         <h3 class="card-name">入梯毛孩<span class="sub">zootecture.com</span></h3>
         <p class="card-desc">毛孩與空間的對話。</p>
-        <span class="card-url">
-          zootecture.com
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
+        <span class="card-url">zootecture.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
 
     <!-- Card 03: 毛毛邏輯 -->
-    <a class="card card-3" href="https://petlogic.org" target="_blank" rel="noopener noreferrer" data-tilt>
+    <a class="card card-3" href="https://petlogic.org" target="_blank" rel="noopener noreferrer">
       <div class="card-corner"></div>
-      <img class="card-img" src="https://aka.doubaocdn.com/s/qvxtAFLFgE" alt="毛毛邏輯 Petlogic" loading="lazy" decoding="async" fetchpriority="low" width="1024" height="1024">
+      <img class="card-img" src="https://aka.doubaocdn.com/s/qvxtAFLFgE" alt="毛毛邏輯 Petlogic" loading="lazy" decoding="async" width="1024" height="1024">
       <div class="card-overlay"></div>
       <span class="card-num">03</span>
       <div class="card-content">
         <span class="card-cat">Pet Lifestyle</span>
         <h3 class="card-name">毛毛邏輯<span class="sub">petlogic.org</span></h3>
         <p class="card-desc">用邏輯理解毛孩。</p>
-        <span class="card-url">
-          petlogic.org
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
+        <span class="card-url">petlogic.org <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
 
     <!-- Card 04: 順寵圖鑑 -->
-    <a class="card card-4" href="https://vocus.cc/salon/zootecture" target="_blank" rel="noopener noreferrer" data-tilt>
+    <a class="card card-4" href="https://vocus.cc/salon/zootecture" target="_blank" rel="noopener noreferrer">
       <div class="card-corner"></div>
-      <img class="card-img" src="https://aka.doubaocdn.com/s/aXPHPPQeY1" alt="順寵圖鑑" loading="lazy" decoding="async" fetchpriority="low" width="1024" height="1024">
+      <img class="card-img" src="https://aka.doubaocdn.com/s/aXPHPPQeY1" alt="順寵圖鑑" loading="lazy" decoding="async" width="1024" height="1024">
       <div class="card-overlay"></div>
       <span class="card-num">04</span>
       <div class="card-content">
         <span class="card-cat">Pet Encyclopedia</span>
         <h3 class="card-name">順寵圖鑑<span class="sub">Pets Salon</span></h3>
         <p class="card-desc">寵物品種圖鑑百科。</p>
-        <span class="card-url">
-          vocus.cc/salon/zootecture
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
+        <span class="card-url">vocus.cc/salon/zootecture <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
 
     <!-- Card 05: 安寵好好學 -->
-    <a class="card card-5" href="https://vocus.cc/salon/petlogic" target="_blank" rel="noopener noreferrer" data-tilt>
+    <a class="card card-5" href="https://vocus.cc/salon/petlogic" target="_blank" rel="noopener noreferrer">
       <div class="card-corner"></div>
-      <img class="card-img" src="https://aka.doubaocdn.com/s/S7iTlpBXVH" alt="安寵好好學" loading="lazy" decoding="async" fetchpriority="low" width="1024" height="1024">
+      <img class="card-img" src="https://aka.doubaocdn.com/s/S7iTlpBXVH" alt="安寵好好學" loading="lazy" decoding="async" width="1024" height="1024">
       <div class="card-overlay"></div>
       <span class="card-num">05</span>
       <div class="card-content">
         <span class="card-cat">Pet Education</span>
         <h3 class="card-name">安寵好好學<span class="sub">Petlogic Salon</span></h3>
         <p class="card-desc">寵物照護知識學堂。</p>
-        <span class="card-url">
-          vocus.cc/salon/petlogic
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
+        <span class="card-url">vocus.cc/salon/petlogic <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
 
-    <!-- Card 06: 九回房地 — full width -->
-    <a class="card card-6" href="./dashboard.html" target="_blank" rel="noopener noreferrer" data-tilt>
+    <!-- Card 06: 九回房地 -->
+    <a class="card card-6" href="./dashboard.html">
       <div class="card-corner"></div>
-      <img class="card-img" src="https://aka.doubaocdn.com/s/oApVJn6G2w" alt="九回房地" loading="lazy" decoding="async" fetchpriority="low" width="1024" height="1024">
+      <img class="card-img" src="https://aka.doubaocdn.com/s/oApVJn6G2w" alt="九回房地" loading="lazy" decoding="async" width="1024" height="1024">
       <div class="card-overlay"></div>
       <span class="card-num">06</span>
       <div class="card-content">
         <span class="card-cat">Real Estate</span>
         <h3 class="card-name">九回房地<span class="sub">9return.com.tw</span></h3>
         <p class="card-desc">台灣房地產資訊與建案資料平台，提供最完整的房屋交易、行情與區域分析，是購屋與投資者的專業參考入口。</p>
-        <span class="card-url">
-          9return.com.tw
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
+        <span class="card-url">9return.com.tw <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
 
@@ -854,66 +540,11 @@ body {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       </a>
     </div>
-    <div class="footer-bottom">&copy; 2025 欣媒體 Network &middot; 六站聯播 &middot; 設計規劃開發：張書欣</div>
+    <div class="footer-bottom">&copy; 2026 欣媒體 Network &middot; 六站聯播 &middot; 設計規劃開發：張書欣</div>
   </div>
 </footer>
 
 <script>
-/* ===== Custom Cursor (idle-paused RAF) ===== */
-(function() {
-  var dot = document.getElementById('cursorDot');
-  var ring = document.getElementById('cursorRing');
-  if (!dot || !ring) return;
-  var mx = window.innerWidth / 2, my = window.innerHeight / 2;
-  var rx = mx, ry = my;
-  var rafId = null, idleTimer = null;
-
-  function tick() {
-    rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    if (Math.abs(mx - rx) > 0.3 || Math.abs(my - ry) > 0.3) {
-      rafId = requestAnimationFrame(tick);
-    } else { rafId = null; }
-  }
-  function start() { if (!rafId) rafId = requestAnimationFrame(tick); }
-
-  document.addEventListener('mousemove', function(e) {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-    start();
-    clearTimeout(idleTimer);
-  }, { passive: true });
-
-  document.querySelectorAll('.card, .nav-tag, .nav-logo, a').forEach(function(el) {
-    el.addEventListener('mouseenter', function() { ring.classList.add('hover'); dot.classList.add('hover'); });
-    el.addEventListener('mouseleave', function() { ring.classList.remove('hover'); dot.classList.remove('hover'); });
-  });
-})();
-
-/* ===== 3D Tilt (RAF-batched) ===== */
-(function() {
-  var cards = document.querySelectorAll('[data-tilt]');
-  cards.forEach(function(card) {
-    var pending = false, rotX = 0, rotY = 0;
-    card.addEventListener('mousemove', function(e) {
-      var r = card.getBoundingClientRect();
-      rotX = ((e.clientY - r.top - r.height / 2) / (r.height / 2)) * -5;
-      rotY = ((e.clientX - r.left - r.width / 2) / (r.width / 2)) * 5;
-      if (!pending) {
-        pending = true;
-        requestAnimationFrame(function() {
-          card.style.transform = 'perspective(1000px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) scale(1.02)';
-          pending = false;
-        });
-      }
-    });
-    card.addEventListener('mouseleave', function() {
-      card.style.transform = '';
-      pending = false;
-    });
-  });
-})();
-
 /* ===== Scroll Reveal ===== */
 (function() {
   var cards = document.querySelectorAll('.card');
@@ -922,15 +553,15 @@ body {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         var i = Array.from(cards).indexOf(entry.target);
-        setTimeout(function(){ entry.target.classList.add('visible'); }, i * 100);
+        setTimeout(function(){ entry.target.classList.add('visible'); }, i * 90);
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
   cards.forEach(function(c){ obs.observe(c); });
 })();
 
-/* ===== Parallax Orbs (RAF-throttled) ===== */
+/* ===== Parallax Orbs ===== */
 (function() {
   var orbs = document.querySelectorAll('.orb');
   if (!orbs.length) return;
@@ -940,9 +571,7 @@ body {
       ticking = true;
       requestAnimationFrame(function() {
         var sy = window.pageYOffset;
-        orbs.forEach(function(b, i) {
-          b.style.transform = 'translateY(' + (sy * (i + 1) * 0.08) + 'px)';
-        });
+        orbs.forEach(function(b, i) { b.style.transform = 'translateY(' + (sy * (i + 1) * 0.08) + 'px)'; });
         ticking = false;
       });
     }
