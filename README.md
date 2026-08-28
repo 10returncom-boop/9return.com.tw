@@ -150,3 +150,7 @@ python scripts/build_dashboard.py
 
 - 網站：https://9return.com.tw
 - 資料問題：歡迎發 Issue 或 Pull Request
+
+---
+
+*最後更新：2026-08-28 部署至 9return.com.tw*
