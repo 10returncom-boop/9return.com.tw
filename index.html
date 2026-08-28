@@ -105,9 +105,10 @@ a { color: inherit; text-decoration: none; }
   display: flex; align-items: center; gap: 5px;
 }
 .nav-logo-dot {
-  width: 9px; height: 9px;
+  width: 8px; height: 8px;
   background: var(--accent); border-radius: 50%;
   animation: pulse-dot 2s var(--ease) infinite;
+  margin: 0 5px;
 }
 @keyframes pulse-dot {
   0%, 100% { transform: scale(1); opacity: 1; }
@@ -412,8 +413,7 @@ a { color: inherit; text-decoration: none; }
 <!-- ===== Navigation ===== -->
 <nav class="nav">
   <a href="./index.html" class="nav-logo">
-    <span class="nav-logo-dot"></span>
-    欣媒體<em>｜</em>沒有做不到，只有想不到
+    欣媒體<span class="nav-logo-dot"></span>沒有做不到，只有想不到
   </a>
   <div class="nav-right">
     <a href="./index.html" class="nav-home">回首頁</a>
