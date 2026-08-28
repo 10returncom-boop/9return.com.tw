@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>全台建案統計儀表板 | 不動產資料彙整平台</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<meta property="og:title" content="全台建案統計儀表板 | 不動產資料彙整平台">
+<meta property="og:description" content="彙整全台22縣市公寓大廈報備資料，提供縣市別、行政區別、個案建案的多維度統計與查詢。">
+<meta property="og:image" content="assets/og-image.jpg">
+<meta property="og:url" content="https://9return.com.tw/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="全台建案統計儀表板">
+<meta name="twitter:image" content="assets/og-image.jpg">
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" integrity="sha384-pPi0zxBAoDu6+JXW/C68UZLvBUUtU+7zonhif43rqj7pxsGyqyqzcian2Rj37Rss" crossorigin="anonymous"></script>
 <style>
@@ -81,13 +91,20 @@ tr:hover td{background:var(--c-bg)}
 .pending-note{background:#fff8e1;border:1px solid #ffe082;border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;font-size:13px;color:#795548}
 .pending-note strong{color:#e65100}
 @media(max-width:768px){.chart-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.container{padding:12px}}
+
+.hero-header{position:relative;background:linear-gradient(135deg,rgba(26,58,92,.92) 0%,rgba(26,58,92,.85) 100%),url('assets/hero-bg.jpg') center/cover no-repeat;padding:32px 24px 28px;border-bottom:3px solid var(--c-accent);overflow:hidden}
+.hero-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(26,58,92,.3) 100%);pointer-events:none}
+.hero-header h1{font-family:var(--font-serif);font-size:28px;font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.4);position:relative;z-index:1}
+.hero-header .sub{font-size:13px;color:rgba(255,255,255,.85);margin-top:6px;position:relative;z-index:1}
+.hero-header .badge{display:inline-block;background:var(--c-accent);color:var(--c-primary);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px;position:relative;z-index:1}
 </style>
 </head>
 <body>
 
-<div class="header">
+<div class="hero-header">
   <h1>全台建案統計儀表板</h1>
   <div class="sub">不動產資料彙整平台 · 版本 v2.1 · 更新 2026-08-28 12:16</div>
+  <div class="badge">8 縣市 37,188 筆 · 22 縣市架構</div>
 </div>
 
 <div class="container">
@@ -640,5 +657,22 @@ function renderCases(){
 function goPage(p){page=p;renderCases();window.scrollTo({top:document.getElementById('case-table').offsetTop-20,behavior:'smooth'})}
 applyFilter();
 </script>
+<footer style="background:var(--c-primary);color:rgba(255,255,255,.85);padding:28px 24px 20px;margin-top:40px;border-top:3px solid var(--c-accent)">
+<div style="max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px">
+<div>
+<div style="font-family:var(--font-serif);font-size:18px;font-weight:700;color:#fff;margin-bottom:6px">全台建案統計儀表板</div>
+<div style="font-size:12px;color:rgba(255,255,255,.6)">彙整全台22縣市公寓大廈報備開放資料 · 版本 v2.1</div>
+</div>
+<div style="text-align:right;font-size:13px;line-height:1.9">
+<div>聯絡：<a href="tel:0968222201" style="color:var(--c-accent);text-decoration:none;font-weight:600">0968-222201</a></div>
+<div>Line：<span style="color:var(--c-accent);font-weight:600">331.today</span></div>
+<div style="color:rgba(255,255,255,.55);font-size:12px;margin-top:4px">設計規劃開發：張書欣</div>
+</div>
+</div>
+<div style="max-width:1400px;margin:14px auto 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.15);font-size:11px;color:rgba(255,255,255,.4);text-align:center">
+資料來源：各縣市政府公寓大廈報備開放資料及 data.gov.tw · 本站僅供參考，實際資訊以政府公告為準 · &copy; 2026 9return.com.tw
+</div>
+</footer>
+
 </body>
 </html>
