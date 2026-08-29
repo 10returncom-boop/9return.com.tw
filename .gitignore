@@ -1,59 +1,44 @@
-# OS
-.DS_Store
-Thumbs.db
-desktop.ini
+# 排除備份與重複圖片（檔名前綴為數字或錯誤拼字）
+assets/1*.jpg
+assets/1*.webp
+assets/2*.jpg
+assets/2*.webp
+assets/csard-*.jpg
+assets/csard-*.webp
+assets/carsd-*.jpg
+assets/cxard-*.jpg
+assets/hsero-*.jpg
+assets/hsero-*.webp
+assets/layer-edit-*.jpg
+assets/layer-edit-*.webp
+assets/assetscard-*.jpg
+assets/-card-*.jpg
+assets/0card-*.jpg
+assets/xcard-*.jpg
+assets/6card-*.jpg
+assets/card-03-17*.jpg
+assets/cards-*.jpg
+assets/card-016-*.jpg
+assets/card-062-*.jpg
+assets/card-06-realestate\ \(2\).jpg
+assets/card-04-pets\ \(2\).jpg
+assets/card-03-petlogic\ \(2\).jpg
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+# 排除原始 jpg（已轉 webp，HTML 只引用 webp）
+assets/card-01-gallery.jpg
+assets/card-02-zootecture.jpg
+assets/card-03-petlogic.jpg
+assets/card-04-pets.jpg
+assets/card-05-education.jpg
+assets/card-06-realestate.jpg
+assets/og-image-new.png
 
-# Virtual environments
-venv/
-env/
-ENV/
-.venv/
+# 排除空檔案與暫存
+assets/*.bmp
+assets/image.png*
+assets/生成*.png
+assets/生成*.webp
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.project
-.classpath
-.settings/
-
-# 暫存與備份
-*.tmp
-*.bak
-*.log
-*.orig
-*.rej
-
-# 本地測試
-node_modules/
-.parcel-cache/
-
-# 大型原始資料（保留精簡版在 data/raw/）
-# 若需完整歷史版本，請另行存放
-*_v1.*
-*_v2.0_*.xlsx
-*_v2.0_*.csv
+# 排除子資料夾備份
+assets/新增資料夾/
+assets/新增*/
