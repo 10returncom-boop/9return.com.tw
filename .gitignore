@@ -1,44 +1,34 @@
-# 排除備份與重複圖片（檔名前綴為數字或錯誤拼字）
-assets/1*.jpg
-assets/1*.webp
-assets/2*.jpg
-assets/2*.webp
-assets/csard-*.jpg
-assets/csard-*.webp
-assets/carsd-*.jpg
-assets/cxard-*.jpg
-assets/hsero-*.jpg
-assets/hsero-*.webp
-assets/layer-edit-*.jpg
-assets/layer-edit-*.webp
-assets/assetscard-*.jpg
-assets/-card-*.jpg
-assets/0card-*.jpg
-assets/xcard-*.jpg
-assets/6card-*.jpg
-assets/card-03-17*.jpg
-assets/cards-*.jpg
-assets/card-016-*.jpg
-assets/card-062-*.jpg
-assets/card-06-realestate\ \(2\).jpg
-assets/card-04-pets\ \(2\).jpg
-assets/card-03-petlogic\ \(2\).jpg
+# ===== 備用資料區（本機保留，不上傳 GitHub）=====
+備用資料區/
+備用*/
 
-# 排除原始 jpg（已轉 webp，HTML 只引用 webp）
-assets/card-01-gallery.jpg
-assets/card-02-zootecture.jpg
-assets/card-03-petlogic.jpg
-assets/card-04-pets.jpg
-assets/card-05-education.jpg
-assets/card-06-realestate.jpg
-assets/og-image-new.png
-
-# 排除空檔案與暫存
+# ===== assets 只保留正式 webp 檔案 =====
+# 排除所有原始 jpg/png（已轉 webp，HTML 只引用 webp）
+assets/*.jpg
+assets/*.jpeg
+assets/*.png
 assets/*.bmp
+
+# 排除備份與重複圖片（數字前綴、錯誤拼字、編輯層）
+assets/1*
+assets/2*
+assets/0*
+assets/6*
+assets/-*
+assets/csard-*
+assets/carsd-*
+assets/cxard-*
+assets/hsero-*
+assets/layer-edit-*
+assets/assetscard-*
+assets/xcard-*
+assets/cards-*
+assets/card-016-*
+assets/card-062-*
+assets/card-03-17*
 assets/image.png*
-assets/生成*.png
-assets/生成*.webp
+assets/生成*
 
 # 排除子資料夾備份
-assets/新增資料夾/
 assets/新增*/
+assets/*/
