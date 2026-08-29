@@ -126,14 +126,14 @@
 
 | 參數 | 目前值 |
 |------|--------|
-| 滾動速度 | `22s` 循環（線性） |
+| 滾動速度 | `18s` 循環（線性） |
 | 字級 | `24px` |
 | 字重 | `700`（粗體） |
 | 顏色 | 深黃色 `#DAA520` |
 | hover 顏色 | 白色 `#F2F0EB` |
 | 項目間距 | `48px` |
-| 圓點大小 | `7px`（深黃色） |
-| 頂部 padding | `72px`（閃過固定 nav） |
+| 圓點大小 | `10px`（深黃色） |
+| 頂部 padding | `50px`（閃過固定 nav） |
 | 底部 padding | `6px` |
 
 #### 跑馬燈 6 站內容（重複 2 次循環）
@@ -158,30 +158,30 @@
 | 文字對齊 | 置中（`text-align: center`） |
 | 分類標籤字級 | `11px` |
 | 卡片名稱字級 | `28px`（預設） |
-| 描述字級 | `14px` |
-| 網址字級 | `13px` |
+| 描述字級 | `16px` |
+| 網址字級 | `16px` |
 
 #### 卡片個別設定
 
 | # | 卡片名稱 | 分類 | 網域/副標 | 圖片路徑 | 連結 | 格子跨度 | 名稱字級 |
 |---|----------|------|-----------|----------|------|----------|----------|
 | 01 | 三三藝 331 Gallery | Art Gallery | 331.today | `assets/card-01-gallery.jpg` | `https://331.today` | 2欄×2列 | `36px` |
-| 02 | 入梯毛孩 | Pet Architecture | zootecture.com | `assets/card-02-zootecture.jpg` | `https://zootecture.com` | 1欄×1列 | `28px` |
-| 03 | 毛毛邏輯 | Pet Lifestyle | petlogic.org | `assets/card-03-petlogic.jpg` | `https://petlogic.org` | 1欄×1列 | `28px` |
-| 04 | 順寵圖鑑 | Pet Encyclopedia | Pets Salon | `assets/card-04-pets.jpg` | `https://vocus.cc/salon/zootecture` | 1欄×1列 | `28px` |
-| 05 | 安寵好好學 | Pet Education | Petlogic Salon | `assets/card-05-education.jpg` | `https://vocus.cc/salon/petlogic` | 1欄×1列 | `28px` |
+| 02 | ZooTecture 入梯毛孩 | Pet Architecture | zootecture.com | `assets/card-02-zootecture.jpg` | `https://zootecture.com` | 1欄×1列 | `28px` |
+| 03 | Petlogic 毛毛邏輯 | Pet Lifestyle | petlogic.org | `assets/card-03-petlogic.jpg` | `https://petlogic.org` | 1欄×1列 | `28px` |
+| 04 | Vocus 順寵圖鑑 | Pet Encyclopedia | Pets Salon | `assets/card-04-pets.jpg` | `https://vocus.cc/salon/zootecture` | 1欄×1列 | `28px` |
+| 05 | Vocus 安寵好好學 | Pet Education | Petlogic Salon | `assets/card-05-education.jpg` | `https://vocus.cc/salon/petlogic` | 1欄×1列 | `28px` |
 | 06 | 不動產觀測站 | Real Estate | 9return.com.tw | `assets/card-06-realestate.jpg` | `./dashboard.html` | 4欄×1列 | `38px` |
 
 #### 卡片描述
 
 | # | 描述 |
 |---|------|
-| 01 | 當代藝品展售與藝術家平台，以數位畫廊的形式呈現精品藝術收藏，匯聚兩岸三地新銳與資深藝術家作品。 |
-| 02 | 毛孩與空間的對話。 |
-| 03 | 用邏輯理解毛孩。 |
-| 04 | 寵物品種圖鑑百科。 |
-| 05 | 寵物照護知識學堂。 |
-| 06 | 台灣房地產資訊與建案資料平台，提供最完整的房屋交易、行情與區域分析，是購屋與投資者的專業參考入口。 |
+| 01 | 【三三藝】當代藝品展售與藝術家平台，以數位畫廊的形式呈現精品藝術收藏，匯聚兩岸三地新銳與資深藝術家作品。 |
+| 02 |【ZooTecture】毛孩與空間的對話。 |
+| 03 |【Petlogic】用邏輯理解毛孩。 |
+| 04 | Vocus 寵物品種圖鑑百科。 |
+| 05 | Vocus 寵物照護知識學堂。 |
+| 06 |【九回房地】台灣房地產資訊與建案資料平台，提供最完整的房屋交易、行情與區域分析，是購屋與投資者的專業參考入口。 |
 
 ### 4.6 Footer
 
