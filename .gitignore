@@ -1,4 +1,4 @@
-# ===== 備用資料區（本機保留，不上傳 GitHub）=====
+﻿# ===== 備用資料區（本機保留，不上傳 GitHub）=====
 備用資料區/
 備用*/
 
@@ -32,3 +32,13 @@ assets/生成*
 # 排除子資料夾備份
 assets/新增*/
 assets/*/
+
+# ===== 排除 D:\_WWW 根目錄其他專案 =====
+global-soundscape/
+honglou-architecture/
+hongloumeng-costume/
+petlogic-備用資料區/
+zootecture_backup/
+zootecture_petblog/
+三三藝-backup/
+petlogic-規格書-v2.0.md
