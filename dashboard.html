@@ -102,6 +102,30 @@ tr:hover td{background:var(--c-bg)}
 .hero-header h1{font-family:var(--font-serif);font-size:28px;font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.4);position:relative;z-index:1}
 .hero-header .sub{font-size:13px;color:rgba(255,255,255,.85);margin-top:6px;position:relative;z-index:1}
 .hero-header .badge{display:inline-block;background:var(--c-accent);color:var(--c-primary);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px;position:relative;z-index:1}
+
+/* ===== Anti-Copy Protection ===== */
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+img, a {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+.protect-toast {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  background: rgba(35,20,9,0.95); color: #E8C84B; padding: 18px 32px;
+  border-radius: 8px; font-size: 16px; font-weight: 600; z-index: 99999;
+  border: 1px solid rgba(232,200,75,0.4); opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.protect-toast.show { opacity: 1; }
 </style>
 </head>
 <body>
@@ -688,5 +712,34 @@ applyFilter();
 資料來源：各縣市政府公寓大廈報備開放資料及 data.gov.tw · 本站僅供參考，實際資訊以政府公告為準 · &copy; 2026 9return.com.tw
 </div>
 </footer>
+
+/* ===== Anti-Copy / Anti-Save / Anti-Download Protection ===== */
+(function() {
+  'use strict';
+  function showToast(msg) {
+    var t = document.querySelector('.protect-toast');
+    if (!t) { t = document.createElement('div'); t.className = 'protect-toast'; document.body.appendChild(t); }
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 1800);
+  }
+  document.addEventListener('contextmenu', function(e) { e.preventDefault(); showToast('本網站禁止右鍵複製'); return false; });
+  document.addEventListener('copy', function(e) { e.preventDefault(); showToast('本網站禁止複製內容'); return false; });
+  document.addEventListener('cut', function(e) { e.preventDefault(); showToast('本網站禁止剪下內容'); return false; });
+  document.addEventListener('dragstart', function(e) { if (e.target.tagName === 'IMG' || e.target.tagName === 'A') { e.preventDefault(); showToast('本網站禁止拖曳存檔'); return false; } });
+  document.addEventListener('keydown', function(e) {
+    var key = e.key.toLowerCase();
+    if (e.ctrlKey || e.metaKey) {
+      if (key === 'c' || key === 'x' || key === 'u' || key === 's' || key === 'p' || key === 'a') {
+        e.preventDefault(); showToast('本網站禁止此操作'); return false;
+      }
+      if (e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) {
+        e.preventDefault(); showToast('本網站禁止開發者工具'); return false;
+      }
+    }
+    if (key === 'f12') { e.preventDefault(); showToast('本網站禁止開發者工具'); return false; }
+  });
+  document.addEventListener('selectstart', function(e) { e.preventDefault(); return false; });
+  window.addEventListener('beforeprint', function(e) { e.preventDefault(); showToast('本網站禁止列印存檔'); return false; });
+})();
 </body>
 </html>
