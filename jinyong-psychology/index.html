@@ -382,11 +382,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: #E8DED4;
   border: 1px solid #C9B8A8;
   border-radius: var(--radius);
-  padding: 32px 24px;
+  padding: 20px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
 }
 .char-card::before {
   content: "";
@@ -429,25 +432,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border: 1px solid rgba(245,240,232,0.3);
   border-radius: 2px;
 }
+.char-info { flex: 1; min-width: 0; }
 .char-name {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   color: var(--ink);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .char-work {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--gold);
   font-weight: 500;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   letter-spacing: 1px;
 }
 .char-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 .char-tag {
   font-size: 12px;
@@ -458,13 +462,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-weight: 500;
 }
 .char-mbti {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--indigo);
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   display: flex;
   align-items: center;
   gap: 6px;
+  margin-bottom: 4px;
+}
+.char-personality {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  margin-top: 4px;
 }
 .char-mbti .dot {
   width: 6px;
@@ -1082,11 +1093,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ===== 人物肖像 ===== */
 .char-portrait-wrap {
-  width: 88px;
-  height: 88px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   overflow: hidden;
-  margin-bottom: 20px;
+  flex-shrink: 0;
   border: 3px solid var(--cinnabar);
   box-shadow: 0 4px 16px rgba(169,50,38,0.2);
   transition: transform 0.3s;
@@ -2939,12 +2950,15 @@ function renderCharGrid() {
       <div class="char-portrait-wrap">
         <img class="char-portrait" src="${c.portrait}" alt="${c.name}" loading="lazy">
       </div>
-      <div class="char-name">${c.name}</div>
-      <div class="char-work">${c.work}</div>
-      <div class="char-tags">
-        ${c.tags.slice(0, 3).map(t => `<span class="char-tag">${t}</span>`).join("")}
+      <div class="char-info">
+        <div class="char-name">${c.name}</div>
+        <div class="char-work">${c.work}</div>
+        <div class="char-tags">
+          ${c.tags.slice(0, 3).map(t => `<span class="char-tag">${t}</span>`).join("")}
+        </div>
+        <div class="char-mbti"><span class="dot"></span>${c.mbti}</div>
+        <div class="char-personality">${c.personality.split("—")[0].trim()}</div>
       </div>
-      <div class="char-mbti"><span class="dot"></span>${c.mbti} · ${c.personality.split("—")[0].trim()}</div>
     </div>
   `).join("");
   grid.querySelectorAll(".char-card").forEach(card => {
