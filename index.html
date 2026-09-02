@@ -143,6 +143,16 @@ a { color: inherit; text-decoration: none; }
   padding: 40px 40px 0;
   text-align: center;
 }
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:
+      0 0 4px rgba(218,165,32,0.8),
+      0 0 11px rgba(218,165,32,0.6),
+      0 0 19px rgba(218,165,32,0.4),
+      0 0 40px rgba(255,140,0,0.3);
+  }
+  20%, 24%, 55% { text-shadow: none; }
+}
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(52px, 9vw, 130px);
@@ -162,8 +172,15 @@ a { color: inherit; text-decoration: none; }
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .hero-title .hero-orange {
-  -webkit-text-stroke: 1.5px #DAA520;
-  -webkit-text-fill-color: transparent; font-weight: 400;
+  color: #FFD700;
+  font-weight: 700;
+  white-space: nowrap;
+  animation: neon-flicker 3s infinite alternate;
+  text-shadow:
+    0 0 4px rgba(218,165,32,0.8),
+    0 0 11px rgba(218,165,32,0.6),
+    0 0 19px rgba(218,165,32,0.4),
+    0 0 40px rgba(255,140,0,0.3);
 }
 .hero-title .hero-yellow {
   color: var(--accent); font-weight: 800;
@@ -361,7 +378,7 @@ a { color: inherit; text-decoration: none; }
   .marquee { padding: 64px 0 4px; }
   .marquee-item { font-size: 15px; padding: 0 14px; }
   .hero { padding: 20px 16px 0; }
-  .hero-title { font-size: clamp(38px, 11vw, 72px); letter-spacing: 0.01em; }
+  .hero-title { font-size: clamp(28px, 8vw, 56px); letter-spacing: 0.01em; }
   .hero-title .line:nth-child(1) { margin-bottom: 0.35em; }
   .hero-desc { font-size: 13px; margin-top: 24px; padding-bottom: 20px; max-width: 100%; }
   .grid-section { padding: 36px 16px 48px; }
@@ -389,7 +406,7 @@ a { color: inherit; text-decoration: none; }
   .marquee { padding: 58px 0 2px; }
   .marquee-item { font-size: 13px; padding: 0 10px; }
   .hero { padding: 16px 14px 0; }
-  .hero-title { font-size: clamp(32px, 12vw, 56px); }
+  .hero-title { font-size: clamp(24px, 7.5vw, 44px); }
   .hero-desc { font-size: 12px; margin-top: 18px; padding-bottom: 16px; }
   .grid-section { padding: 28px 14px 40px; }
   .section-title { font-size: 24px; }
@@ -502,25 +519,11 @@ img, a {
     </a>
 
     <!-- Card 02 -->
-    <a class="card card-2" href="./hongloumeng/index.html">
-      <div class="card-corner"></div>
-      <img class="card-img" src="assets/card-08-hongloumeng.webp" alt="紅樓夢建築志" loading="lazy" decoding="async" width="1024" height="1024">
-      <div class="card-overlay"></div>
-      <span class="card-num">02</span>
-      <div class="card-content">
-        <span class="card-cat">Dream of Red Chamber</span>
-        <h3 class="card-name">紅樓夢建築志<span class="sub">大觀園營造</span></h3>
-        <p class="card-desc">以紅樓夢為本，還原大觀園的亭台樓閣、山水庭院，見證古典園林的詩意空間。</p>
-        <span class="card-url">hongloumeng <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </div>
-    </a>
-
-    <!-- Card 03 -->
-    <a class="card card-3" href="https://331.today" target="_blank" rel="noopener noreferrer">
+    <a class="card card-2" href="https://331.today" target="_blank" rel="noopener noreferrer">
       <div class="card-corner"></div>
       <img class="card-img" src="assets/card-01-gallery.webp" alt="藝品藝廊 331 Gallery" loading="eager" decoding="async" fetchpriority="high" width="1024" height="1024">
       <div class="card-overlay"></div>
-      <span class="card-num">03</span>
+      <span class="card-num">02</span>
       <div class="card-content">
         <span class="card-cat">Art Gallery</span>
         <h3 class="card-name">331 Gallery<span class="sub">331.today</span></h3>
@@ -529,31 +532,45 @@ img, a {
       </div>
     </a>
 
-    <!-- Card 04 -->
-    <a class="card card-4" href="./classic-architecture/index.html">
-      <div class="card-corner"></div>
-      <img class="card-img" src="assets/card-07-classic-arch.webp" alt="古代經典建築" loading="lazy" decoding="async" width="1024" height="1024">
-      <div class="card-overlay"></div>
-      <span class="card-num">04</span>
-      <div class="card-content">
-        <span class="card-cat">Classical Architecture</span>
-        <h3 class="card-name">古代經典建築<span class="sub">十大經典還原</span></h3>
-        <p class="card-desc">從十大古代經典文獻還原中國古典建築之美，探索斗拱飛簷與營造法式的千年智慧。</p>
-        <span class="card-url">classic-architecture <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </div>
-    </a>
-
-    <!-- Card 05 -->
-    <a class="card card-5" href="https://zootecture.com" target="_blank" rel="noopener noreferrer">
+    <!-- Card 03 -->
+    <a class="card card-3" href="https://zootecture.com" target="_blank" rel="noopener noreferrer">
       <div class="card-corner"></div>
       <img class="card-img" src="assets/card-02-zootecture.webp" alt="入梯毛孩 Zootecture" loading="lazy" decoding="async" width="1024" height="1024">
       <div class="card-overlay"></div>
-      <span class="card-num">05</span>
+      <span class="card-num">03</span>
       <div class="card-content">
         <span class="card-cat">Pet Architecture</span>
         <h3 class="card-name">入梯毛孩<span class="sub">zootecture.com</span></h3>
         <p class="card-desc">毛孩與空間的對話。</p>
         <span class="card-url">zootecture.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <!-- Card 04 -->
+    <a class="card card-4" href="./hongloumeng/index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-08-hongloumeng.webp" alt="紅樓夢建築志" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">04</span>
+      <div class="card-content">
+        <span class="card-cat">Dream of Red Chamber</span>
+        <h3 class="card-name">紅樓夢建築志<span class="sub">大觀園營造</span></h3>
+        <p class="card-desc">以紅樓夢為本，還原大觀園的亭台樓閣、山水庭院，見證古典園林的詩意空間。</p>
+        <span class="card-url">hongloumeng <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <!-- Card 05 -->
+    <a class="card card-5" href="./classic-architecture/index.html">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-07-classic-arch.webp" alt="古代經典建築" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">05</span>
+      <div class="card-content">
+        <span class="card-cat">Classical Architecture</span>
+        <h3 class="card-name">古代經典建築<span class="sub">十大經典還原</span></h3>
+        <p class="card-desc">從十大古代經典文獻還原中國古典建築之美，探索斗拱飛簷與營造法式的千年智慧。</p>
+        <span class="card-url">classic-architecture <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
 
