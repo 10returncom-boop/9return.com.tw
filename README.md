@@ -1,156 +1,111 @@
-# 全台建案統計儀表板 | 9return.com.tw
+# 欣矩陣 ∞ 欣媒體 — 9return.com.tw
 
-台灣不動產公寓大廈報備資料開放平台，彙整全台 22 縣市公寓大廈報備資訊，提供縣市別、行政區別、個案建案的多維度統計與查詢。
+> 旗下 30 大網站入口，沒有做不到，只有想不到。跨產業垂直站點全面佈局。
 
-## 網站功能
-
-- **總覽指標**：全台建照/使用執照年度累計、待售新成屋、預售屋建案統計
-- **縣市別主表**：每縣市一列，含六都/非六都標籤、建照/使照統計、待售宅數、預售戶數
-- **鄉鎮市區子表**：點擊縣市展開各區建案件數、戶數、主要重劃區標註
-- **個案建案明細庫**：建案名稱、縣市、行政區、地址、戶數、建物型態、管理組織、重劃區標記
-- **8 縣市獨立子頁**：臺北市、新北市、桃園市、臺中市、臺南市、嘉義市、彰化縣、新竹市
-
-## 資料涵蓋
-
-| 項目 | 數量 |
-|------|------|
-| 公寓大廈報備筆數 | 37,225 筆 |
-| 已涵蓋縣市 | 8 / 22 |
-| 行政區 | 138 個 |
-| 總戶數 | 697,070 戶 |
-| 重劃區標記 | 22,495 棟 (60.5%) |
-
-### 已涵蓋縣市
-
-| 縣市 | 筆數 | 戶數 | 子頁 |
-|------|------|------|------|
-| 臺中市 | 12,004 | — | [counties/taichung.html](counties/taichung.html) |
-| 臺北市 | 9,155 | — | [counties/taipei.html](counties/taipei.html) |
-| 新北市 | 4,714 | — | [counties/newtaipei.html](counties/newtaipei.html) |
-| 桃園市 | 3,191 | — | [counties/taoyuan.html](counties/taoyuan.html) |
-| 臺南市 | 2,847 | — | [counties/tainan.html](counties/tainan.html) |
-| 新竹市 | 2,536 | — | [counties/hsinchu.html](counties/hsinchu.html) |
-| 嘉義市 | 1,624 | — | [counties/chiayi.html](counties/chiayi.html) |
-| 彰化縣 | 1,117 | — | [counties/changhua.html](counties/changhua.html) |
-
-### 待補縣市（14 個）
-
-宜蘭縣、新竹縣、苗栗縣、南投縣、雲林縣、嘉義縣、屏東縣、臺東縣、花蓮縣、澎湖縣、金門縣、連江縣、基隆市、高雄市
-
-> 後續若各縣市政府開放公寓大廈報備資料或伺服器恢復，可隨時匯入更新，不需改動網站架構。
-
-## 專案結構
+## 網站架構
 
 ```
-9return-com-tw/
-├── index.html                  # 儀表板首頁（總覽＋縣市表＋個案庫）
-├── CNAME                       # GitHub Pages 自訂網域
-├── counties/                   # 各縣市獨立子頁
-│   ├── taichung.html
-│   ├── taipei.html
-│   ├── newtaipei.html
-│   ├── taoyuan.html
-│   ├── tainan.html
-│   ├── hsinchu.html
-│   ├── chiayi.html
-│   └── changhua.html
-├── data/                       # 處理後 JSON 資料（網站讀取）
-│   ├── overview.json           # 總覽指標
-│   ├── county_stats.json       # 縣市別統計
-│   ├── district_stats.json     # 行政區別統計
-│   ├── case_db.json            # 個案建案明細庫
-│   └── raw/                    # 原始 CSV 資料
-│       └── 全台公寓大廈報備資料彙整_v2.1.csv
-├── scripts/                    # 資料處理與網站建置腳本
-│   └── build_dashboard.py      # CSV → JSON + HTML 產生器
-├── docs/                       # 專案文件
-│   ├── DATA_SOURCES.md         # 資料來源說明
-│   └── UPDATE_GUIDE.md         # 資料更新與新增縣市指南
-├── .gitignore
-├── LICENSE
-└── README.md
+9return.com.tw/
+├── index.html              # 門戶首頁（17張卡片 bento grid）
+├── dashboard.html          # 九回房地觀測站
+├── sitemap.xml             # SEO站點地圖（27 URL）
+├── robots.txt              # 爬蟲規則
+├── README.md               # 本說明書
+├── assets/                 # 靜態資源
+│   ├── card-01~17.webp     # 卡片背景圖（1024×1024 webp）
+│   ├── og/                 # OG分享圖
+│   └── brand-banners/      # 品牌橫幅
+├── counties/               # 8縣市不動產頁
+├── jinyong-psychology/     # 金庸人物與心理學
+│   ├── index.html          # 100人物圖譜+QUIZ
+│   └── about.html          # 設計者張書欣
+├── hongloumeng/            # 夢見紅樓夢的家
+│   ├── index.html
+│   └── about.html
+├── classic-architecture/   # 古代建築還原記
+│   ├── index.html
+│   ├── arch-01~10.html     # 10大建築頁
+│   ├── about.html
+│   └── sitemap.html
+└── scripts/                # Python維護腳本
 ```
 
-## 資料欄位說明
+## 卡片清單（17張）
 
-原始 CSV（v2.1）共 10 欄：
+| # | 卡片名稱 | 狀態 | 連結 |
+|---|---------|------|------|
+| 1 | 金庸人物與心理學 | 上線 | ./jinyong-psychology/ |
+| 2 | 三三藝 331 Gallery | 上線 | # |
+| 3 | ZooTecture 入梯 | 上線 | # |
+| 4 | Petlogic毛毛邏輯 | 上線 | # |
+| 5 | 夢見紅樓夢的家 | 上線 | ./hongloumeng/ |
+| 6 | 古代建築還原記 | 上線 | ./classic-architecture/ |
+| 7 | 順寵毛小孩 | 上線 | # |
+| 8 | 安寵好好學 | 上線 | # |
+| 9 | 寵物空間好好裝 | 上線 | # |
+| 10 | 九回房地觀測站 | 上線 | ./dashboard.html |
+| 11 | 虛擬試衣間 | 即將上線 | ./index.html |
+| 12 | 經濟學的小遊戲 | 即將上線 | ./index.html |
+| 13 | 星象命盤占星 | 即將上線 | ./index.html |
+| 14 | 三國演義 vs 賽局 | 即將上線 | ./index.html |
+| 15 | 以物易物好好玩 | 即將上線 | ./index.html |
+| 16 | Infucoco愛幻想 | 即將上線 | ./index.html |
+| 17 | 音樂家都很怪 | 即將上線 | ./index.html |
 
-| 欄位 | 說明 |
-|------|------|
-| 縣市 | 所屬縣市（繁體中文） |
-| 使照序號 | 使用執照序號 |
-| 公寓大廈名稱 | 建案/社區名稱 |
-| 行政區 | 鄉鎮市區 |
-| 地址 | 完整地址 |
-| 戶數 | 總戶數（部分縣市開放資料未提供） |
-| 管理組織型態 | 管理委員會 / 區分所有權人會議 / 其他 |
-| 建物型態 | 大樓 / 華廈 / 公寓 / 社區 / 其他（自動分類） |
-| 重劃區標記 | 依名稱/地址關鍵字比對標註的重劃區 |
-| 資料來源 | 彙整來源標記 |
+## 全域樣式變數
 
-## 技術架構
+| 變數 | 值 | 說明 |
+|------|-----|------|
+| Header/Footer 背景 | #0a0a0a | 黑底 |
+| Header/Footer 文字 | #e2e8f0 | 白字 |
+| Hover 底線 | #ef4444 2px | 紅色底線 |
+| 卡片標題字型 | 28px | 全部卡片統一（含大卡） |
+| 卡片描述字型 | 14px | 全部卡片統一 |
+| 即將上線標籤 | #fbbf24 | 黃色 |
+| OG圖 | 1200×630 webp | og-brand-main.webp |
+| 卡片圖 | 1024×1024 webp q=85 | 絕對無文字 |
 
-- **前端**：純靜態 HTML + CSS + JavaScript（無框架依賴）
-- **圖表**：ECharts 5.6（CDN）
-- **字體**：Noto Sans TC / Noto Serif TC（Google Fonts）
-- **資料**：JSON 靜態檔案，由 Python 腳本從 CSV 產生
-- **託管**：GitHub Pages（自訂網域 9return.com.tw）
+## 設計者資訊
 
-## 本地預覽
+- **設計者**：張書欣
+- **關於頁**：https://9return.com.tw/jinyong-psychology/about.html
+- **Email**：zootecture@gmail.com
+- **Line**：331.today
+- **電話**：0968222201
+- **服務**：網站規劃 / 設計 / 開發 / 網路行銷與策略聯盟
 
-```bash
-# 進入專案目錄
-cd 9return-com-tw
+## 維護說明
 
-# 啟動簡易 HTTP 伺服器
-python -m http.server 8080
+### 新增卡片
+1. 在 `index.html` 的 bento grid 中新增 `<a class="card card-N">` 區塊
+2. 卡片圖放入 `assets/card-NN-name.webp`（1024×1024，無文字）
+3. 更新 `網站導覽_SITES.json` 和變數表
+4. 更新 `sitemap.xml`
 
-# 瀏覽器開啟
-# http://localhost:8080
-```
+### 變更卡片順序
+1. 調整 `index.html` 中卡片區塊順序
+2. 重新編號 `card-N` class 和 `card-num`
+3. 重新命名對應圖檔
+4. 執行 `scripts/reorder_cards.py` 輔助
 
-## 重新建置網站
+### 卡片圖片規範
+- **絕對不可含任何文字、字母、數字、商標、印章、書法**
+- 統一 1024×1024 WebP quality=85
+- 生成後需目視檢查隱藏文字（書本封面、黑板、招牌、物品標籤）
 
-```bash
-# 安裝依賴（僅需標準函式庫）
-python scripts/build_dashboard.py
+### 浮水印
+- 文字：欣媒體
+- 位置：左下角
+- 字型：微軟正黑體 10pt
+- 執行：`scripts/add_watermark.py <目錄>`
 
-# 輸出：
-#   data/overview.json
-#   data/county_stats.json
-#   data/district_stats.json
-#   data/case_db.json
-#   index.html
-#   counties/*.html
-```
+## 文件清單
 
-## 資料來源
-
-- 各縣市政府公寓大廈報備開放資料
-- data.gov.tw 國家發展委員會資料開放平台
-- 內政部建築管理資訊系統
-- 實價登錄資料
-
-詳見 [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md)
-
-## 更新紀錄
-
-| 版本 | 日期 | 說明 |
-|------|------|------|
-| v2.1 | 2026-08-28 | 新增新竹市 2,536 筆（data.gov.tw）；新增建物型態、重劃區標記欄位；22 縣市架構 |
-| v2.0 | 2026-08-28 | 7 縣市 34,689 筆彙整；儀表板上線 |
-| v1.0 | 2026-08-28 | 臺中市公寓大廈分析網站 |
-
-## 授權
-
-本專案資料來自政府開放資料，依 [政府開放資料授權條款](https://data.gov.tw/license) 使用。
-程式碼部分採 MIT 授權，詳見 [LICENSE](LICENSE)。
-
-## 聯絡
-
-- 網站：https://9return.com.tw
-- 資料問題：歡迎發 Issue 或 Pull Request
+- `統一導航系統_規格書.docx` — 完整規格（v2.3）
+- `網站導覽_變數調整表.xlsx` — 變數/卡片/圖片/文件清單
+- `網站導覽_SITES.json` — 結構化卡片資料
+- `sitemap.xml` — SEO站點地圖
 
 ---
 
-*最後更新：2026-08-28 部署至 9return.com.tw*
+*版本 v2.3 | 2026-09-03 | 張書欣*
