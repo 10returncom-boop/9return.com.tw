@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>紅樓夢建築志 · 專業知識庫</title>
+<title>夢見紅樓夢的家 · 專業知識庫</title>
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
 <style>
 :root{--ink:#1a1a2e;--dai:#2c3e50;--dai-light:#3d566e;--vermilion:#c0392b;--vermilion-dark:#962d22;--paper:#f5f0e8;--paper-dark:#ebe3d5;--bamboo:#7d9b76;--bamboo-dark:#5a7a54;--gold:#b8860b;--gold-light:#d4a843;--stone:#8b8680;--line:#d4c9b8;--shadow:rgba(26,26,46,.12)}
@@ -133,20 +133,20 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 <!-- Open Graph / LINE分享預覽 -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="欣矩陣 ∞ 欣媒體">
-<meta property="og:title" content="紅樓夢建築志 | 大觀園古典建築美學">
+<meta property="og:title" content="夢見紅樓夢的家 | 大觀園古典建築美學">
 <meta property="og:description" content="從紅樓夢還原大觀園建築空間，探索古典園林美學與建築智慧。">
 <meta property="og:url" content="https://9return.com.tw/hongloumeng/">
 <meta property="og:image" content="../assets/og/og-brand-main.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="紅樓夢建築志 | 大觀園古典建築美學">
+<meta name="twitter:title" content="夢見紅樓夢的家 | 大觀園古典建築美學">
 <meta name="twitter:description" content="從紅樓夢還原大觀園建築空間，探索古典園林美學與建築智慧。">
 <meta name="twitter:image" content="../assets/og/og-brand-main.webp">
 </head>
 <body>
 <nav class="topnav">
-  <div class="brand" onclick="navigate('home')"><span class="seal">樓</span>紅樓夢建築志</div>
+  <div class="brand" onclick="navigate('home')"><span class="seal">樓</span>夢見紅樓夢的家</div>
   <div class="nav-links" id="navLinks">
     <a class="active" onclick="navigate('home')">建築展示</a>
     <a onclick="navigate('features')">專業功能</a>
@@ -227,7 +227,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 </div>
 
 <div class="tooltip" id="tooltip"></div>
-<footer class="footer">紅樓夢建築志 · 20項專業功能 · 800篇深度文章 · 200篇網網相連 · 依原文及清代建築考證還原<div style="text-align:center;padding:8px 12px;">
+<footer class="footer">夢見紅樓夢的家 · 20項專業功能 · 800篇深度文章 · 200篇網網相連 · 依原文及清代建築考證還原<div style="text-align:center;padding:8px 12px;">
 <details class="hl-footer-dd" style="display:inline-block;text-align:left;min-width:200px;">
 <summary style="cursor:pointer;font-weight:700;color:#fff;padding:6px 12px;background:rgba(255,255,255,.1);border-radius:6px;list-style:none;">網站導覽 <span style="font-size:11px;">▾</span></summary>
 <div style="padding:10px 12px;background:rgba(0,0,0,.3);border-radius:0 0 6px 6px;margin-top:4px;">
@@ -437,7 +437,7 @@ function renderArticle(a){
   document.getElementById('articleDetailContent').innerHTML=`
     <div class="back-btn" onclick="navigate('featureDetail',currentFeature)">← 返回${f?f.name:''}</div>
     <h1>${a.title}</h1>
-    <div class="meta"><span>📚 ${f?f.name:''}</span><span>📝 紅樓夢建築志</span><span>🏛 清代建築考證</span></div>
+    <div class="meta"><span>📚 ${f?f.name:''}</span><span>📝 夢見紅樓夢的家</span><span>🏛 清代建築考證</span></div>
     <div class="content">${a.content}</div>
     <div class="a-tags">${a.tags.map(t=>`<span class="a-tag">${t}</span>`).join('')}</div>`;
 }
@@ -476,7 +476,7 @@ function renderLinkedArticle(a){
   document.getElementById('linkedArticleContent').innerHTML=`
     <div class="back-btn" onclick="navigate('network')">← 返回知識網絡</div>
     <h1>${a.title}</h1>
-    <div class="meta"><span>🔗 知識網絡</span><span style="color:${a.color}">${a.groupName}</span><span>📝 紅樓夢建築志</span></div>
+    <div class="meta"><span>🔗 知識網絡</span><span style="color:${a.color}">${a.groupName}</span><span>📝 夢見紅樓夢的家</span></div>
     <div class="content">${a.content}</div>
     <div class="related-section">
       <h3>相關文章 · 繼續探索</h3>
