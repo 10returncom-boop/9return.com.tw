@@ -146,16 +146,16 @@ a { color: inherit; text-decoration: none; }
 @keyframes neon-flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
     text-shadow:
-      0 0 4px rgba(218,165,32,0.8),
-      0 0 11px rgba(218,165,32,0.6),
-      0 0 19px rgba(218,165,32,0.4),
-      0 0 40px rgba(255,140,0,0.3);
+      0 0 4px rgba(255,255,255,0.9),
+      0 0 11px rgba(255,255,255,0.7),
+      0 0 19px rgba(255,200,150,0.5),
+      0 0 40px rgba(255,140,0,0.4);
   }
   20%, 24%, 55% { text-shadow: none; }
 }
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(52px, 9vw, 130px);
+  font-size: clamp(40px, 5.5vw, 72px);
   font-weight: 800; line-height: 1.0; letter-spacing: 0.02em;
 }
 .hero-title .line { display: block; overflow: hidden; }
@@ -172,15 +172,15 @@ a { color: inherit; text-decoration: none; }
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .hero-title .hero-orange {
-  color: #FFD700;
+  color: #FF6B1A;
   font-weight: 700;
   white-space: nowrap;
   animation: neon-flicker 3s infinite alternate;
   text-shadow:
-    0 0 4px rgba(218,165,32,0.8),
-    0 0 11px rgba(218,165,32,0.6),
-    0 0 19px rgba(218,165,32,0.4),
-    0 0 40px rgba(255,140,0,0.3);
+    0 0 4px rgba(255,255,255,0.9),
+    0 0 11px rgba(255,255,255,0.7),
+    0 0 19px rgba(255,200,150,0.5),
+    0 0 40px rgba(255,140,0,0.4);
 }
 .hero-title .hero-yellow {
   color: var(--accent); font-weight: 800;
@@ -547,11 +547,25 @@ img, a {
     </a>
 
     <!-- Card 04 -->
-    <a class="card card-4" href="./hongloumeng/index.html">
+    <a class="card card-4" href="https://petlogic.org" target="_blank" rel="noopener noreferrer">
+      <div class="card-corner"></div>
+      <img class="card-img" src="assets/card-03-petlogic.webp" alt="毛毛邏輯 Petlogic" loading="lazy" decoding="async" width="1024" height="1024">
+      <div class="card-overlay"></div>
+      <span class="card-num">04</span>
+      <div class="card-content">
+        <span class="card-cat">Pet Lifestyle</span>
+        <h3 class="card-name">毛毛邏輯<span class="sub">petlogic.org</span></h3>
+        <p class="card-desc">用邏輯理解毛孩。</p>
+        <span class="card-url">petlogic.org <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <!-- Card 05 -->
+    <a class="card card-5" href="./hongloumeng/index.html">
       <div class="card-corner"></div>
       <img class="card-img" src="assets/card-08-hongloumeng.webp" alt="紅樓夢建築志" loading="lazy" decoding="async" width="1024" height="1024">
       <div class="card-overlay"></div>
-      <span class="card-num">04</span>
+      <span class="card-num">05</span>
       <div class="card-content">
         <span class="card-cat">Dream of Red Chamber</span>
         <h3 class="card-name">紅樓夢建築志<span class="sub">大觀園營造</span></h3>
@@ -560,31 +574,17 @@ img, a {
       </div>
     </a>
 
-    <!-- Card 05 -->
-    <a class="card card-5" href="./classic-architecture/index.html">
+    <!-- Card 06 -->
+    <a class="card card-6" href="./classic-architecture/index.html">
       <div class="card-corner"></div>
       <img class="card-img" src="assets/card-07-classic-arch.webp" alt="古代經典建築" loading="lazy" decoding="async" width="1024" height="1024">
       <div class="card-overlay"></div>
-      <span class="card-num">05</span>
+      <span class="card-num">06</span>
       <div class="card-content">
         <span class="card-cat">Classical Architecture</span>
         <h3 class="card-name">古代經典建築<span class="sub">十大經典還原</span></h3>
         <p class="card-desc">從十大古代經典文獻還原中國古典建築之美，探索斗拱飛簷與營造法式的千年智慧。</p>
         <span class="card-url">classic-architecture <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-      </div>
-    </a>
-
-    <!-- Card 06 -->
-    <a class="card card-6" href="https://petlogic.org" target="_blank" rel="noopener noreferrer">
-      <div class="card-corner"></div>
-      <img class="card-img" src="assets/card-03-petlogic.webp" alt="毛毛邏輯 Petlogic" loading="lazy" decoding="async" width="1024" height="1024">
-      <div class="card-overlay"></div>
-      <span class="card-num">06</span>
-      <div class="card-content">
-        <span class="card-cat">Pet Lifestyle</span>
-        <h3 class="card-name">毛毛邏輯<span class="sub">petlogic.org</span></h3>
-        <p class="card-desc">用邏輯理解毛孩。</p>
-        <span class="card-url">petlogic.org <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
 
