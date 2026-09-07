@@ -743,6 +743,53 @@ body::before{
 .achievement .a-name{font-size:11px;color:var(--ivory);font-weight:500}
 .achievement .a-desc{font-size:9px;color:var(--ivory-dim);margin-top:2px}
 
+/* ===== 固定頂部 Header ===== */
+.fixed-header{
+  position:fixed;top:0;right:0;left:var(--sidebar-w);
+  height:52px;z-index:150;
+  background:linear-gradient(90deg,rgba(13,15,14,.95),rgba(26,31,29,.92));
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--bronze-light);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;
+}
+.fixed-header .fh-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:15px;font-weight:700;color:var(--gold-bright);
+  letter-spacing:3px;
+}
+.fixed-header .fh-title .sub{
+  font-size:10px;color:var(--patina);letter-spacing:2px;margin-left:8px;font-weight:400;
+}
+.fixed-header .fh-nav-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 18px;
+  background:linear-gradient(135deg,var(--bronze-mid),var(--bronze-dark));
+  border:1px solid var(--gold);border-radius:30px;
+  color:var(--gold-bright);font-size:12px;font-weight:600;
+  letter-spacing:1px;cursor:pointer;
+  transition:all .25s ease;
+}
+.fixed-header .fh-nav-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 16px rgba(201,169,106,.3);
+}
+.fixed-header .fh-nav-btn .badge{
+  background:var(--gold);color:var(--ink);
+  font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;
+}
+/* 主內容閃過 fixed header */
+.main{padding-top:52px}
+/* 手機版：header 全寕、隱藏舊 menu-toggle */
+@media(max-width:900px){
+  .fixed-header{left:0;padding:0 16px}
+  .fixed-header .fh-title{font-size:13px;letter-spacing:2px}
+  .fixed-header .fh-title .sub{display:none}
+  .fixed-header .fh-nav-btn{padding:6px 14px;font-size:11px;gap:6px}
+  .fixed-header .fh-nav-btn .badge{font-size:8px;padding:1px 5px}
+  .menu-toggle{display:none !important}
+}
+
 /* ===== 響應式 ===== */
 .menu-toggle{
   display:none;position:fixed;top:16px;left:16px;z-index:200;
@@ -758,7 +805,7 @@ body::before{
   .main{margin-left:0}
   .page-header{padding:32px 24px 24px}
   .page-body{padding:24px 24px 60px}
-  .hero{padding:80px 24px 40px}
+  .hero{padding:72px 24px 40px}
   /* hero-title letter-spacing 由 clamp 控制 */
   .pentatonic-info,.sf-result,.dual-compare,.visit-grid{grid-template-columns:1fr}
   .inscription-view{grid-template-columns:1fr}
@@ -1045,6 +1092,12 @@ input, textarea, [contenteditable="true"] {
 
 </head>
 <body>
+<header class="fixed-header">
+  <div class="fh-title">曾侯乙編鐘<span class="sub">千古絕響</span></div>
+  <button class="fh-nav-btn" onclick="toggleSidebar()">
+    <span>☰</span><span>完整導覽</span><span class="badge">60+</span>
+  </button>
+</header>
 <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
 
 <!-- ===== 側邊欄 ===== -->
