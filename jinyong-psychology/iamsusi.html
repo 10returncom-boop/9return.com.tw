@@ -15,21 +15,21 @@
 :root{
   --bg:#0c0c10;--bg-2:#14141a;--bg-card:#1a1a22;
   --text:#f0f0f3;--text-dim:#a8a8b3;--text-mute:#71717a;
-  --accent:#c9a961;--accent-2:#a8893f;--accent-3:#8b7332;
-  --border:rgba(201,169,97,.15);--glow:rgba(201,169,97,.25);
+  --accent:#e0c878;--accent-2:#c4a44e;--accent-3:#a88c3e;
+  --border:rgba(224,200,120,.2);--glow:rgba(224,200,120,.35);
   --radius:16px;--ease:cubic-bezier(.22,1,.36,1);
 }
 [data-theme="light"]{
   --bg:#f7f6f3;--bg-2:#efeee9;--bg-card:#ffffff;
   --text:#1a1a20;--text-dim:#4a4a52;--text-mute:#6b6b73;
-  --border:rgba(139,105,20,.15);--glow:rgba(139,105,20,.2);
+  --border:rgba(168,140,62,.2);--glow:rgba(168,140,62,.3);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
   background:
-    linear-gradient(180deg,rgba(12,12,16,.93),rgba(12,12,16,.96)),
+    linear-gradient(180deg,rgba(12,12,16,.96),rgba(12,12,16,.98)),
     url('images/hero-iamsusi.webp') center/cover no-repeat fixed;
   color:var(--text);
   line-height:1.7;overflow-x:hidden;
@@ -37,20 +37,20 @@ body{
 }
 [data-theme="light"] body{
   background:
-    linear-gradient(180deg,rgba(247,246,243,.93),rgba(247,246,243,.96)),
+    linear-gradient(180deg,rgba(247,246,243,.96),rgba(247,246,243,.98)),
     url('images/hero-iamsusi.webp') center/cover no-repeat fixed;
 }
 /* ===== 固定導覽列 ===== */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:14px 32px;
+  padding:8px 32px;
   background:rgba(15,15,20,.85);backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
   transition:all .4s var(--ease);
 }
 [data-theme="light"] .nav{background:rgba(247,246,243,.85)}
-.nav.scrolled{padding:10px 32px;box-shadow:0 4px 30px rgba(0,0,0,.3)}
+.nav.scrolled{padding:6px 32px;box-shadow:0 4px 30px rgba(0,0,0,.3)}
 .nav-logo{
   font-size:20px;font-weight:900;letter-spacing:1px;
   background:linear-gradient(135deg,var(--accent),var(--accent-2));
@@ -74,18 +74,18 @@ body{
 
 /* ===== Hero ===== */
 .hero{
-  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:100px 24px 60px;position:relative;overflow:hidden;
+  min-height:100vh;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  text-align:left;padding:80px 32px 48px;position:relative;overflow:hidden;max-width:1100px;margin:0 auto;
 }
 .hero-bg{
   position:absolute;inset:0;z-index:0;
   background:
-    linear-gradient(180deg,rgba(12,12,16,.88),rgba(12,12,16,.75) 50%,rgba(12,12,16,.92)),
+    linear-gradient(180deg,rgba(12,12,16,.92),rgba(12,12,16,.82) 50%,rgba(12,12,16,.95)),
     url('images/hero-iamsusi.webp') center/cover no-repeat;
 }
 [data-theme="light"] .hero-bg{
   background:
-    linear-gradient(180deg,rgba(247,246,243,.92),rgba(247,246,243,.85) 50%,rgba(247,246,243,.95)),
+    linear-gradient(180deg,rgba(247,246,243,.95),rgba(247,246,243,.88) 50%,rgba(247,246,243,.97)),
     url('images/hero-iamsusi.webp') center/cover no-repeat;
 }
 [data-theme="light"] .hero h1,[data-theme="light"] .hero .typing,[data-theme="light"] .hero-desc{
@@ -140,12 +140,12 @@ body{
   line-height:1.9;opacity:0;animation:fade-up .8s var(--ease) .8s forwards;
 }
 .hero-cta{
-  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  display:flex;gap:16px;justify-content:flex-start;flex-wrap:wrap;
   opacity:0;animation:fade-up .8s var(--ease) 1s forwards;
 }
 .btn{
   display:inline-flex;align-items:center;gap:10px;
-  padding:14px 32px;border-radius:50px;font-size:15px;font-weight:700;
+  padding:8px 32px;border-radius:50px;font-size:15px;font-weight:700;
   text-decoration:none;cursor:pointer;border:none;transition:all .3s var(--ease);
 }
 .btn-primary{
@@ -175,7 +175,7 @@ body{
 [data-theme="light"] .section-sub{color:#4a4a52}
 
 /* ===== 通用 Section ===== */
-.section{padding:100px 24px;max-width:1100px;margin:0 auto}
+.section{padding:48px 24px;max-width:1100px;margin:0 auto}
 .section-tag{
   display:inline-block;font-size:12px;font-weight:800;letter-spacing:3px;
   color:var(--accent);text-transform:uppercase;margin-bottom:12px;
@@ -206,7 +206,7 @@ body{
 /* ===== 關於我 ===== */
 .about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:40px;align-items:start}
 .about-info p{color:var(--text-dim);margin-bottom:16px;line-height:1.9;font-size:15px}
-.about-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;justify-content:center}
+.about-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;justify-content:flex-start}
 .tag{
   padding:7px 16px;border-radius:50px;font-size:12px;font-weight:700;
   background:rgba(139,92,246,.1);color:var(--accent-3);border:1px solid rgba(139,92,246,.2);
@@ -217,10 +217,10 @@ body{
 .tag.red{background:rgba(239,68,68,.1);color:var(--accent-2);border-color:rgba(239,68,68,.2)}
 
 /* ===== 證照 ===== */
-.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
 .cert-card{
   background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;display:flex;align-items:flex-start;gap:14px;
+  padding:22px;display:flex;align-items:flex-start;gap:16px;
   transition:all .35s var(--ease);cursor:default;position:relative;overflow:hidden;
 }
 .cert-card::before{
@@ -231,13 +231,19 @@ body{
 .cert-card:hover{transform:translateX(6px);border-color:var(--accent);background:rgba(245,158,11,.04)}
 .cert-card:hover::before{transform:scaleY(1)}
 .cert-icon{
-  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  width:52px;height:52px;border-radius:14px;flex-shrink:0;
   background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(239,68,68,.1));
   display:flex;align-items:center;justify-content:center;
-  color:var(--accent);font-size:18px;
+  color:var(--accent);font-size:22px;
 }
-.cert-text h4{font-size:14px;font-weight:800;margin-bottom:3px;line-height:1.4}
-.cert-text p{font-size:11px;color:var(--text-mute);font-weight:600}
+.cert-text h4{font-size:16px;font-weight:800;margin-bottom:4px;line-height:1.4}
+.cert-text p{font-size:13px;color:var(--text-mute);font-weight:600}
+.cert-num{
+  position:absolute;bottom:12px;right:18px;
+  font-size:32px;font-weight:900;
+  color:var(--accent);opacity:.28;
+  font-family:'Georgia',serif;line-height:1;
+}
 
 /* ===== 經歷時間軸 ===== */
 .timeline{position:relative;padding-left:32px}
@@ -301,13 +307,13 @@ body{
 
 /* ===== RWD ===== */
 @media(max-width:768px){
-  .nav{padding:12px 16px}
+  .nav{padding:8px 16px}
   .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;
     background:var(--bg-2);padding:16px;gap:4px;border-bottom:1px solid var(--border)}
   .nav-links.open{display:flex}
   .nav-links a{padding:12px 16px;width:100%}
   .nav-menu-btn{display:block}
-  .section{padding:60px 16px}
+  .section{padding:32px 16px}
   .about-grid{grid-template-columns:1fr}
   .about-avatar{max-width:200px;margin:0 auto}
   .hero{padding:80px 16px 40px}
@@ -368,7 +374,7 @@ body{
     <p class="section-sub">從英文系到資策會，從IT到金融，從不動產到藝術——每一步都是跨界，每一次轉型都是累積。</p>
   </div>
   <div class="about-grid reveal">
-    <div class="about-info" style="grid-column:1/-1;max-width:800px;margin:0 auto;text-align:center;">
+    <div class="about-info" style="grid-column:1/-1;max-width:800px;">
       <p><strong style="color:var(--text)">張書欣（Susi）</strong>，東海大學EMBA不動產經營組第一屆，國際專案管理師（PMP），美國壽險管理師（FLMI），SAP ERP企業資源規劃顧問師。</p>
       <p>現任<strong style="color:var(--accent)">九回房地執行長</strong>、<strong style="color:var(--accent-2)">三三藝</strong>創辦人、<strong style="color:var(--accent-3)">舒安境工作室</strong>負責人。用AI整合不動產、藝術與金融，擴展寵物媒體矩陣。</p>
       <p>歷經新光金控、中國信託人壽、宏利人壽、ING富邦人壽等金融機構，參與多件M&A併購案與公司大轉型；亦曾在拜耳先靈製藥、台灣東洋藥品擔任IT經理，導入PLM/e-Clinical臨床實驗系統。</p>
@@ -481,8 +487,9 @@ const certs = [
   {icon:'fa-plane',name:'國際英文導遊與領隊',org:'國際'},
 ];
 const certsGrid = document.getElementById('certsGrid');
-certs.forEach(c=>{
-  certsGrid.innerHTML += `<div class="cert-card"><div class="cert-icon"><i class="fas ${c.icon}"></i></div><div class="cert-text"><h4>${c.name}</h4><p>${c.org}</p></div></div>`;
+certs.forEach((c,i)=>{
+  const num=String(i+1).padStart(2,'0');
+  certsGrid.innerHTML += `<div class="cert-card"><div class="cert-icon"><i class="fas ${c.icon}"></i></div><div class="cert-text"><h4>${c.name}</h4><p>${c.org}</p></div><span class="cert-num">${num}</span></div>`;
 });
 
 // ===== 經歷資料 =====
