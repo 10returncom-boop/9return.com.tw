@@ -173,14 +173,17 @@ body::before{
   font-family:'Noto Serif SC',serif;
   font-size:clamp(32px,7vw,88px);
   font-weight:900;
-  color:var(--gold-bright);
   letter-spacing:clamp(4px,1.5vw,16px);
   margin-bottom:16px;
-  text-shadow:0 0 60px rgba(201,169,106,.3);
   position:relative;z-index:2;
   white-space:nowrap;
   overflow:hidden;
+  background:linear-gradient(90deg,#ffffff,#f5e6a0,#ffe680,#ffffff,#f5e6a0);
+  background-size:300% 100%;
+  -webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;
+  animation:ripple 4s ease-in-out infinite;
 }
+@keyframes ripple{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .hero-subtitle{
   font-size:clamp(14px,2vw,20px);
   color:var(--patina-light);
@@ -936,6 +939,12 @@ select:focus,input:focus{border-color:var(--gold)!important}
 }
 .mode-btn .mb-desc{font-size:10px;color:var(--ivory-dim);margin-top:4px}
 
+/* 全域：除數字外全部白色字 */
+*{color:var(--ivory)!important}
+.num{color:var(--patina)!important}
+.nav-item.active .num{color:var(--gold)!important}
+.cert-num{color:var(--patina)!important;opacity:.28}
+
 </style>
 <!-- ANTI-COPY-PROTECT -->
 <style>
@@ -1413,10 +1422,10 @@ input, textarea, [contenteditable="true"] {
           <table style="width:100%;border-collapse:collapse;font-size:13px">
             <thead>
               <tr style="border-bottom:1px solid var(--bronze-light)">
-                <th style="padding:10px;text-align:left;color:var(--gold)">音名</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">三分損益頻率比</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">十二平均律頻率比</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">差異（音分）</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">音名</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">三分損益頻率比</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">十二平均律頻率比</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">差異（音分）</th>
               </tr>
             </thead>
             <tbody id="compareTable"></tbody>
@@ -2085,12 +2094,12 @@ input, textarea, [contenteditable="true"] {
           <table style="width:100%;border-collapse:collapse;font-size:13px" id="noteCompareTable">
             <thead>
               <tr style="border-bottom:1px solid var(--bronze-light)">
-                <th style="padding:10px;text-align:left;color:var(--gold)">中國律名</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">陰陽</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">月份</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">西方音名</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">頻率(Hz)</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">操作</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">中國律名</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">陰陽</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">月份</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">西方音名</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">頻率(Hz)</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">操作</th>
               </tr>
             </thead>
             <tbody id="noteCompareBody"></tbody>
@@ -2219,48 +2228,48 @@ input, textarea, [contenteditable="true"] {
           <table style="width:100%;border-collapse:collapse;font-size:12px">
             <thead>
               <tr style="border-bottom:1px solid var(--bronze-light)">
-                <th style="padding:10px;text-align:left;color:var(--gold)">文明</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">代表樂器</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">音階體系</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">音律理論</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">水平評價</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">文明</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">代表樂器</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">音階體系</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">音律理論</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">水平評價</th>
               </tr>
             </thead>
             <tbody>
               <tr style="border-bottom:1px solid rgba(52,61,58,.5)">
-                <td style="padding:10px;color:var(--gold);font-family:'Noto Serif SC',serif">中國（曾國）</td>
-                <td style="padding:10px">編鐘、編磬、瑟、笙、建鼓</td>
-                <td style="padding:10px">五聲、七聲、十二半音齊備</td>
-                <td style="padding:10px">三分損益律、旋宮轉調、一鐘雙音</td>
-                <td style="padding:10px;color:var(--vermilion-bright)">世界領先</td>
+                <td style="padding:6px;color:var(--ivory);font-family:'Noto Serif SC',serif;font-weight:600">中國（曾國）</td>
+                <td style="padding:6px">編鐘、編磬、瑟、笙、建鼓</td>
+                <td style="padding:6px">五聲、七聲、十二半音齊備</td>
+                <td style="padding:6px">三分損益律、旋宮轉調、一鐘雙音</td>
+                <td style="padding:6px;color:var(--ivory);font-weight:700">世界領先</td>
               </tr>
               <tr style="border-bottom:1px solid rgba(52,61,58,.5)">
-                <td style="padding:10px;color:var(--gold);font-family:'Noto Serif SC',serif">古希臘</td>
-                <td style="padding:10px">里拉琴、阿夫洛斯管</td>
-                <td style="padding:10px">七聲音階（多里亞等調式）</td>
-                <td style="padding:10px">畢達哥拉斯五度相生律</td>
-                <td style="padding:10px;color:var(--patina-light)">高度發達</td>
+                <td style="padding:6px;color:var(--ivory);font-family:'Noto Serif SC',serif;font-weight:600">古希臘</td>
+                <td style="padding:6px">里拉琴、阿夫洛斯管</td>
+                <td style="padding:6px">七聲音階（多里亞等調式）</td>
+                <td style="padding:6px">畢達哥拉斯五度相生律</td>
+                <td style="padding:6px;color:var(--ivory)">高度發達</td>
               </tr>
               <tr style="border-bottom:1px solid rgba(52,61,58,.5)">
-                <td style="padding:10px;color:var(--gold);font-family:'Noto Serif SC',serif">古埃及</td>
-                <td style="padding:10px">豎琴、長笛、鈸</td>
-                <td style="padding:10px">五聲音階為主</td>
-                <td style="padding:10px">無系統樂律文獻傳世</td>
-                <td style="padding:10px;color:var(--ivory-dim)">較為發達</td>
+                <td style="padding:6px;color:var(--ivory);font-family:'Noto Serif SC',serif;font-weight:600">古埃及</td>
+                <td style="padding:6px">豎琴、長笛、鈸</td>
+                <td style="padding:6px">五聲音階為主</td>
+                <td style="padding:6px">無系統樂律文獻傳世</td>
+                <td style="padding:6px;color:var(--ivory)">較為發達</td>
               </tr>
               <tr style="border-bottom:1px solid rgba(52,61,58,.5)">
-                <td style="padding:10px;color:var(--gold);font-family:'Noto Serif SC',serif">古美索不達米亞</td>
-                <td style="padding:10px">里拉琴、鼓、蘆葦笛</td>
-                <td style="padding:10px">九弦里拉的音階</td>
-                <td style="padding:10px">有調音文獻（烏爾的里拉）</td>
-                <td style="padding:10px;color:var(--ivory-dim)">較為發達</td>
+                <td style="padding:6px;color:var(--ivory);font-family:'Noto Serif SC',serif;font-weight:600">古美索不達米亞</td>
+                <td style="padding:6px">里拉琴、鼓、蘆葦笛</td>
+                <td style="padding:6px">九弦里拉的音階</td>
+                <td style="padding:6px">有調音文獻（烏爾的里拉）</td>
+                <td style="padding:6px;color:var(--ivory)">較為發達</td>
               </tr>
               <tr>
-                <td style="padding:10px;color:var(--gold);font-family:'Noto Serif SC',serif">古印度</td>
-                <td style="padding:10px">維納琴、鼓、笛</td>
-                <td style="padding:10px">二十二個斯魯蒂（微分音）</td>
-                <td style="padding:10px">拉格（Raga）調式體系</td>
-                <td style="padding:10px;color:var(--patina-light)">獨特體系</td>
+                <td style="padding:6px;color:var(--ivory);font-family:'Noto Serif SC',serif;font-weight:600">古印度</td>
+                <td style="padding:6px">維納琴、鼓、笛</td>
+                <td style="padding:6px">二十二個斯魯蒂（微分音）</td>
+                <td style="padding:6px">拉格（Raga）調式體系</td>
+                <td style="padding:6px;color:var(--ivory)">獨特體系</td>
               </tr>
             </tbody>
           </table>
@@ -3292,10 +3301,10 @@ input, textarea, [contenteditable="true"] {
           <table style="width:100%;border-collapse:collapse;font-size:12px">
             <thead>
               <tr style="background:var(--bronze-mid)">
-                <th style="padding:10px;text-align:left;color:var(--gold)">特徵</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">琴（古琴）</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">瑟</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">箏（古箏）</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">特徵</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">琴（古琴）</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">瑟</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">箏（古箏）</th>
               </tr>
             </thead>
             <tbody style="color:var(--ivory-dim)">
@@ -3495,11 +3504,11 @@ input, textarea, [contenteditable="true"] {
           <table style="width:100%;border-collapse:collapse;font-size:12px">
             <thead>
               <tr style="background:var(--bronze-mid)">
-                <th style="padding:10px;text-align:left;color:var(--gold)">等級</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">舞佾（舞蹈人數）</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">樂懸（鐘磬懸掛）</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">編鐘規模</th>
-                <th style="padding:10px;text-align:left;color:var(--gold)">說明</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">等級</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">舞佾（舞蹈人數）</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">樂懸（鐘磬懸掛）</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">編鐘規模</th>
+                <th style="padding:6px;text-align:left;color:var(--ivory);font-weight:700">說明</th>
               </tr>
             </thead>
             <tbody style="color:var(--ivory-dim)">
@@ -3959,7 +3968,7 @@ const sfNotes = [
     const tr = document.createElement('tr');
     tr.style.borderBottom = '1px solid rgba(52,61,58,0.5)';
     tr.innerHTML = `
-      <td style="padding:10px;color:var(--gold);font-family:'Noto Serif SC',serif">${c.name}</td>
+      <td style="padding:6px;color:var(--ivory);font-family:'Noto Serif SC',serif;font-weight:600">${c.name}</td>
       <td style="padding:10px;color:var(--ivory-dim)">${c.sf.toFixed(3)}</td>
       <td style="padding:10px;color:var(--ivory-dim)">${c.eq.toFixed(3)}</td>
       <td style="padding:10px;color:${c.diff>5?'var(--vermilion-bright)':'var(--patina-light)'}">${c.diff.toFixed(1)} 音分</td>
