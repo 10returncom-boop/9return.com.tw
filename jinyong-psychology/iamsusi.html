@@ -279,7 +279,8 @@ body{
   padding:20px 24px;transition:all .35s var(--ease);
 }
 .tl-card:hover{border-color:var(--accent);transform:translateX(4px);box-shadow:0 8px 30px rgba(0,0,0,.15)}
-.tl-company{font-size:19px;font-weight:800;color:var(--accent);margin-bottom:4px}
+.tl-company{font-size:19px;font-weight:800;color:#991b1b;margin-bottom:4px}
+.tl-loc{font-size:13px;font-weight:500;color:#1a1a1a;margin-left:10px}
 .tl-role{font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px}
 .tl-desc{font-size:13px;color:var(--text-dim);line-height:1.7}
 
@@ -511,7 +512,11 @@ const experiences = [
 ];
 const timeline = document.getElementById('timeline');
 experiences.forEach(e=>{
-  timeline.innerHTML += `<div class="tl-item"><div class="tl-card"><div class="tl-company">${e.company}</div><div class="tl-role">${e.role}</div><div class="tl-desc">${e.desc}</div></div></div>`;
+  const parts = e.company.split(' | ');
+  const compName = parts[0];
+  const compLoc = parts[1] ? parts[1] : '';
+  const locHtml = compLoc ? `<span class="tl-loc">${compLoc}</span>` : '';
+  timeline.innerHTML += `<div class="tl-item"><div class="tl-card"><div class="tl-company">${compName}${locHtml}</div><div class="tl-role">${e.role}</div><div class="tl-desc">${e.desc}</div></div></div>`;
 });
 
 // ===== 職涯歷練 =====
