@@ -139,6 +139,13 @@ body{
   animation:gradient-shift 4s ease infinite;
 }
 @keyframes gradient-shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes ripple{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.title-ripple{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent-3),var(--accent),var(--accent-2));
+  background-size:300% 100%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:ripple 4s ease-in-out infinite;
+}
 .hero .typing{
   font-size:clamp(18px,3vw,28px);color:var(--text-dim);font-weight:600;
   margin-bottom:32px;min-height:40px;
@@ -379,7 +386,7 @@ body{
 <section class="section" id="about">
   <div class="reveal">
     <span class="section-tag">About Me</span>
-    <h2 class="section-title">欣媒體 ∞ 欣矩陣<br><span style="color:var(--accent)">讓你的邏輯與專業更Sexy</span></h2>
+    <h2 class="section-title"><span class="title-ripple">欣媒體 ∞ 欣矩陣</span><br><span style="color:var(--accent)">讓你的邏輯與專業更Sexy</span></h2>
     <p class="section-sub">從英文系到資策會，從IT到金融，從不動產到藝術——每一步都是跨界，每一次轉型都是累積。</p>
   </div>
   <div class="about-grid reveal">
