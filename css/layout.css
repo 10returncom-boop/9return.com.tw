@@ -167,21 +167,32 @@
 .hero.centered .btn-row{justify-content:center}
 .hero.centered .hero-meta{justify-content:center}
 .hero-brand{
-  display:inline-flex;align-items:center;justify-content:center;gap:.8rem;
+  display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
   font-family:"Noto Serif TC","PingFang TC","Microsoft JhengHei",serif;
-  font-weight:900;font-size:clamp(1.7rem,5vw,3.2rem);letter-spacing:.12em;
+  font-weight:900;font-size:clamp(1.25rem,3.4vw,2.1rem);letter-spacing:.12em;
   white-space:nowrap;flex-wrap:wrap;
   color:#FFFFFF;
   background:rgba(12,11,9,.80);
   border:1px solid rgba(255,255,255,.22);
-  padding:.55em 1.35em;
+  padding:.5em 1.15em;
   border-radius:999px;
-  box-shadow:0 12px 38px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.18);
+  box-shadow:0 10px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.16);
   backdrop-filter:blur(6px);
   -webkit-backdrop-filter:blur(6px);
 }
-.hero-brand .inf{width:.85em;height:.85em;color:var(--warm);flex:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+.hero-brand .inf{width:.9em;height:.9em;color:var(--warm);flex:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
 .hero-brand .amp{color:var(--warm);margin:0 .06em}
+/* 漣漪文字：逐字起伏 */
+.ripple-text{display:inline-flex;align-items:baseline;gap:.01em}
+.ripple-text>span{display:inline-block;animation:rippleChar 2.6s ease-in-out infinite}
+.ripple-text>span:nth-child(2){animation-delay:.13s}
+.ripple-text>span:nth-child(3){animation-delay:.26s}
+.ripple-text>span:nth-child(4){animation-delay:.39s}
+.ripple-text>span:nth-child(5){animation-delay:.52s}
+.ripple-text>span:nth-child(6){animation-delay:.65s}
+.ripple-text>span:nth-child(7){animation-delay:.78s}
+@keyframes rippleChar{0%,100%{transform:translateY(0)}50%{transform:translateY(-.09em)}}
+@media (prefers-reduced-motion: reduce){.ripple-text>span{animation:none}}
 
 /* ---------- 回到頂部 ---------- */
 .to-top{
