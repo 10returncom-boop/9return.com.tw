@@ -76,4 +76,4 @@
 
 - `contact.html` 表單為前端展示，送出後以 `mailto:` 開啟寄件視窗；正式上線需串接後端收件或表單服務
 - 案例中標示「會員制規劃中」的站點連結暫指向 `index.html`，上線後請更新為正式網址
-- Email 預設 `hello@9return.com.tw`，請依實際信箱更新
+- Email 預設 `zootecture@gmail.com`，請依實際信箱更新
