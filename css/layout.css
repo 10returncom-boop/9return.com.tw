@@ -11,7 +11,7 @@
   border-bottom:1px solid var(--line);
 }
 .header-inner{display:flex;align-items:center;gap:1rem;height:66px}
-.brand{display:flex;align-items:center;gap:.65rem;font-family:"Noto Serif TC",serif;font-weight:800;font-size:1.12rem;letter-spacing:.06em;white-space:nowrap;color:inherit}
+.brand{display:flex;align-items:center;gap:.65rem;font-family:"Noto Sans TC",serif;font-weight:800;font-size:1.12rem;letter-spacing:.06em;white-space:nowrap;color:inherit}
 .brand .amp{color:var(--warm);margin:0 .05em}
 .brand .inf{width:30px;height:30px;color:var(--warm);flex:none}
 .brand small{display:none}
@@ -138,7 +138,7 @@
 .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
 @media(min-width:640px){.stat-grid{grid-template-columns:repeat(4,1fr)}}
 .stat{padding:1.4rem 1.2rem;border:1px solid var(--line);border-radius:16px;background:var(--bg-1);text-align:center}
-.stat .num{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.4rem);line-height:1}
+.stat .num{font-family:"Noto Sans TC",serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.4rem);line-height:1}
 .stat .num small{font-size:.5em;color:var(--warm)}
 .stat .lbl{margin-top:.5rem;color:var(--ink-dim);font-size:.86rem}
 
@@ -169,11 +169,11 @@
 .hero.centered .hero-meta{justify-content:center}
 .hero-brand{
   display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
-  font-family:"Noto Serif TC","PingFang TC","Microsoft JhengHei",serif;
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",serif;
   font-weight:900;font-size:clamp(1.25rem,3.4vw,2.1rem);letter-spacing:.12em;
   white-space:nowrap;flex-wrap:wrap;
   color:#FFFFFF;
-  background:rgba(8,7,6,.68);
+  background:rgba(111,74,46,.72);
   border:1px solid rgba(255,255,255,.18);
   padding:.5em 1.15em;
   border-radius:999px;

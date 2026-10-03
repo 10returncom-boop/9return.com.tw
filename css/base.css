@@ -79,7 +79,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,textarea,select{font:inherit;color:inherit}
 
 /* ---------- 字體層級（clamp 流式，呼應 Breathe Clamp） ---------- */
-h1,h2,h3,h4{font-family:"Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",serif;font-weight:800;line-height:1.25;letter-spacing:.01em;text-wrap:balance}
+h1,h2,h3,h4{font-family:"Noto Sans TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",serif;font-weight:800;line-height:1.25;letter-spacing:.01em;text-wrap:balance}
 .h1{font-size:clamp(2.1rem,6vw,4.4rem);font-weight:900}
 .h2{font-size:clamp(1.6rem,3.6vw,2.6rem)}
 .h3{font-size:clamp(1.15rem,2.2vw,1.5rem)}

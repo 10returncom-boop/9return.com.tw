@@ -33,7 +33,7 @@
 .loop-arrow svg{width:22px;height:22px}
 
 /* 成功案例 ─ 案例數 */
-.case-count{font-family:"Noto Serif TC",serif;font-weight:900;color:var(--warm);font-size:1.3rem}
+.case-count{font-family:"Noto Sans TC",serif;font-weight:900;color:var(--warm);font-size:1.3rem}
 
 /* 報價 ─ 注意框 */
 .note-box{border:1px solid var(--line);border-left:3px solid var(--warm);border-radius:12px;
@@ -44,7 +44,7 @@
 .def-grid{display:grid;gap:1.2rem}
 @media(min-width:860px){.def-grid{grid-template-columns:repeat(3,1fr)}}
 .def-card{padding:1.7rem 1.5rem;height:100%}
-.def-card .letter{font-family:"Noto Serif TC",serif;font-weight:900;font-size:1.7rem;color:var(--warm);
+.def-card .letter{font-family:"Noto Sans TC",serif;font-weight:900;font-size:1.7rem;color:var(--warm);
   width:52px;height:52px;border-radius:15px;display:grid;place-items:center;background:var(--ok-warm);margin-bottom:.9rem}
 .def-card h3{font-size:1.15rem}
 .def-card p{color:var(--ink-dim);font-size:.93rem;margin-top:.4rem}
