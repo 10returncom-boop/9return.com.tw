@@ -170,7 +170,7 @@
 .hero-brand{
   display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
   font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",serif;
-  font-weight:900;font-size:clamp(1.25rem,3.4vw,2.1rem);letter-spacing:.12em;
+  font-weight:900;font-size:clamp(1.7rem,5vw,3.4rem);letter-spacing:.12em;
   white-space:nowrap;flex-wrap:wrap;
   color:#FFFFFF;
   background:rgba(111,74,46,.72);
