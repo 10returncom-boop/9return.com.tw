@@ -85,8 +85,9 @@
 .pillar ul li svg{width:15px;height:15px;color:var(--warm);margin-top:.25rem;flex:none}
 .pillar ul li b{color:var(--ink)}
 
-/* ---------- 流程時間軸（grid 三列對齊） ---------- */
-.timeline{display:grid;grid-template-columns:90px 22px 1fr;row-gap:0}
+/* ---------- 流程時間軸（grid 三列對齊：節點／軸／內容） ---------- */
+.timeline{display:grid;row-gap:0}
+.tl-row{display:grid;grid-template-columns:90px 22px 1fr}
 .tl-node{position:relative;padding:0 0 2.4rem}
 .tl-dot{justify-self:center;width:15px;height:15px;border-radius:50%;margin-top:.3rem;position:relative;z-index:1;
   background:linear-gradient(135deg,var(--warm-bright),var(--warm));box-shadow:0 0 0 5px var(--ok-warm)}
@@ -99,7 +100,7 @@
 .tl-body p{color:var(--ink-dim);font-size:.9rem;max-width:60ch}
 .tl-row:last-child .tl-node,.tl-row:last-child .tl-axis::before,.tl-row:last-child .tl-body{padding-bottom:0}
 .tl-row:last-child .tl-axis::before{bottom:auto;height:0}
-@media(max-width:600px){.timeline{grid-template-columns:66px 16px 1fr}}
+@media(max-width:600px){.tl-row{grid-template-columns:66px 16px 1fr}}
 
 /* ---------- 報價 ---------- */
 .pricing-grid{display:grid;gap:1.2rem;grid-template-columns:1fr}
