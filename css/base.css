@@ -110,3 +110,6 @@ h1,h2,h3,h4{font-family:"Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
 }
+
+/* ---------- 無障礙：僅供螢幕閱讀器（SEO 隱藏標題） ---------- */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
