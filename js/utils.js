@@ -105,6 +105,30 @@
     onScroll();
   }
 
+  /* ---------- Header Popover / Dropdown 選單 ---------- */
+  function initPopoverMenu() {
+    var wrap = document.getElementById("popoverMenu");
+    var btn = document.getElementById("menuToggle");
+    if (!wrap || !btn) return;
+    function setOpen(open) {
+      wrap.classList.toggle("open", open);
+      btn.setAttribute("aria-expanded", String(open));
+    }
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      setOpen(!wrap.classList.contains("open"));
+    });
+    document.addEventListener("click", function (e) {
+      if (!wrap.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setOpen(false);
+    });
+    wrap.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () { setOpen(false); });
+    });
+  }
+
   /* ---------- 主程式入口 ---------- */
   window.SiteInit = function () {
     initTheme();
@@ -112,6 +136,7 @@
     initFaq();
     initFilter();
     initTop();
+    initPopoverMenu();
     var b = document.getElementById("brandYear");
     if (b) b.textContent = new Date().getFullYear();
   };

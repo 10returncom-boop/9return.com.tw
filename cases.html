@@ -83,88 +83,20 @@
       <svg class="inf breathe" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16c-2.2 0-4-1.8-4-4s1.8-4 4-4c2.9 0 4.5 4 6.9 4s4-4 6.9-4c2.2 0 4 1.8 4 4s-1.8 4-4 4c-2.9 0-4.5-4-6.9-4S8.9 16 6 16Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span>欣矩陣<small>欣媒體</small></span>
     </a>
-    <nav class="nav-main" aria-label="主要導覽">
-      <a href="index.html">首頁</a>
-      <div class="nav-item">
-        <a href="services.html">服務項目<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></a>
-        <div class="dropdown">
-          <a href="services.html#sites"><span>內容站點佈局</span><em>垂直內容站點與知識庫</em></a>
-          <a href="services.html#seo"><span>SEO · AEO · GEO</span><em>三面向優化整合</em></a>
-          <a href="services.html#marketing"><span>數位行銷</span><em>內容行銷與流量導入</em></a>
-          <a href="services.html#update"><span>內容自動更新</span><em>維持搜尋新鮮度</em></a>
-        </div>
-      </div>
-      <a href="pricing.html">報價方案</a>
-      <div class="nav-item">
-        <a href="cases.html" class="active" aria-current="page">成功案例<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></a>
-        <div class="dropdown dropdown-cases">
-          <a href="https://9return.com.tw/zeng-hou-yi-bells/index.html"><span>曾侯乙編鐘戰國青銅禮樂重器</span><em>zeng-hou-yi-bells</em></a>
-          <a href="https://9return.com.tw/jinyong-psychology/index.html"><span>金庸人物與心理學</span><em>jinyong-psychology</em></a>
-          <a href="https://331.today/"><span>331 Gallery 數位藝廊</span><em>331.today</em></a>
-          <a href="https://zootecture.com/"><span>ZooTecture 入梯</span><em>zootecture.com</em></a>
-          <a href="https://petlogic.org/"><span>Petlogic 毛毛邏輯</span><em>petlogic.org</em></a>
-          <a href="https://9return.com.tw/dashboard.html"><span>九回房地觀測站</span><em>9return.com.tw</em></a>
-          <a href="https://9return.com.tw/index.html"><span>當榮格遇到易經</span><em>會員制規劃中</em></a>
-          <a href="https://9return.com.tw/hongloumeng/index.html"><span>夢見紅樓夢的家</span><em>hongloumeng</em></a>
-          <a href="https://9return.com.tw/classic-architecture/index.html"><span>古代建築還原記</span><em>classic-architecture</em></a>
-          <a href="https://vocus.cc/salon/zootecture"><span>順寵毛小孩</span><em>vocus salon</em></a>
-          <a href="https://vocus.cc/salon/petlogic"><span>安寵好好學</span><em>vocus salon</em></a>
-          <a href="https://9return.com.tw/index.html"><span>寵物空間好好裝</span><em>會員制規劃中</em></a>
-          <a href="https://9return.com.tw/index.html"><span>虛擬試衣間</span><em>會員制規劃中</em></a>
-          <a href="https://9return.com.tw/index.html"><span>經濟學的小遊戲</span><em>會員制規劃中</em></a>
-          <a href="https://9return.com.tw/index.html"><span>星象命盤占星</span><em>會員制規劃中</em></a>
-          <a href="https://9return.com.tw/index.html"><span>三國演義 vs 賽局</span><em>會員制規劃中</em></a>
-          <a href="https://9return.com.tw/index.html"><span>以物易物好好玩</span><em>會員制規劃中</em></a>
-          <a href="https://9return.com.tw/index.html"><span>Infucoco 愛幻想</span><em>會員制規劃中</em></a>
-          <a href="https://9return.com.tw/index.html"><span>音樂家都很怪</span><em>會員制規劃中</em></a>
-          <a href="https://9return.com.tw/index.html"><span>舒心玫瑰園</span><em>會員制規劃中</em></a>
-          <a href="https://9return.com.tw/index.html"><span>我看不到但都知道</span><em>會員制規劃中</em></a>
-          <a href="https://9return.com.tw/index.html"><span>世界名牌這樣唸</span><em>會員制規劃中</em></a>
-          <a class="dd-all" href="cases.html">查看全部案例 →</a>
-        </div>
-      </div>
-      <a href="seo.html">SEO·AEO·GEO</a>
-      <a href="about.html">關於我們</a>
-      <a href="contact.html">聯絡我們</a>
-    </nav>
     <div class="header-actions">
-      <button id="themeToggle" class="icon-btn" aria-label="切換主題" title="切換主題">
+      <button id="themeToggle" class="icon-btn" aria-label="切換主題" title="切換主題" onclick="window.Theme.toggle()">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></svg>
       </button>
-      <button class="icon-btn" id="openDrawer" aria-label="開啟選單">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3.5 6.5h17M3.5 12h17M3.5 17.5h17"/></svg>
-      </button>
-      <a class="btn-cta" href="contact.html">免費諮詢</a>
+      <div class="popover-menu" id="popoverMenu">
+        <button class="icon-btn menu-btn" id="menuToggle" aria-label="開啟選單" aria-haspopup="menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3.5 6.5h17M3.5 12h17M3.5 17.5h17"/></svg>
+        </button>
+        <nav class="menu-popover" aria-label="全站選單" role="menu"><a class="mp-link" href="index.html" role="menuitem">首頁</a><details class="mp-group"><summary class="mp-summary">服務項目<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><div class="mp-subs"><a href="services.html">服務項目總覽</a><a href="services.html#sites">內容站點佈局</a><a href="services.html#seo">SEO · AEO · GEO</a><a href="services.html#marketing">數位行銷</a><a href="services.html#update">內容自動更新</a></div></details><a class="mp-link" href="pricing.html" role="menuitem">報價方案</a><details class="mp-group"><summary class="mp-summary">成功案例<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><div class="mp-subs mp-cases"><a href="https://9return.com.tw/zeng-hou-yi-bells/index.html">曾侯乙編鐘戰國青銅禮樂重器</a><a href="https://9return.com.tw/jinyong-psychology/index.html">金庸人物與心理學</a><a href="https://331.today/">331 Gallery 數位藝廊</a><a href="https://zootecture.com/">ZooTecture 入梯</a><a href="https://petlogic.org/">Petlogic 毛毛邏輯</a><a href="https://9return.com.tw/dashboard.html">九回房地觀測站</a><a href="https://9return.com.tw/index.html">當榮格遇到易經</a><a href="https://9return.com.tw/hongloumeng/index.html">夢見紅樓夢的家</a><a href="https://9return.com.tw/classic-architecture/index.html">古代建築還原記</a><a href="https://vocus.cc/salon/zootecture">順寵毛小孩</a><a href="https://vocus.cc/salon/petlogic">安寵好好學</a><a href="https://9return.com.tw/index.html">寵物空間好好裝</a><a href="https://9return.com.tw/index.html">虛擬試衣間</a><a href="https://9return.com.tw/index.html">經濟學的小遊戲</a><a href="https://9return.com.tw/index.html">星象命盤占星</a><a href="https://9return.com.tw/index.html">三國演義 vs 賽局</a><a href="https://9return.com.tw/index.html">以物易物好好玩</a><a href="https://9return.com.tw/index.html">Infucoco 愛幻想</a><a href="https://9return.com.tw/index.html">音樂家都很怪</a><a href="https://9return.com.tw/index.html">舒心玫瑰園</a><a href="https://9return.com.tw/index.html">我看不到但都知道</a><a href="https://9return.com.tw/index.html">世界名牌這樣唸</a><a class="dd-all" href="cases.html">查看全部案例 →</a></div></details><a class="mp-link" href="seo.html" role="menuitem">SEO·AEO·GEO</a><a class="mp-link" href="about.html" role="menuitem">關於我們</a><a class="mp-link" href="contact.html" role="menuitem">聯絡我們</a></nav>
+      </div>
     </div>
   </div>
 </header>
-
-<div class="drawer" id="drawer">
-  <div class="scrim" data-close-drawer></div>
-  <aside class="panel" aria-label="側邊選單">
-    <div class="d-head">
-      <span class="brand"><svg class="inf" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16c-2.2 0-4-1.8-4-4s1.8-4 4-4c2.9 0 4.5 4 6.9 4s4-4 6.9-4c2.2 0 4 1.8 4 4s-1.8 4-4 4c-2.9 0-4.5-4-6.9-4S8.9 16 6 16Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>欣矩陣<small>欣媒體</small></span>
-      <button class="icon-btn" data-close-drawer aria-label="關閉選單">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg>
-      </button>
-    </div>
-    <nav>
-      <a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3.5 10.5 12 3.5l8.5 7M5.5 9v11h13V9"/></svg>首頁</a>
-      <a href="services.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>服務項目</a>
-      <a href="pricing.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2.5 20 5v6c0 4.5-3.2 8-8 10.5C7.2 19 4 15.5 4 11V5Z"/><path d="M8.5 11.5 11 14l4.5-4.8"/></svg>報價方案</a>
-      <a href="cases.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.9L12 16.9 6.8 19.7l1-5.9L3.5 9.7l5.9-.9Z"/></svg>成功案例</a>
-      <a href="seo.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 19.5 9.5 14l4 4L20 9"/><path d="M15.5 9H20v4.5"/></svg>SEO·AEO·GEO</a>
-      <a href="about.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11.5v4.5M12 7.6v.2"/></svg>關於我們</a>
-      <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>聯絡我們</a>
-    </nav>
-    <div class="d-foot">
-      <p>電話 <a href="tel:0968222201">0968-222201</a></p>
-      <p>Line <a href="https://line.me/R/ti/p/~331.today" target="_blank" rel="noopener">331.today</a></p>
-      <p style="margin-top:.4rem">設計規劃開發 · 張書欣</p>
-    </div>
-  </aside>
-</div>
 
 <main>
 <nav class="breadcrumb clamp" aria-label="麵包屑導覽"><a href="index.html">首頁</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
