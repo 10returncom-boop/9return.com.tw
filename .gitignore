@@ -1,0 +1,10 @@
+# 自檢截圖（非交付物）
+_shots/
+
+# Python
+__pycache__/
+*.pyc
+
+# 系統
+Thumbs.db
+Desktop.ini

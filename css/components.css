@@ -1,0 +1,226 @@
+/* =========================================================
+   欣矩陣 ∞ 欣媒體 — components.css
+   卡片 / 按鈕 / 時間軸 / 表格 / FAQ / 報價 / 表單 / 動效
+   ========================================================= */
+
+/* ---------- 無限 ∞ 符號 ---------- */
+.inf{display:inline-block;vertical-align:-.08em}
+@keyframes breathe{
+  0%,100%{transform:scale(1);filter:drop-shadow(0 2px 8px rgba(161,123,53,.25))}
+  50%{transform:scale(1.04);filter:drop-shadow(0 4px 16px rgba(161,123,53,.4))}
+}
+.inf.breathe{animation:breathe 4s ease-in-out infinite}
+
+/* ---------- 光軌分隔 ---------- */
+.glow-rule{display:flex;align-items:center;gap:.8rem;color:var(--ink-faint)}
+.glow-rule::before,.glow-rule::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--warm))}
+.glow-rule::after{background:linear-gradient(90deg,var(--cool),transparent)}
+
+/* ---------- 按鈕 ---------- */
+.btn-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.4rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.78rem 1.5rem;border-radius:999px;font-weight:600;font-size:.95rem;
+  transition:transform .18s,box-shadow .2s,filter .2s,border-color .2s}
+.btn svg{width:17px;height:17px}
+.btn-primary{color:#fff;background:linear-gradient(135deg,var(--warm-bright),var(--warm));
+  box-shadow:0 12px 26px -14px rgba(161,123,53,.6)}
+.btn-primary:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.btn-line{border:1px solid var(--warm);color:var(--warm);background:transparent}
+.btn-line:hover{background:var(--ok-warm);color:var(--warm);transform:translateY(-2px)}
+.btn-sm{padding:.5rem .95rem;font-size:.86rem}
+
+/* ---------- 卡片 ---------- */
+.card{border:1px solid var(--line);border-radius:18px;background:var(--bg-1);overflow:hidden;
+  transition:transform .25s,border-color .25s,box-shadow .25s;position:relative}
+.card:hover{transform:translateY(-5px);border-color:var(--line-strong);
+  box-shadow:var(--shadow)}
+.glow-card{position:relative}
+.glow-card::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;
+  background:linear-gradient(135deg,var(--ok-warm),transparent 40%,transparent 60%,var(--ok-cool));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+
+/* 成功案例卡 */
+.case-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--bg-1);
+  transition:transform .25s,border-color .25s,box-shadow .25s}
+.case-card:hover{transform:translateY(-5px);border-color:var(--line-strong);box-shadow:var(--shadow)}
+.case-thumb{aspect-ratio:4/3;overflow:hidden;position:relative}
+.case-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.case-card:hover .case-thumb img{transform:scale(1.06)}
+.case-thumb .tag{position:absolute;top:.7rem;left:.7rem;z-index:2;background:rgba(20,18,14,.72);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#F3EDE0;font-size:.72rem;font-weight:600;
+  padding:.28rem .7rem;border-radius:999px;letter-spacing:.08em;border:1px solid rgba(212,176,100,.35)}
+.case-body{padding:1.05rem 1.15rem 1.2rem;display:flex;flex-direction:column;gap:.35rem;flex:1}
+.case-body h3{font-size:1.04rem;font-weight:700}
+.case-body .url{font-size:.8rem;color:var(--cool-bright);display:flex;align-items:center;gap:.3rem;margin-bottom:.15rem}
+.case-body .url svg{width:13px;height:13px}
+.case-body p{color:var(--ink-dim);font-size:.9rem;flex:1}
+.case-body .stat-row{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{font-size:.72rem;font-weight:600;padding:.2rem .6rem;border-radius:999px;border:1px solid var(--line);
+  color:var(--ink-dim);background:var(--bg-2)}
+.chip.hot{color:var(--warm);border-color:var(--ok-warm)}
+
+/* 案例區分隔小標 */
+.case-subhead{display:flex;align-items:center;gap:.7rem;margin:2.2rem 0 1.1rem;color:var(--ink-dim);
+  font-size:.84rem;font-weight:600;letter-spacing:.18em}
+.case-subhead::before,.case-subhead::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--warm))}
+.case-subhead::after{background:linear-gradient(90deg,var(--warm),transparent)}
+
+/* 篩選器 */
+.filter-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.8rem}
+.filter-btn{padding:.5rem 1rem;border-radius:999px;font-size:.88rem;font-weight:600;color:var(--ink-dim);
+  border:1px solid var(--line);background:var(--bg-1);transition:all .2s}
+.filter-btn:hover{color:var(--ink);border-color:var(--line-strong)}
+.filter-btn.active{color:#fff;background:linear-gradient(135deg,var(--warm-bright),var(--warm));border-color:transparent}
+
+/* 服務支柱卡 */
+.pillar{padding:1.8rem 1.5rem;display:flex;flex-direction:column;gap:.7rem;height:100%}
+.pillar .ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;color:#fff;
+  background:linear-gradient(135deg,var(--warm-bright),var(--warm));box-shadow:0 12px 26px -14px rgba(161,123,53,.5)}
+.pillar .ico svg{width:25px;height:25px}
+.pillar h3{font-size:1.18rem}
+.pillar p{color:var(--ink-dim);font-size:.93rem;flex:1}
+.pillar ul{display:grid;gap:.45rem}
+.pillar ul li{display:flex;gap:.5rem;align-items:flex-start;font-size:.9rem;color:var(--ink-dim)}
+.pillar ul li svg{width:15px;height:15px;color:var(--warm);margin-top:.25rem;flex:none}
+.pillar ul li b{color:var(--ink)}
+
+/* ---------- 流程時間軸（grid 三列對齊） ---------- */
+.timeline{display:grid;grid-template-columns:90px 22px 1fr;row-gap:0}
+.tl-node{position:relative;padding:0 0 2.4rem}
+.tl-dot{justify-self:center;width:15px;height:15px;border-radius:50%;margin-top:.3rem;position:relative;z-index:1;
+  background:linear-gradient(135deg,var(--warm-bright),var(--warm));box-shadow:0 0 0 5px var(--ok-warm)}
+.tl-axis{position:relative}
+.tl-axis::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);
+  background:linear-gradient(180deg,var(--warm),var(--warm-bright));opacity:.55}
+.tl-body{padding:0 0 2.4rem .6rem}
+.tl-body h3{font-size:1.08rem;margin-bottom:.25rem}
+.tl-body .tl-time{font-size:.8rem;font-weight:600;letter-spacing:.1em;color:var(--cool-bright)}
+.tl-body p{color:var(--ink-dim);font-size:.9rem;max-width:60ch}
+.tl-row:last-child .tl-node,.tl-row:last-child .tl-axis::before,.tl-row:last-child .tl-body{padding-bottom:0}
+.tl-row:last-child .tl-axis::before{bottom:auto;height:0}
+@media(max-width:600px){.timeline{grid-template-columns:66px 16px 1fr}}
+
+/* ---------- 報價 ---------- */
+.pricing-grid{display:grid;gap:1.2rem;grid-template-columns:1fr}
+@media(min-width:880px){.pricing-grid{grid-template-columns:repeat(3,1fr)}}
+.price-card{display:flex;flex-direction:column;padding:1.9rem 1.6rem;border:1px solid var(--line);border-radius:22px;
+  background:var(--bg-1);position:relative;transition:transform .25s,border-color .25s,box-shadow .25s;height:100%}
+.price-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.price-card.featured{border:1px solid transparent;background:
+  linear-gradient(var(--bg-1),var(--bg-1)) padding-box,
+  linear-gradient(135deg,var(--warm-bright),var(--warm)) border-box}
+.price-card.featured::after{content:"最受歡迎";position:absolute;top:-12px;left:1.4rem;
+  background:linear-gradient(135deg,var(--warm-bright),var(--warm));color:#fff;font-size:.74rem;font-weight:700;
+  padding:.3rem .9rem;border-radius:999px;letter-spacing:.08em}
+.price-name{font-family:"Noto Serif TC",serif;font-size:1.15rem;font-weight:800}
+.price-sub{color:var(--ink-dim);font-size:.85rem;margin:.3rem 0 1.2rem}
+.price{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(2rem,4vw,2.5rem);line-height:1}
+.price small{font-size:.55em;color:var(--ink-dim);font-weight:500}
+.price .from{font-size:.78rem;color:var(--ink-faint);font-weight:500;display:block;margin-bottom:.2rem}
+.price-features{list-style:none;margin:1.4rem 0 1.6rem;display:grid;gap:.6rem;flex:1}
+.price-features li{display:flex;gap:.55rem;font-size:.92rem;color:var(--ink-dim);align-items:flex-start}
+.price-features li svg{width:16px;height:16px;color:var(--warm);margin-top:.22rem;flex:none}
+.price-features li.off{opacity:.45}
+.price-features li.off svg{color:var(--ink-faint)}
+.price-card .btn{width:100%}
+
+/* 對照表 */
+.compare-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--bg-1)}
+table.compare{width:100%;border-collapse:collapse;table-layout:fixed;min-width:760px}
+.compare th,.compare td{padding:.9rem 1rem;text-align:left;border-bottom:1px solid var(--line);font-size:.9rem;vertical-align:top}
+.compare thead th{font-family:"Noto Serif TC",serif;font-weight:800;font-size:.98rem;color:var(--ink);
+  background:var(--bg-2)}
+.compare thead th.hl{color:var(--warm)}
+.compare tbody th{font-weight:600;color:var(--ink);width:22%}
+.compare tbody td{color:var(--ink-dim)}
+.compare tbody tr:last-child th,.compare tbody tr:last-child td{border-bottom:none}
+.compare .yes{color:var(--warm);font-weight:600}
+.compare .no{color:var(--ink-faint)}
+.compare tbody tr:hover td,.compare tbody tr:hover th{background:var(--bg-2)}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:820px;margin-inline:auto}
+.faq-item{border:1px solid var(--line);border-radius:14px;background:var(--bg-1);margin-bottom:.8rem;overflow:hidden}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:1.05rem 1.2rem;text-align:left;font-weight:600;font-size:.98rem;color:var(--ink)}
+.faq-q .chev{width:18px;height:18px;color:var(--cool-bright);flex:none;transition:transform .28s}
+.faq-item.open .faq-q .chev{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .32s ease}
+.faq-a-inner{padding:0 1.2rem 1.15rem;color:var(--ink-dim);font-size:.93rem}
+.faq-a-inner a{color:var(--warm);font-weight:600}
+
+/* ---------- 表單 ---------- */
+.form-grid{display:grid;gap:1rem}
+.form-grid.two{grid-template-columns:1fr}
+@media(min-width:640px){.form-grid.two{grid-template-columns:1fr 1fr}}
+.field label{display:block;font-size:.86rem;font-weight:600;margin-bottom:.4rem;color:var(--ink)}
+.field label span{color:var(--warm)}
+.field input,.field textarea,.field select{
+  width:100%;padding:.8rem 1rem;border-radius:12px;border:1px solid var(--line-strong);
+  background:var(--bg-1);color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:var(--cool);box-shadow:0 0 0 3px var(--ok-cool)}
+.field textarea{resize:vertical;min-height:130px}
+
+/* ---------- 深色亮色切換按鈕 ---------- */
+#themeToggle .icon-moon{display:none}
+[data-theme="light"] #themeToggle .icon-moon{display:block}
+[data-theme="light"] #themeToggle .icon-sun{display:none}
+
+/* ---------- 捲動顯現 ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- CTA 帶 ---------- */
+.cta-band{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:26px;padding:clamp(2.4rem,6vw,4rem);
+  background:radial-gradient(120% 120% at 0% 0%,var(--ok-warm),transparent 46%),
+             radial-gradient(120% 120% at 100% 100%,var(--ok-cool),transparent 46%),
+             var(--bg-1);text-align:center}
+.cta-band h2{max-width:18ch;margin:.8rem auto .6rem}
+.cta-band p{color:var(--ink-dim);max-width:52ch;margin:0 auto}
+.cta-band .inf{color:var(--warm);width:44px;height:44px}
+
+/* ---------- 名片卡（關於） ---------- */
+.person-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:2rem 1.5rem}
+.person-avatar{width:84px;height:84px;border-radius:24px;display:grid;place-items:center;margin-bottom:1rem;
+  background:linear-gradient(135deg,var(--warm-bright),var(--warm));color:#fff;font-family:"Noto Serif TC",serif;font-weight:900;font-size:2rem}
+.person-card h3{font-size:1.2rem}
+.person-card .role{color:var(--cool-bright);font-size:.86rem;font-weight:600;margin:.2rem 0 .8rem}
+
+/* ---------- 內容卡片網格 ---------- */
+.grid{display:grid;gap:1.1rem}
+.grid.cols-2{grid-template-columns:1fr}
+.grid.cols-3{grid-template-columns:1fr}
+@media(min-width:640px){.grid.cols-2{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+}
+.grid.cols-4{grid-template-columns:1fr}
+@media(min-width:640px){.grid.cols-4{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- 兩欄排版 ---------- */
+.split{display:grid;gap:2rem;align-items:center}
+@media(min-width:860px){.split{grid-template-columns:1fr 1fr}}
+.split .visual{border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+.split .visual img{width:100%;height:100%;object-fit:cover}
+.checks{display:grid;gap:.6rem;margin-top:1rem}
+.checks li{display:flex;gap:.6rem;align-items:flex-start;color:var(--ink-dim);font-size:.94rem}
+.checks li svg{width:17px;height:17px;color:var(--warm);margin-top:.2rem;flex:none}
+.checks li b{color:var(--ink)}
+
+/* ---------- 徽章行 ---------- */
+.badge-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem}
+.badge{display:inline-flex;align-items:center;gap:.4rem;padding:.42rem .9rem;border-radius:999px;
+  font-size:.85rem;font-weight:600;color:var(--ink);border:1px solid var(--line-strong);background:var(--bg-1)}
+.badge svg{width:15px;height:15px;color:var(--cool-bright)}
+
+/* ---------- 聯絡資訊卡 ---------- */
+.contact-card{padding:1.6rem 1.4rem;display:flex;gap:1rem;align-items:flex-start;height:100%}
+.contact-card .ico{width:46px;height:46px;border-radius:14px;flex:none;display:grid;place-items:center;color:#fff;
+  background:linear-gradient(135deg,var(--warm-bright),var(--warm))}
+.contact-card .ico svg{width:22px;height:22px}
+.contact-card h3{font-size:1.05rem}
+.contact-card p{color:var(--ink-dim);font-size:.93rem;word-break:break-all}
+.contact-card a{color:var(--warm);font-weight:600}

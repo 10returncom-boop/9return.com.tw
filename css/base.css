@@ -1,0 +1,112 @@
+/* =========================================================
+   欣矩陣 ∞ 欣媒體 — base.css
+   色彩 token（oklch 派生）、Reset、字體、Clamp 流式工具
+   ========================================================= */
+
+/* ---------- 色彩 token ---------- */
+:root{
+  color-scheme: dark;
+  /* 深色（典雅墨色 × 香檳金） */
+  --bg-0:#14120E;          /* 頁面底，深墨 */
+  --bg-1:#1C1915;          /* 提升面 */
+  --bg-2:#241F18;          /* 卡片面 */
+  --bg-3:#2C2620;          /* hover 面 */
+  --ink:#F3EDE0;           /* 主文字（暖米白） */
+  --ink-dim:#B7AB96;       /* 次要文字 */
+  --ink-faint:#857A65;     /* 弱提示 */
+  --line:rgba(243,237,224,.13);
+  --line-strong:rgba(243,237,224,.26);
+  --warm:#D4B064;          /* 香檳金 */
+  --warm-bright:#E2C277;
+  --cool:#7FAF9E;          /* 墨綠 */
+  --cool-bright:#9CC7B6;
+  --ok-warm:rgba(212,176,100,.13);
+  --ok-cool:rgba(127,175,158,.15);
+  --ok-warm-2:rgba(226,194,119,.09);
+  --ok-cool-2:rgba(156,199,182,.09);
+  --shadow:0 28px 70px -30px rgba(0,0,0,.62);
+  --header-bg:rgba(20,18,14,.78);
+}
+[data-theme="light"]{
+  color-scheme: light;
+  --bg-0:#F5EFE3;          /* 象牙米白底 */
+  --bg-1:#FAF5EA;
+  --bg-2:#FFFFFF;
+  --bg-3:#EDE5D3;
+  --ink:#2B251A;           /* 深墨 */
+  --ink-dim:#6E6452;
+  --ink-faint:#9B907A;
+  --line:rgba(43,37,26,.13);
+  --line-strong:rgba(43,37,26,.24);
+  --warm:#A17B35;          /* 古銅金 */
+  --warm-bright:#B58F45;
+  --cool:#2F6356;          /* 墨綠 */
+  --cool-bright:#3B7A6B;
+  --ok-warm:rgba(161,123,53,.13);
+  --ok-cool:rgba(47,99,86,.13);
+  --ok-warm-2:rgba(181,143,69,.09);
+  --ok-cool-2:rgba(59,122,107,.09);
+  --shadow:0 26px 64px -32px rgba(90,70,40,.34);
+  --header-bg:rgba(245,239,227,.86);
+}
+
+/* ---------- Reset ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg-0);
+  color:var(--ink);
+  line-height:1.75;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  transition:background .35s ease,color .35s ease;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font:inherit;color:inherit}
+
+/* ---------- 字體層級（clamp 流式，呼應 Breathe Clamp） ---------- */
+h1,h2,h3,h4{font-family:"Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",serif;font-weight:800;line-height:1.25;letter-spacing:.01em;text-wrap:balance}
+.h1{font-size:clamp(2.1rem,6vw,4.4rem);font-weight:900}
+.h2{font-size:clamp(1.6rem,3.6vw,2.6rem)}
+.h3{font-size:clamp(1.15rem,2.2vw,1.5rem)}
+.h4{font-size:1.06rem}
+.lead{font-size:clamp(1rem,2vw,1.2rem);color:var(--ink-dim);max-width:56ch}
+.eyebrow{
+  font-family:"Noto Sans TC",sans-serif;
+  font-weight:600;font-size:.78rem;letter-spacing:.32em;
+  color:var(--warm);
+  text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.eyebrow::before{content:"";width:2.2rem;height:1px;
+  background:linear-gradient(90deg,var(--warm),var(--warm-bright));display:inline-block}
+.eyebrow.center{justify-content:center}
+
+/* ---------- Clamp 工具（Breathe Clamp 組件） ---------- */
+.clamp{width:min(100% - 2.4rem,1200px);margin-inline:auto}
+.clamp-narrow{width:min(100% - 2.4rem,880px);margin-inline:auto}
+@media(min-width:720px){.clamp{width:min(100% - 5rem,1200px)}.clamp-narrow{width:min(100% - 5rem,880px)}}
+
+/* ---------- 通用排版工具 ---------- */
+.mt-1{margin-top:.75rem}.mt-2{margin-top:1.5rem}.mt-3{margin-top:2.75rem}
+.mb-1{margin-bottom:.75rem}.mb-2{margin-bottom:1.5rem}
+.muted{color:var(--ink-dim)}
+.grad-text{
+  background:linear-gradient(92deg,var(--warm) 0%,var(--cool-bright) 70%,var(--cool) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+::selection{background:var(--ok-cool);color:var(--ink)}
+
+/* ---------- 捲軸 ---------- */
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:8px;border:3px solid var(--bg-0)}
+::-webkit-scrollbar-track{background:transparent}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
