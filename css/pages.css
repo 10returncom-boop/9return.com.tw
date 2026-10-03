@@ -56,3 +56,27 @@
 
 /* 空白確認區 */
 .empty-hint{text-align:center;padding:2.5rem 1rem;color:var(--ink-faint);font-size:.92rem}
+
+/* =========================================================
+   內頁標題 ─ 咖啡底白字（易讀性統一）
+   ========================================================= */
+.page-hero h1,
+.section-head h2{
+  background:linear-gradient(120deg,var(--coffee) 0%,var(--coffee-2) 100%);
+  color:#fff;
+  display:inline-block;
+  padding:.4em 1em;
+  border-radius:.8em;
+  box-shadow:0 8px 22px rgba(20,18,14,.22);
+  line-height:1.3;
+  max-width:none;
+}
+/* 標題內的漸層字統一改白字 */
+.page-hero h1 .grad-text,
+.section-head h2 .grad-text{
+  background:none;
+  -webkit-background-clip:border-box;
+  background-clip:border-box;
+  -webkit-text-fill-color:#fff;
+  color:#fff;
+}
