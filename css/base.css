@@ -18,6 +18,8 @@
   --line-strong:rgba(243,237,224,.26);
   --warm:#D4B064;          /* 香檳金 */
   --warm-bright:#E2C277;
+  --coffee:#6F4A2E;        /* 咖啡（按鈕統一底色） */
+  --coffee-2:#8A5E3A;
   --cool:#7FAF9E;          /* 墨綠 */
   --cool-bright:#9CC7B6;
   --ok-warm:rgba(212,176,100,.13);
@@ -41,6 +43,8 @@
   --line-strong:rgba(43,37,26,.24);
   --warm:#A17B35;          /* 古銅金 */
   --warm-bright:#B58F45;
+  --coffee:#6F4A2E;        /* 咖啡（按鈕統一底色） */
+  --coffee-2:#8A5E3A;
   --cool:#2F6356;          /* 墨綠 */
   --cool-bright:#3B7A6B;
   --ok-warm:rgba(161,123,53,.13);
