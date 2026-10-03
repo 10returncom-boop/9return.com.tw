@@ -26,6 +26,7 @@
   --ok-cool-2:rgba(156,199,182,.09);
   --shadow:0 28px 70px -30px rgba(0,0,0,.62);
   --header-bg:rgba(20,18,14,.78);
+  --bg-veil:rgba(20,18,14,.88);
 }
 [data-theme="light"]{
   color-scheme: light;
@@ -48,6 +49,7 @@
   --ok-cool-2:rgba(59,122,107,.09);
   --shadow:0 26px 64px -32px rgba(90,70,40,.34);
   --header-bg:rgba(245,239,227,.86);
+  --bg-veil:rgba(245,239,227,.84);
 }
 
 /* ---------- Reset ---------- */
@@ -55,7 +57,10 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;
-  background:var(--bg-0);
+  background:
+    linear-gradient(var(--bg-veil),var(--bg-veil)),
+    url("../assets/bg-paper.webp") center/cover;
+  background-color:var(--bg-0);
   color:var(--ink);
   line-height:1.75;
   font-size:16px;
