@@ -235,8 +235,8 @@ CASES_BODY = f'''
   <section class="hero page-hero">
     <div class="clamp hero-inner">
       <span class="eyebrow">成功案例</span>
-      <h1>22 個垂直站點，<span class="grad-text">見證佈局實力</span></h1>
-      <p class="lead">從文史藝術、寵物生活、房地產到財經與心理療癒，我們已佈局 22 個跨產業垂直內容站點。點擊卡片可直接造訪該站。</p>
+      <h1>23 個垂直站點，<span class="grad-text">見證佈局實力</span></h1>
+      <p class="lead">從文史藝術、寵物生活、房地產到財經與心理療癒，我們已佈局 23 個跨產業垂直內容站點。點擊卡片可直接造訪該站。</p>
     </div>
   </section>
 
@@ -411,7 +411,7 @@ ABOUT_BODY = '''
         <div class="tl-row"><div class="tl-node"><span class="tl-dot"></span></div><div class="tl-axis"></div><div class="tl-body"><span class="tl-time">佈局</span><h3>文史藝術與寵物生活</h3><p>曾侯乙編鐘、金庸心理、ZooTecture、Petlogic 等站點陸續上線。</p></div></div>
         <div class="tl-row"><div class="tl-node"><span class="tl-dot"></span></div><div class="tl-axis"></div><div class="tl-body"><span class="tl-time">拓展</span><h3>房地產、財經與心理</h3><p>九回房地觀測站、經濟學小遊戲、占星與療癒等領域加入。</p></div></div>
         <div class="tl-row"><div class="tl-node"><span class="tl-dot"></span></div><div class="tl-axis"></div><div class="tl-body"><span class="tl-time">整合</span><h3>SEO / AEO / GEO 優化</h3><p>把搜尋、語音與生成式 AI 三入口整合進每一座站點。</p></div></div>
-        <div class="tl-row"><div class="tl-node"><span class="tl-dot"></span></div><div class="tl-axis"></div><div class="tl-body"><span class="tl-time">未來</span><h3>持續成長</h3><p>22 個站點與更多領域持續擴展，完成你的價值性創造。</p></div></div>
+        <div class="tl-row"><div class="tl-node"><span class="tl-dot"></span></div><div class="tl-axis"></div><div class="tl-body"><span class="tl-time">未來</span><h3>持續成長</h3><p>23 個站點與更多領域持續擴展，完成你的價值性創造。</p></div></div>
       </div>
     </div>
   </section>
@@ -544,12 +544,12 @@ PAGES = [
     },
     {
         "file": "cases.html", "active": "cases.html",
-        "title": "成功案例｜欣矩陣 ∞ 欣媒體｜22 個跨產業垂直內容站點",
-        "desc": "欣矩陣 ∞ 欣媒體成功案例：22 個跨產業垂直內容站點，涵蓋文史藝術、寵物生活、房地產、財經與心理療癒，點擊即可造訪每座站點。",
+        "title": "成功案例｜欣矩陣 ∞ 欣媒體｜23 個跨產業垂直內容站點",
+        "desc": "欣矩陣 ∞ 欣媒體成功案例：23 個跨產業垂直內容站點，涵蓋文史藝術、寵物生活、房地產、財經與心理療癒，點擊即可造訪每座站點。",
         "keywords": "成功案例,內容站點,垂直站點,案例,網站案例,欣矩陣,欣媒體",
         "canonical": "https://9return.com.tw/cases.html",
         "og_title": "成功案例｜欣矩陣 ∞ 欣媒體",
-        "og_desc": "22 個跨產業垂直內容站點，見證佈局實力。",
+        "og_desc": "23 個跨產業垂直內容站點，見證佈局實力。",
         "crumbs": [("首頁","index.html"),("成功案例","cases.html")],
         "json": None,
         "body": CASES_BODY, "extra_js": "",

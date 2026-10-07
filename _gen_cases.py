@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """欣矩陣 ∞ 欣媒體 — 各頁面內容定義（供 _gen_site.py 使用）"""
 
-# 22 個成功案例
+# 23 個成功案例
 CASES = [
     ("card-22-zeng-hou-yi-bells.webp","文史藝術","曾侯乙編鐘戰國青銅禮樂重器","出土於湖北隨州的戰國早期青銅禮樂重器，65 件編鐘音域跨五個半八度，一鐘雙音，改寫世界音樂史的驚世發現。","https://9return.com.tw/zeng-hou-yi-bells/index.html","zeng-hou-yi-bells","上線"),
     ("card-01-jinyong.webp","文史藝術","金庸人物與心理學","一百位金庸江湖人物的心理畫像，用現代心理學透視刀光劍影之外的愛恨情仇與人格底色。","https://9return.com.tw/jinyong-psychology/index.html","jinyong-psychology","上線"),
@@ -25,6 +25,7 @@ CASES = [
     ("card-19-rose-garden.webp","心理療癒","舒心玫瑰園","在玫瑰花園中尋找心靈療癒，以芳香與自然撫慰日常疲憊，打造屬於你的舒心角落。","https://9return.com.tw/index.html","會員制規劃中","規劃中"),
     ("card-20-intuition.webp","心理療癒","我看不到但都知道","超越視覺的靈性感知，探索直覺、第六感與內在智慧的神秘力量，看見眼睛看不到的真相。","https://9return.com.tw/index.html","會員制規劃中","規劃中"),
     ("card-21-luxury-brands.webp","時尚娛樂","世界名牌這樣唸","LV、Gucci、Hermès、Chanel…世界精品品牌的正確發音教學，從此不再唸錯鬧笑話。","https://9return.com.tw/index.html","會員制規劃中","規劃中"),
+    ("card-23-stationery-pen.webp","文史藝術","從文具控到鋼筆控","鋼筆百科全書：從萬寶龍到你手上的那張紙，品牌、結構、上墨、墨水到保養，一站讀懂鋼筆的世界。","https://331.fyi/stationery-pen","331.fyi/stationery-pen","上線"),
 ]
 
 def case_card(c):
