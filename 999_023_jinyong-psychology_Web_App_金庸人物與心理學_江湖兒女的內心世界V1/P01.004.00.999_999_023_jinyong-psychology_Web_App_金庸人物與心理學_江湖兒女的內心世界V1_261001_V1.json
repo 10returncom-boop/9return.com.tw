@@ -1,0 +1,616 @@
+{
+  "naming": "P01.004.00.999_999_023_jinyong-psychology_Web_App_金庸人物與心理學_江湖兒女的內心世界V1_20261001_V1.json",
+  "project_code": "P01",
+  "doc_sequence": "004",
+  "jd": "00",
+  "ddc": "999",
+  "site_name": "999_023_jinyong-psychology_Web_App_金庸人物與心理學_江湖兒女的內心世界V1",
+  "site_folder": "D:\\_WWW_325_public\\999_023_jinyong-psychology_Web_App_金庸人物與心理學_江湖兒女的內心世界V1",
+  "title": "金庸人物與心理學 — 江湖兒女的內心世界",
+  "lang": "zh-TW",
+  "encoding_issues": false,
+  "garbled": false,
+  "redirect_only": false,
+  "page_count": 2,
+  "pages": [
+    {
+      "file": "index.html",
+      "title": "金庸人物與心理學 — 江湖兒女的內心世界",
+      "role": "入口頁",
+      "size_bytes": 157560,
+      "tables": 0,
+      "tools": 0
+    },
+    {
+      "file": "about.html",
+      "title": "關於我 | 金庸人物與心理學 — 江湖兒女的內心世界",
+      "role": "子頁面",
+      "size_bytes": 16591,
+      "tables": 0,
+      "tools": 0
+    }
+  ],
+  "navigation": [
+    {
+      "type": "nav",
+      "text": "金金庸人物與心理學",
+      "href": "#hero",
+      "meta": "",
+      "file": "index.html"
+    },
+    {
+      "type": "nav",
+      "text": "首頁",
+      "href": "#hero",
+      "meta": "",
+      "file": "index.html"
+    },
+    {
+      "type": "nav",
+      "text": "人物圖譜",
+      "href": "#characters",
+      "meta": "",
+      "file": "index.html"
+    },
+    {
+      "type": "nav",
+      "text": "心理視角",
+      "href": "#psychology",
+      "meta": "",
+      "file": "index.html"
+    },
+    {
+      "type": "nav",
+      "text": "人格測驗",
+      "href": "#quiz",
+      "meta": "",
+      "file": "index.html"
+    },
+    {
+      "type": "nav",
+      "text": "回首頁",
+      "href": "index.html",
+      "meta": "",
+      "file": "index.html"
+    },
+    {
+      "type": "nav",
+      "text": "金庸人物",
+      "href": "index.html#characters",
+      "meta": "",
+      "file": "index.html"
+    },
+    {
+      "type": "nav",
+      "text": "你像誰",
+      "href": "index.html#quiz",
+      "meta": "",
+      "file": "index.html"
+    },
+    {
+      "type": "nav",
+      "text": "關於我",
+      "href": "about.html",
+      "meta": "",
+      "file": "index.html"
+    },
+    {
+      "type": "nav",
+      "text": "探索人物圖譜",
+      "href": "#characters",
+      "meta": "",
+      "file": "index.html"
+    },
+    {
+      "type": "nav",
+      "text": "測測你是誰？",
+      "href": "#quiz",
+      "meta": "",
+      "file": "index.html"
+    },
+    {
+      "type": "nav",
+      "text": "關於設計者：張書欣",
+      "href": "about.html",
+      "meta": "",
+      "file": "index.html"
+    }
+  ],
+  "css_variables": [
+    {
+      "name": "--ink",
+      "value": "#1a1a2e",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--ink-light",
+      "value": "#2d2d44",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--ink-muted",
+      "value": "#5a5a72",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--cinnabar",
+      "value": "#a93226",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--cinnabar-light",
+      "value": "#c0392b",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--cinnabar-deep",
+      "value": "#7b241c",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--rice",
+      "value": "#f5f0e8",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--rice-warm",
+      "value": "#faf6ee",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--rice-dark",
+      "value": "#e8e0d0",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--indigo",
+      "value": "#2c3e50",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--indigo-light",
+      "value": "#34495e",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--gold",
+      "value": "#b8860b",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--gold-light",
+      "value": "#d4a017",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--shadow-soft",
+      "value": "0 4px 24px rgba(26,26,46,0.08)",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--shadow-card",
+      "value": "0 8px 32px rgba(26,26,46,0.12)",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--radius",
+      "value": "4px",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--font-serif",
+      "value": "\"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+      "sources": [
+        "index.html"
+      ]
+    },
+    {
+      "name": "--font-sans",
+      "value": "\"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+      "sources": [
+        "index.html"
+      ]
+    }
+  ],
+  "js_constants": [
+    {
+      "name": "devtoolsOpen",
+      "kind": "scalar",
+      "file": "index.html",
+      "rows": 0,
+      "fields": [],
+      "sample": "",
+      "pipe": false
+    },
+    {
+      "name": "threshold",
+      "kind": "scalar",
+      "file": "index.html",
+      "rows": 0,
+      "fields": [],
+      "sample": "",
+      "pipe": false
+    },
+    {
+      "name": "characters",
+      "kind": "array",
+      "file": "index.html",
+      "rows": 100,
+      "fields": [
+        "analysis",
+        "https",
+        "id",
+        "link",
+        "mbti",
+        "name",
+        "personality",
+        "portrait",
+        "psychFocus",
+        "quote",
+        "tags",
+        "work"
+      ],
+      "sample": "{\r\n    id: \"guojing\",\r\n    name: \"郭靖\",\r\n    work: \"《射鵰英雄傳》\",\r\n    mbti: \"ISFJ\",\r\n    tags: [\"忠厚\", \"責任感\", \"堅韌\", \"大智若愚\"],\r\n    personality: \"守衛者型 — 沉默、務實、有強烈的責任感與道德感\",\r\n    analysis: \"郭靖天資平庸卻終成一代大俠，核心在於",
+      "pipe": false
+    },
+    {
+      "name": "psychTheories",
+      "kind": "array",
+      "file": "index.html",
+      "rows": 32,
+      "fields": [
+        "desc",
+        "name"
+      ],
+      "sample": "{\r\n    id: \"attachment\",\r\n    name: \"依戀理論\",\r\n    origin: \"約翰·鮑爾比 / 瑪麗·安斯沃斯\",\r\n    desc: \"依戀理論認爲，童年早期與主要照顧者的互動模式，會形成「內部工作模型」，深刻影響成年後的親密關係。分爲安全型、焦慮型、迴避型和混亂型四種依戀風格。\",\r\n    detail: \"金庸筆下的愛情悲劇，往往可以追溯到角色的依戀",
+      "pipe": false
+    },
+    {
+      "name": "quizQuestions",
+      "kind": "array",
+      "file": "index.html",
+      "rows": 40,
+      "fields": [
+        "text",
+        "type"
+      ],
+      "sample": "{\r\n    q: \"面對一個重大決定，你通常會：\",\r\n    options: [\r\n      { text: \"深思熟慮，考慮所有人的感受後再做決定\", type: \"C\" },\r\n      { text: \"聽從內心，哪怕可能傷害到一些人\", type: \"A\" },\r\n      { text: \"隨機應變，到時候再說\", type: \"B\" },\r\n      { text: \"儘",
+      "pipe": false
+    },
+    {
+      "name": "quotes",
+      "kind": "array",
+      "file": "index.html",
+      "rows": 6,
+      "fields": [
+        "author",
+        "text"
+      ],
+      "sample": "{ text: \"俠之大者，爲國爲民。\", author: \"—— 郭靖《射鵰英雄傳》\" },\r\n  { text: \"問世間，情是何物，直教生死相許。\", author: \"—— 元好問，《神鵰俠侶》引\" },\r\n  { text: \"人生在世，會當暢情適意。\", author: \"—— 令狐沖《笑傲江湖》\" },\r\n  { text: \"他強由他強，清風拂山崗；他橫由他橫，明月照大江。\", a",
+      "pipe": false
+    },
+    {
+      "name": "works",
+      "kind": "array",
+      "file": "index.html",
+      "rows": 1,
+      "fields": [],
+      "sample": "all",
+      "pipe": false
+    },
+    {
+      "name": "pages",
+      "kind": "array",
+      "file": "index.html",
+      "rows": 0,
+      "fields": [],
+      "sample": "",
+      "pipe": false
+    },
+    {
+      "name": "quizResults",
+      "kind": "object",
+      "file": "index.html",
+      "rows": 0,
+      "fields": [],
+      "sample": "const quizResults = {\r\n  A: {\r\n    char: \"郭靖 / 蕭峯\",\r\n    work: \"大俠型人格\",\r\n    desc: \"你有強烈的責任感和道德感，是那種「天下興亡，匹夫有責」的人。面對困難，你選擇迎難而上而非退縮。你的感情深沉而堅定，一旦認定就不會改變。但有時你過於看重「應該做什麼」，而忽略了「自己想要什麼」。學會在擔當與自我之間找到平衡，你的江湖路",
+      "pipe": false
+    },
+    {
+      "name": "state",
+      "kind": "object",
+      "file": "index.html",
+      "rows": 0,
+      "fields": [],
+      "sample": "const state = {\r\n  currentFilter: \"all\",\r\n  currentPsych: psychTheories[0].id,\r\n  quizStep: 0,\r\n  quizAnswers: {},\r\n  quizStarted: false,\r\n  currentPage: 1,\r\n  pageSize: 12\r\n};\r\n\r\n// ===== 渲染：人物篩選按鈕 =",
+      "pipe": false
+    },
+    {
+      "name": "labels",
+      "kind": "object",
+      "file": "index.html",
+      "rows": 0,
+      "fields": [],
+      "sample": "const labels = { all: \"全部作品\", \"《射鵰英雄傳》\": \"射鵰英雄傳\", \"《神鵰俠侶》\": \"神鵰俠侶\", \"《倚天屠龍記》\": \"倚天屠龍記\", \"《天龍八部》\": \"天龍八部\", \"《笑傲江湖》\": \"笑傲江湖\", \"《鹿鼎記》\": \"鹿鼎記\", \"《書劍恩仇錄》\": \"書劍恩仇錄\", \"《飛狐外傳》\": \"飛狐外傳\", \"《雪山飛狐》\": \"雪山飛狐\", \"《連城",
+      "pipe": false
+    },
+    {
+      "name": "counts",
+      "kind": "object",
+      "file": "index.html",
+      "rows": 0,
+      "fields": [],
+      "sample": "const counts = { A: 0, B: 0, C: 0, D: 0 };\r\n    Object.values(state.quizAnswers).forEach(v => counts[v]++);\r\n    const maxType = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];\r\n    const re",
+      "pipe": false
+    },
+    {
+      "name": "quoteIndex",
+      "kind": "scalar",
+      "file": "index.html",
+      "rows": 0,
+      "fields": [],
+      "sample": "",
+      "pipe": false
+    },
+    {
+      "name": "devtoolsOpen",
+      "kind": "scalar",
+      "file": "about.html",
+      "rows": 0,
+      "fields": [],
+      "sample": "",
+      "pipe": false
+    },
+    {
+      "name": "threshold",
+      "kind": "scalar",
+      "file": "about.html",
+      "rows": 0,
+      "fields": [],
+      "sample": "",
+      "pipe": false
+    }
+  ],
+  "js_functions": [
+    {
+      "name": "renderFilterBar",
+      "params": [],
+      "file": "index.html"
+    },
+    {
+      "name": "renderCharGrid",
+      "params": [],
+      "file": "index.html"
+    },
+    {
+      "name": "renderPagination",
+      "params": [
+        "total",
+        "totalPages"
+      ],
+      "file": "index.html"
+    },
+    {
+      "name": "goToPage",
+      "params": [
+        "p"
+      ],
+      "file": "index.html"
+    },
+    {
+      "name": "openModal",
+      "params": [
+        "id"
+      ],
+      "file": "index.html"
+    },
+    {
+      "name": "closeModal",
+      "params": [],
+      "file": "index.html"
+    },
+    {
+      "name": "renderPsychTabs",
+      "params": [],
+      "file": "index.html"
+    },
+    {
+      "name": "renderPsychContent",
+      "params": [],
+      "file": "index.html"
+    },
+    {
+      "name": "renderQuiz",
+      "params": [],
+      "file": "index.html"
+    },
+    {
+      "name": "rotateQuote",
+      "params": [],
+      "file": "index.html"
+    },
+    {
+      "name": "initNav",
+      "params": [],
+      "file": "index.html"
+    },
+    {
+      "name": "init",
+      "params": [],
+      "file": "index.html"
+    }
+  ],
+  "tools": [],
+  "seo": {
+    "meta": {
+      "name:viewport": "width=device-width, initial-scale=1.0",
+      "prop:og:type": "website",
+      "prop:og:site_name": "欣矩陣 ∞ 欣媒體",
+      "prop:og:title": "金庸人物與心理學 | 江湖·人心·心理學",
+      "prop:og:description": "刀光劍影之外，江湖兒女的內心世界。100位金庸人物心理圖譜，探索武俠背後的人性。",
+      "prop:og:url": "https://9return.com.tw/jinyong-psychology/",
+      "prop:og:image": "https://9return.com.tw/assets/og/og-06-wuxia-hero.webp",
+      "prop:og:image:width": "1200",
+      "prop:og:image:height": "630",
+      "name:twitter:card": "summary_large_image",
+      "name:twitter:title": "金庸人物與心理學 | 江湖·人心·心理學",
+      "name:twitter:description": "刀光劍影之外，江湖兒女的內心世界。100位金庸人物心理圖譜，探索武俠背後的人性。",
+      "name:twitter:image": "https://9return.com.tw/assets/og/og-06-wuxia-hero.webp"
+    },
+    "jsonld": [],
+    "index_meta_description": ""
+  },
+  "db_schema_summary": [
+    {
+      "table": "t_characters_01",
+      "source_var": "characters",
+      "source_file": "index.html",
+      "rows": 100,
+      "pipe_separated": false,
+      "fields": [
+        "analysis",
+        "https",
+        "id",
+        "link",
+        "mbti",
+        "name",
+        "personality",
+        "portrait",
+        "psychFocus",
+        "quote",
+        "tags",
+        "work"
+      ]
+    },
+    {
+      "table": "t_psychTheories_02",
+      "source_var": "psychTheories",
+      "source_file": "index.html",
+      "rows": 32,
+      "pipe_separated": false,
+      "fields": [
+        "desc",
+        "name"
+      ]
+    },
+    {
+      "table": "t_quizQuestions_03",
+      "source_var": "quizQuestions",
+      "source_file": "index.html",
+      "rows": 40,
+      "pipe_separated": false,
+      "fields": [
+        "text",
+        "type"
+      ]
+    },
+    {
+      "table": "t_quotes_04",
+      "source_var": "quotes",
+      "source_file": "index.html",
+      "rows": 6,
+      "pipe_separated": false,
+      "fields": [
+        "author",
+        "text"
+      ]
+    },
+    {
+      "table": "t_works_05",
+      "source_var": "works",
+      "source_file": "index.html",
+      "rows": 1,
+      "pipe_separated": false,
+      "fields": []
+    }
+  ],
+  "file_list": {
+    "html": [
+      {
+        "name": "index.html",
+        "size_bytes": 157560
+      },
+      {
+        "name": "about.html",
+        "size_bytes": 16591
+      }
+    ],
+    "data": [],
+    "images": {
+      "count": 113,
+      "total_kb": 12700.5,
+      "samples": [
+        "images/bg-realestate.webp",
+        "images/char-atlas.webp",
+        "images/hero-badge.png",
+        "images/hero-badge.webp",
+        "images/hero-bg-original.webp",
+        "images/hero-bg.webp",
+        "images/hero-bluecoffee.png",
+        "images/hero-coffee.png",
+        "images/hero-new.png",
+        "images/hero-wuxia.png",
+        "images/portrait-aobai.webp",
+        "images/portrait-aqin.webp",
+        "images/portrait-azhu.webp",
+        "images/portrait-azi.webp",
+        "images/portrait-chenglingyu.webp",
+        "images/portrait-chengying.webp",
+        "images/portrait-chenjialuo.webp",
+        "images/portrait-chenjinnan.webp",
+        "images/portrait-dingdian.webp",
+        "images/portrait-diyun.webp",
+        "images/portrait-dongfangbubai.webp",
+        "images/portrait-duanyu.webp",
+        "images/portrait-duanzhengchun.webp",
+        "images/portrait-fangzheng.webp",
+        "images/portrait-fanyao.webp",
+        "images/portrait-fengqingyang.webp",
+        "images/portrait-gongsunlue.webp",
+        "images/portrait-gongsunzhi.webp",
+        "images/portrait-guofu.webp",
+        "images/portrait-guojing.webp"
+      ]
+    },
+    "other": []
+  },
+  "template_injection": {
+    "ai_upgrade_top": false,
+    "img_ai_lazy": false
+  },
+  "generated_date": "2026-10-01",
+  "version": "V1",
+  "generator": "P01 網站規格化總專案（自動生成）"
+}

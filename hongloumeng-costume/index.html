@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="description" content="红楼梦 · 人物服饰志">
+<link rel="canonical" href="index.html">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="红楼梦 · 人物服饰志">
+<meta property="og:description" content="红楼梦 · 人物服饰志">
+<meta property="og:image" content="${c.image}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="红楼梦 · 人物服饰志">
+<meta name="twitter:description" content="红楼梦 · 人物服饰志">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>红楼梦 · 人物服饰志</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+/* ===== CSS 变量与重置 ===== */
+:root {
+  --bg: #F5F0E8;
+  --bg-alt: #EDE6D8;
+  --ink: #1a1a1a;
+  --ink-light: #4a4a4a;
+  --dai: #2C3E50;
+  --yanzhi: #C0392B;
+  --zhijin: #D4AF37;
+  --yuebai: #ECF0F1;
+  --card-bg: #FBF8F2;
+  --shadow: 0 4px 20px rgba(44,62,80,0.12);
+  --shadow-hover: 0 8px 32px rgba(44,62,80,0.2);
+  --radius: 8px;
+  --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-serif: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+  --font-sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+[data-theme="dark"] {
+  --bg: #1a1a2e;
+  --bg-alt: #16213e;
+  --ink: #e8e8e8;
+  --ink-light: #b0b0b0;
+  --dai: #5a7a9a;
+  --yanzhi: #e74c3c;
+  --zhijin: #f1c40f;
+  --yuebai: #2c3e50;
+  --card-bg: #232340;
+  --shadow: 0 4px 20px rgba(0,0,0,0.3);
+  --shadow-hover: 0 8px 32px rgba(0,0,0,0.5);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.8;
+  overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
+}
+body.font-large { font-size: 18px; }
+body.font-small { font-size: 14px; }
+
+/* ===== 1. 卷轴加载动画 ===== */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#loader.hidden { opacity: 0; visibility: hidden; }
+.scroll-loader {
+  width: 300px; height: 200px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.scroll-rod {
+  position: absolute; width: 20px; height: 180px;
+  background: linear-gradient(90deg, #8B4513, #D2691E, #8B4513);
+  border-radius: 10px; top: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.scroll-rod.left { left: 0; animation: scrollLeft 2s ease-in-out infinite; }
+.scroll-rod.right { right: 0; animation: scrollRight 2s ease-in-out infinite; }
+.scroll-paper {
+  position: absolute; left: 20px; right: 20px; top: 20px; bottom: 20px;
+  background: var(--card-bg);
+  border-top: 2px solid var(--zhijin);
+  border-bottom: 2px solid var(--zhijin);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 24px; color: var(--dai);
+  animation: paperExpand 2s ease-in-out infinite;
+  overflow: hidden;
+}
+@keyframes scrollLeft { 0%,100%{left:0} 50%{left:60px} }
+@keyframes scrollRight { 0%,100%{right:0} 50%{right:60px} }
+@keyframes paperExpand { 0%,100%{left:20px;right:20px;opacity:0.3} 50%{left:80px;right:80px;opacity:1} }
+
+/* ===== 2. 水墨粒子画布 ===== */
+#ink-canvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 1;
+}
+
+/* ===== 3. 滚动进度条 ===== */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--dai), var(--yanzhi), var(--zhijin));
+  z-index: 1000; width: 0%; transition: width 0.1s;
+}
+
+/* ===== 顶部导航 ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(44,62,80,0.1);
+  padding: 0 24px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background var(--transition);
+}
+[data-theme="dark"] nav { background: rgba(26,26,46,0.92); }
+.nav-logo {
+  font-family: var(--font-serif); font-size: 22px; font-weight: 900;
+  color: var(--dai); letter-spacing: 4px; cursor: pointer;
+}
+.nav-logo span { color: var(--yanzhi); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--ink-light); font-size: 14px;
+  font-family: var(--font-serif); letter-spacing: 2px;
+  transition: color 0.3s; position: relative;
+}
+.nav-links a:hover { color: var(--yanzhi); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--yanzhi); transition: width 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-tools { display: flex; gap: 8px; align-items: center; }
+.tool-btn {
+  width: 36px; height: 36px; border: 1px solid rgba(44,62,80,0.2);
+  background: transparent; border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-light); transition: all 0.3s; font-size: 16px;
+}
+.tool-btn:hover { background: var(--dai); color: var(--bg); border-color: var(--dai); }
+.tool-btn.active { background: var(--yanzhi); color: white; border-color: var(--yanzhi); }
+.search-box {
+  position: relative; display: flex; align-items: center;
+}
+.search-box input {
+  width: 0; padding: 0; border: none; background: transparent;
+  transition: all 0.4s; font-family: var(--font-sans); font-size: 14px;
+  color: var(--ink); outline: none;
+}
+.search-box.open input {
+  width: 180px; padding: 6px 12px; border: 1px solid rgba(44,62,80,0.2);
+  border-radius: 20px; background: var(--card-bg);
+}
+
+/* ===== Hero 区 ===== */
+.hero {
+  position: relative; min-height: 100vh; display: flex;
+  align-items: center; justify-content: center; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: url('https://aka.doubaocdn.com/s/TrkDVII8xw') center/cover no-repeat;
+  filter: brightness(0.85);
+}
+.hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(245,240,232,0.3) 0%, rgba(245,240,232,0.6) 100%);
+}
+[data-theme="dark"] .hero-bg::after {
+  background: linear-gradient(180deg, rgba(26,26,46,0.5) 0%, rgba(26,26,46,0.8) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2; text-align: center; padding: 0 24px;
+}
+.hero-title {
+  font-family: var(--font-serif); font-size: clamp(48px, 8vw, 96px);
+  font-weight: 900; color: var(--dai); letter-spacing: 16px;
+  margin-bottom: 16px; text-shadow: 2px 2px 8px rgba(255,255,255,0.5);
+  opacity: 0; animation: fadeInUp 1.2s ease 0.5s forwards;
+}
+.hero-subtitle {
+  font-family: var(--font-serif); font-size: clamp(16px, 2vw, 24px);
+  color: var(--ink-light); letter-spacing: 8px; margin-bottom: 48px;
+  opacity: 0; animation: fadeInUp 1.2s ease 0.8s forwards;
+}
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 14px 40px; background: var(--dai); color: var(--bg);
+  font-family: var(--font-serif); font-size: 16px; letter-spacing: 4px;
+  border: none; border-radius: 4px; cursor: pointer;
+  transition: all 0.4s; opacity: 0; animation: fadeInUp 1.2s ease 1.1s forwards;
+}
+.hero-cta:hover { background: var(--yanzhi); transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.scroll-hint {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--ink-light); font-size: 12px; letter-spacing: 2px;
+  animation: bounce 2s infinite;
+}
+.scroll-hint .arrow { width: 20px; height: 20px; border-right: 2px solid var(--ink-light); border-bottom: 2px solid var(--ink-light); transform: rotate(45deg); }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(10px)} }
+
+/* ===== 通用区块 ===== */
+.section {
+  padding: 100px 24px; max-width: 1400px; margin: 0 auto;
+  position: relative; z-index: 2;
+}
+.section-header { text-align: center; margin-bottom: 60px; }
+.section-title {
+  font-family: var(--font-serif); font-size: 42px; font-weight: 900;
+  color: var(--dai); letter-spacing: 8px; margin-bottom: 12px;
+}
+.section-divider {
+  width: 80px; height: 3px; background: linear-gradient(90deg, transparent, var(--zhijin), transparent);
+  margin: 0 auto 16px;
+}
+.section-desc { font-family: var(--font-serif); color: var(--ink-light); font-size: 16px; letter-spacing: 2px; }
+
+/* ===== 30. 滚动渐入 ===== */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== 人物筛选工具栏 ===== */
+.filter-bar {
+  display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+  margin-bottom: 40px; align-items: center;
+}
+.filter-group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.filter-label { font-family: var(--font-serif); font-size: 14px; color: var(--ink-light); margin-right: 4px; }
+.filter-btn {
+  padding: 6px 16px; border: 1px solid rgba(44,62,80,0.2); background: transparent;
+  border-radius: 20px; cursor: pointer; font-family: var(--font-serif); font-size: 13px;
+  color: var(--ink-light); transition: all 0.3s;
+}
+.filter-btn:hover { border-color: var(--dai); color: var(--dai); }
+.filter-btn.active { background: var(--dai); color: var(--bg); border-color: var(--dai); }
+.color-dot {
+  display: inline-block; width: 12px; height: 12px; border-radius: 50%;
+  margin-right: 6px; vertical-align: middle; border: 1px solid rgba(0,0,0,0.2);
+}
+.random-btn {
+  padding: 8px 24px; background: var(--yanzhi); color: white; border: none;
+  border-radius: 20px; cursor: pointer; font-family: var(--font-serif); font-size: 14px;
+  letter-spacing: 2px; transition: all 0.3s; display: flex; align-items: center; gap: 8px;
+}
+.random-btn:hover { transform: scale(1.05); box-shadow: 0 4px 16px rgba(192,57,43,0.4); }
+.compare-toggle {
+  padding: 8px 20px; background: transparent; border: 1px solid var(--zhijin);
+  color: var(--zhijin); border-radius: 20px; cursor: pointer; font-family: var(--font-serif);
+  font-size: 14px; transition: all 0.3s;
+}
+.compare-toggle.active { background: var(--zhijin); color: var(--ink); }
+
+/* ===== 4. 人物卡片翻转 ===== */
+.characters-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px; perspective: 1200px;
+}
+.character-card {
+  position: relative; height: 420px; cursor: pointer;
+  transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.character-card.flipped { transform: rotateY(180deg); }
+.character-card.compare-selected { outline: 3px solid var(--zhijin); outline-offset: 4px; border-radius: var(--radius); }
+.card-face {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
+  background: var(--card-bg);
+}
+.card-front { display: flex; flex-direction: column; }
+.card-front img {
+  width: 100%; height: 320px; object-fit: cover; object-position: top;
+  transition: transform 0.6s;
+}
+.character-card:hover .card-front img { transform: scale(1.05); }
+.card-front-info {
+  padding: 16px; text-align: center; flex: 1;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.card-name {
+  font-family: var(--font-serif); font-size: 22px; font-weight: 700;
+  color: var(--dai); letter-spacing: 4px; margin-bottom: 4px;
+}
+.card-title { font-size: 12px; color: var(--ink-light); letter-spacing: 2px; }
+.card-back {
+  transform: rotateY(180deg); padding: 24px;
+  display: flex; flex-direction: column; justify-content: center;
+  background: linear-gradient(135deg, var(--card-bg), var(--bg-alt));
+}
+.card-back h3 {
+  font-family: var(--font-serif); font-size: 20px; color: var(--yanzhi);
+  margin-bottom: 12px; letter-spacing: 2px;
+}
+.card-back p { font-size: 13px; color: var(--ink-light); margin-bottom: 8px; line-height: 1.7; }
+.card-back .costume-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.costume-tag {
+  padding: 3px 10px; background: rgba(44,62,80,0.1); border-radius: 12px;
+  font-size: 11px; color: var(--dai);
+}
+.card-hint {
+  position: absolute; bottom: 8px; right: 12px; font-size: 11px;
+  color: var(--ink-light); opacity: 0.6;
+}
+
+/* ===== 5. 人物详情面板 ===== */
+.detail-overlay {
+  position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px); opacity: 0; visibility: hidden;
+  transition: all 0.4s; display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.detail-overlay.open { opacity: 1; visibility: visible; }
+.detail-panel {
+  background: var(--card-bg); border-radius: var(--radius); max-width: 900px;
+  width: 100%; max-height: 85vh; overflow-y: auto; position: relative;
+  transform: scale(0.9) translateY(20px); transition: transform 0.4s;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.detail-overlay.open .detail-panel { transform: scale(1) translateY(0); }
+.detail-close {
+  position: absolute; top: 16px; right: 16px; width: 40px; height: 40px;
+  border-radius: 50%; border: none; background: rgba(0,0,0,0.1); cursor: pointer;
+  font-size: 20px; color: var(--ink); z-index: 10; transition: all 0.3s;
+}
+.detail-close:hover { background: var(--yanzhi); color: white; transform: rotate(90deg); }
+.detail-body { display: grid; grid-template-columns: 300px 1fr; gap: 0; }
+.detail-image { position: relative; height: 100%; min-height: 400px; overflow: hidden; }
+.detail-image img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+/* 11. 放大镜 */
+.magnifier {
+  position: absolute; width: 120px; height: 120px; border-radius: 50%;
+  border: 3px solid var(--zhijin); pointer-events: none; opacity: 0;
+  background-repeat: no-repeat; box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  transition: opacity 0.2s; z-index: 5;
+}
+.detail-image:hover .magnifier { opacity: 1; }
+.detail-info { padding: 32px; }
+.detail-name {
+  font-family: var(--font-serif); font-size: 36px; font-weight: 900;
+  color: var(--dai); letter-spacing: 6px; margin-bottom: 4px;
+}
+.detail-courtyard { font-size: 14px; color: var(--yanzhi); letter-spacing: 2px; margin-bottom: 20px; }
+.detail-section { margin-bottom: 24px; }
+.detail-section h4 {
+  font-family: var(--font-serif); font-size: 16px; color: var(--dai);
+  margin-bottom: 8px; padding-left: 12px; border-left: 3px solid var(--zhijin);
+  letter-spacing: 2px;
+}
+.detail-section p { font-size: 14px; color: var(--ink-light); line-height: 1.8; }
+/* 12. 判词切换 */
+.verdict-box {
+  background: var(--bg-alt); padding: 16px; border-radius: var(--radius);
+  border-left: 4px solid var(--yanzhi); margin-bottom: 16px;
+}
+.verdict-text {
+  font-family: var(--font-serif); font-size: 18px; color: var(--dai);
+  line-height: 2; letter-spacing: 2px; white-space: pre-line;
+}
+.verdict-interpret { font-size: 13px; color: var(--ink-light); margin-top: 8px; display: none; }
+.verdict-box.show-interpret .verdict-interpret { display: block; }
+.verdict-toggle {
+  margin-top: 8px; padding: 4px 12px; font-size: 12px; background: transparent;
+  border: 1px solid var(--dai); color: var(--dai); border-radius: 4px; cursor: pointer;
+  transition: all 0.3s;
+}
+.verdict-toggle:hover { background: var(--dai); color: var(--bg); }
+/* 18. 换色体验 */
+.colorize-tools { display: flex; gap: 8px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+.colorize-btn {
+  width: 28px; height: 28px; border-radius: 50%; border: 2px solid transparent;
+  cursor: pointer; transition: all 0.3s;
+}
+.colorize-btn:hover { transform: scale(1.2); }
+.colorize-btn.active { border-color: var(--ink); }
+.detail-actions { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+.action-btn {
+  padding: 8px 20px; border-radius: 4px; cursor: pointer; font-family: var(--font-serif);
+  font-size: 13px; letter-spacing: 1px; transition: all 0.3s; border: 1px solid;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn-fav { background: transparent; border-color: var(--zhijin); color: var(--zhijin); }
+.btn-fav.active, .btn-fav:hover { background: var(--zhijin); color: var(--ink); }
+.btn-vote { background: transparent; border-color: var(--yanzhi); color: var(--yanzhi); }
+.btn-vote:hover { background: var(--yanzhi); color: white; }
+.btn-tts { background: transparent; border-color: var(--dai); color: var(--dai); }
+.btn-tts:hover { background: var(--dai); color: var(--bg); }
+
+/* ===== 10. 对比模式 ===== */
+.compare-panel {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  background: var(--card-bg); border-top: 2px solid var(--zhijin);
+  padding: 16px 24px; box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+  transform: translateY(100%); transition: transform 0.4s;
+}
+.compare-panel.visible { display: block; transform: translateY(0); }
+.compare-content { display: flex; align-items: center; gap: 24px; max-width: 1400px; margin: 0 auto; }
+.compare-slot {
+  flex: 1; display: flex; align-items: center; gap: 12px;
+  padding: 8px 16px; background: var(--bg-alt); border-radius: var(--radius);
+  min-height: 60px;
+}
+.compare-slot img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: top; }
+.compare-slot .name { font-family: var(--font-serif); font-size: 16px; color: var(--dai); }
+.compare-slot.empty { justify-content: center; color: var(--ink-light); font-size: 13px; }
+.compare-vs { font-family: var(--font-serif); font-size: 24px; color: var(--yanzhi); font-weight: 900; }
+.compare-start {
+  padding: 10px 24px; background: var(--yanzhi); color: white; border: none;
+  border-radius: 4px; cursor: pointer; font-family: var(--font-serif); font-size: 14px;
+  transition: all 0.3s;
+}
+.compare-start:disabled { opacity: 0.5; cursor: not-allowed; }
+.compare-close { background: transparent; border: none; cursor: pointer; font-size: 20px; color: var(--ink-light); }
+
+/* 对比结果弹窗 */
+.compare-result {
+  display: none; position: fixed; inset: 0; z-index: 600;
+  background: rgba(0,0,0,0.7); align-items: center; justify-content: center; padding: 24px;
+}
+.compare-result.open { display: flex; }
+.compare-result-panel {
+  background: var(--card-bg); border-radius: var(--radius); max-width: 1000px; width: 100%;
+  max-height: 85vh; overflow-y: auto; padding: 32px; position: relative;
+}
+.compare-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: start; }
+.compare-col h3 { font-family: var(--font-serif); font-size: 24px; color: var(--dai); text-align: center; margin-bottom: 16px; }
+.compare-col img { width: 100%; border-radius: var(--radius); margin-bottom: 16px; }
+.compare-col .attr { margin-bottom: 12px; }
+.compare-col .attr-label { font-size: 12px; color: var(--ink-light); margin-bottom: 4px; }
+.compare-col .attr-value { font-size: 14px; color: var(--ink); }
+.compare-middle { display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 80px; gap: 16px; }
+.compare-middle .vs { font-family: var(--font-serif); font-size: 32px; color: var(--yanzhi); font-weight: 900; }
+
+/* ===== 13. 经典场景时间线 ===== */
+.timeline-section { background: var(--bg-alt); padding: 100px 24px; }
+.timeline {
+  max-width: 900px; margin: 0 auto; position: relative; padding-left: 40px;
+}
+.timeline::before {
+  content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, var(--dai), var(--yanzhi), var(--zhijin));
+}
+.timeline-item {
+  position: relative; margin-bottom: 40px; padding: 20px 24px;
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  cursor: pointer; transition: all 0.3s;
+}
+.timeline-item:hover { transform: translateX(8px); box-shadow: var(--shadow-hover); }
+.timeline-item::before {
+  content: ''; position: absolute; left: -34px; top: 24px; width: 16px; height: 16px;
+  border-radius: 50%; background: var(--zhijin); border: 3px solid var(--card-bg);
+  box-shadow: 0 0 0 2px var(--zhijin);
+}
+.timeline-chapter { font-family: var(--font-serif); font-size: 13px; color: var(--yanzhi); margin-bottom: 4px; }
+.timeline-title { font-family: var(--font-serif); font-size: 18px; color: var(--dai); margin-bottom: 8px; }
+.timeline-desc { font-size: 14px; color: var(--ink-light); }
+.timeline-detail { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+.timeline-item.expanded .timeline-detail { max-height: 300px; margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(44,62,80,0.2); }
+
+/* ===== 14. 面料知识卡片翻转 ===== */
+.fabric-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px; perspective: 1000px;
+}
+.fabric-card {
+  height: 280px; position: relative; cursor: pointer;
+  transform-style: preserve-3d; transition: transform 0.7s;
+}
+.fabric-card.flipped { transform: rotateY(180deg); }
+.fabric-face {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column;
+  justify-content: center; box-shadow: var(--shadow);
+}
+.fabric-front {
+  background: linear-gradient(135deg, var(--dai), #34495e); color: var(--bg);
+}
+.fabric-front h3 { font-family: var(--font-serif); font-size: 28px; margin-bottom: 8px; letter-spacing: 4px; }
+.fabric-front .en { font-size: 12px; opacity: 0.7; letter-spacing: 2px; }
+.fabric-front .icon { font-size: 48px; margin-bottom: 16px; opacity: 0.8; }
+.fabric-back {
+  transform: rotateY(180deg); background: var(--card-bg);
+}
+.fabric-back p { font-size: 14px; color: var(--ink-light); line-height: 1.8; margin-bottom: 8px; }
+.fabric-back .feature { display: inline-block; padding: 3px 10px; background: rgba(212,175,55,0.2); color: var(--zhijin); border-radius: 12px; font-size: 11px; margin: 2px; }
+
+/* ===== 15. 交互式色彩色板 ===== */
+.color-palette {
+  display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 40px;
+}
+.palette-color {
+  width: 100px; height: 130px; border-radius: var(--radius); cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  padding-bottom: 12px; box-shadow: var(--shadow); transition: all 0.4s;
+  border: 2px solid transparent; position: relative; overflow: hidden;
+}
+.palette-color:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+.palette-color.active { border-color: var(--ink); transform: translateY(-8px); }
+.palette-color .color-name { font-family: var(--font-serif); font-size: 14px; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+.palette-color .color-hex { font-size: 10px; opacity: 0.8; }
+.palette-detail {
+  max-width: 800px; margin: 0 auto; padding: 32px; background: var(--card-bg);
+  border-radius: var(--radius); box-shadow: var(--shadow); min-height: 200px;
+}
+.palette-detail h3 { font-family: var(--font-serif); font-size: 24px; color: var(--dai); margin-bottom: 12px; }
+.palette-detail p { font-size: 14px; color: var(--ink-light); margin-bottom: 16px; line-height: 1.8; }
+.palette-characters { display: flex; gap: 12px; flex-wrap: wrap; }
+.palette-char {
+  display: flex; align-items: center; gap: 8px; padding: 6px 14px;
+  background: var(--bg-alt); border-radius: 20px; cursor: pointer; transition: all 0.3s;
+}
+.palette-char:hover { background: var(--dai); color: var(--bg); }
+.palette-char img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; object-position: top; }
+.palette-char span { font-family: var(--font-serif); font-size: 14px; }
+
+/* ===== 16. 人物关系图谱 ===== */
+.relation-section { background: var(--bg-alt); padding: 100px 24px; }
+.relation-container {
+  max-width: 1000px; margin: 0 auto; background: var(--card-bg);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px;
+  position: relative;
+}
+#relation-svg { width: 100%; height: 500px; }
+.relation-node { cursor: pointer; transition: all 0.3s; }
+.relation-node circle { transition: all 0.3s; }
+.relation-node:hover circle { r: 38; filter: drop-shadow(0 0 8px rgba(212,175,55,0.6)); }
+.relation-node text { font-family: var(--font-serif); font-size: 13px; fill: var(--ink); text-anchor: middle; pointer-events: none; }
+.relation-line { stroke: rgba(44,62,80,0.2); stroke-width: 1.5; fill: none; transition: all 0.3s; }
+.relation-line.highlight { stroke: var(--yanzhi); stroke-width: 2.5; }
+.relation-legend { display: flex; gap: 24px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-light); }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+/* ===== 17. 大观园地图 ===== */
+.garden-map {
+  max-width: 900px; margin: 0 auto; position: relative;
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 32px; overflow: hidden;
+}
+.garden-svg { width: 100%; height: auto; }
+.garden-hotspot { cursor: pointer; transition: all 0.3s; }
+.garden-hotspot:hover { opacity: 0.8; }
+.garden-hotspot circle { fill: var(--yanzhi); opacity: 0.6; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{r:8;opacity:0.6} 50%{r:12;opacity:0.3} }
+.garden-popup {
+  position: absolute; background: var(--card-bg); border: 1px solid var(--zhijin);
+  border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow-hover);
+  max-width: 250px; z-index: 10; display: none;
+}
+.garden-popup.show { display: block; }
+.garden-popup h4 { font-family: var(--font-serif); color: var(--dai); margin-bottom: 6px; }
+.garden-popup p { font-size: 12px; color: var(--ink-light); }
+
+/* ===== 22. 服饰拼图游戏 ===== */
+.game-section { background: var(--bg-alt); padding: 100px 24px; }
+.game-container {
+  max-width: 700px; margin: 0 auto; background: var(--card-bg);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 32px; text-align: center;
+}
+.game-board {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+  max-width: 360px; margin: 0 auto 24px; aspect-ratio: 1;
+}
+.puzzle-piece {
+  background-size: 300% 300%; cursor: pointer; border-radius: 4px;
+  transition: all 0.3s; position: relative; overflow: hidden;
+}
+.puzzle-piece:hover { transform: scale(0.98); }
+.puzzle-piece.empty { background: var(--bg-alt); cursor: default; }
+.puzzle-piece.empty::after { content: '?'; display: flex; align-items: center; justify-content: center; height: 100%; font-family: var(--font-serif); font-size: 32px; color: var(--ink-light); opacity: 0.3; }
+.game-controls { display: flex; gap: 12px; justify-content: center; margin-bottom: 16px; }
+.game-btn {
+  padding: 8px 20px; background: var(--dai); color: var(--bg); border: none;
+  border-radius: 4px; cursor: pointer; font-family: var(--font-serif); font-size: 14px;
+  transition: all 0.3s;
+}
+.game-btn:hover { background: var(--yanzhi); }
+.game-status { font-family: var(--font-serif); font-size: 16px; color: var(--dai); }
+.game-moves { color: var(--yanzhi); font-weight: 700; }
+
+/* ===== 20. 弹幕 ===== */
+#danmaku-container {
+  position: fixed; top: 64px; left: 0; right: 0; height: 200px;
+  pointer-events: none; z-index: 50; overflow: hidden;
+}
+.danmaku-item {
+  position: absolute; white-space: nowrap; font-family: var(--font-serif);
+  font-size: 16px; color: var(--yanzhi); text-shadow: 0 0 4px rgba(255,255,255,0.8);
+  animation: danmakuMove 12s linear forwards;
+}
+@keyframes danmakuMove { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
+
+/* ===== 21. 投票结果 ===== */
+.vote-results {
+  max-width: 800px; margin: 40px auto 0; padding: 24px; background: var(--card-bg);
+  border-radius: var(--radius);
+}
+.vote-bar-container { margin-bottom: 12px; }
+.vote-bar-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+.vote-bar { height: 8px; background: var(--bg-alt); border-radius: 4px; overflow: hidden; }
+.vote-bar-fill { height: 100%; background: linear-gradient(90deg, var(--dai), var(--yanzhi)); border-radius: 4px; transition: width 0.8s ease; }
+
+/* ===== 26. 音乐播放器 ===== */
+.music-player {
+  position: fixed; bottom: 24px; left: 24px; z-index: 150;
+  background: var(--card-bg); border-radius: 50px; box-shadow: var(--shadow-hover);
+  padding: 8px 16px; display: flex; align-items: center; gap: 12px;
+  transform: translateX(-120%); transition: transform 0.4s;
+}
+.music-player.visible { transform: translateX(0); }
+.music-play-btn {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--dai);
+  color: var(--bg); border: none; cursor: pointer; display: flex;
+  align-items: center; justify-content: center; font-size: 14px; transition: all 0.3s;
+}
+.music-play-btn:hover { background: var(--yanzhi); }
+.music-info { font-family: var(--font-serif); font-size: 13px; color: var(--ink-light); }
+.music-title { color: var(--dai); font-weight: 700; }
+
+/* ===== 28. 回到顶部 ===== */
+#back-to-top {
+  position: fixed; bottom: 24px; right: 24px; z-index: 150;
+  width: 48px; height: 48px; border-radius: 50%; background: var(--dai);
+  color: var(--bg); border: none; cursor: pointer; font-size: 20px;
+  box-shadow: var(--shadow-hover); opacity: 0; visibility: hidden;
+  transition: all 0.4s; display: flex; align-items: center; justify-content: center;
+}
+#back-to-top.visible { opacity: 1; visibility: visible; }
+#back-to-top:hover { background: var(--yanzhi); transform: translateY(-4px); }
+
+/* ===== 29. Toast 提示 ===== */
+.toast {
+  position: fixed; top: 80px; left: 50%; transform: translateX(-50%) translateY(-20px);
+  background: var(--dai); color: var(--bg); padding: 12px 28px; border-radius: 4px;
+  font-family: var(--font-serif); font-size: 14px; z-index: 2000; opacity: 0;
+  transition: all 0.4s; box-shadow: var(--shadow-hover);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ===== 页脚 ===== */
+footer {
+  background: var(--dai); color: var(--bg); padding: 60px 24px 32px;
+  text-align: center; position: relative; z-index: 2;
+}
+.footer-title { font-family: var(--font-serif); font-size: 24px; letter-spacing: 6px; margin-bottom: 16px; }
+.footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+.footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; transition: color 0.3s; }
+.footer-links a:hover { color: var(--zhijin); }
+.footer-copy { font-size: 12px; opacity: 0.5; letter-spacing: 1px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .detail-body { grid-template-columns: 1fr; }
+  .detail-image { min-height: 300px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .compare-middle { padding-top: 0; flex-direction: row; }
+  .section-title { font-size: 28px; letter-spacing: 4px; }
+  .characters-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+  .character-card { height: 320px; }
+  .card-front img { height: 240px; }
+  .hero-title { letter-spacing: 8px; }
+}
+</style>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "name": "红楼梦 · 人物服饰志",
+ "url": "index.html"
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "首頁",
+   "item": "index.html"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "红楼梦 · 人物服饰志",
+   "item": "index.html"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<!-- 1. 卷轴加载 -->
+<div id="loader">
+  <div class="scroll-loader">
+    <div class="scroll-rod left"></div>
+    <div class="scroll-paper">红楼梦</div>
+    <div class="scroll-rod right"></div>
+  </div>
+</div>
+
+<!-- 2. 水墨粒子画布 -->
+<canvas id="ink-canvas"></canvas>
+
+<!-- 3. 滚动进度 -->
+<div id="scroll-progress"></div>
+
+<!-- 20. 弹幕容器 -->
+<div id="danmaku-container"></div>
+
+<!-- 导航 -->
+<nav>
+  <div class="nav-logo" onclick="scrollToSection('hero')">红楼<span>梦</span></div>
+  <ul class="nav-links">
+    <li><a href="#characters" onclick="scrollToSection('characters')">人物志</a></li>
+    <li><a href="#timeline" onclick="scrollToSection('timeline')">经典场景</a></li>
+    <li><a href="#fabric" onclick="scrollToSection('fabric')">服饰文化</a></li>
+    <li><a href="#colors" onclick="scrollToSection('colors')">色彩体系</a></li>
+    <li><a href="#relation" onclick="scrollToSection('relation')">人物关系</a></li>
+    <li><a href="#game" onclick="scrollToSection('game')">小游戏</a></li>
+  </ul>
+  <div class="nav-tools">
+    <!-- 6. 搜索 -->
+    <div class="search-box" id="searchBox">
+      <input type="text" id="searchInput" placeholder="搜索人物..." oninput="searchCharacters(this.value)">
+      <button class="tool-btn" onclick="toggleSearch()" title="搜索">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+    </div>
+    <!-- 25. 字体大小 -->
+    <button class="tool-btn" onclick="toggleFontSize()" title="字体大小">A</button>
+    <!-- 24. 夜间模式 -->
+    <button class="tool-btn" onclick="toggleTheme()" title="夜间模式">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <!-- 20. 弹幕开关 -->
+    <button class="tool-btn" id="danmaku-btn" onclick="toggleDanmaku()" title="弹幕">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+    <!-- 27. 全屏 -->
+    <button class="tool-btn" onclick="toggleFullscreen()" title="全屏">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+    </button>
+    <!-- 29. 分享 -->
+    <button class="tool-btn" onclick="sharePage()" title="分享">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">紅樓夢</h1>
+    <p class="hero-subtitle">人物形象 · 服飾志</p>
+    <button class="hero-cta" onclick="scrollToSection('characters')">
+      入大觀園
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  <div class="scroll-hint">
+    <span>向下滚动</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- 人物总览 -->
+<section class="section" id="characters">
+  <div class="section-header reveal">
+    <h2 class="section-title">金陵人物志</h2>
+    <div class="section-divider"></div>
+    <p class="section-desc">悬停卡片查看服饰简介 · 点击展开详细档案</p>
+  </div>
+
+  <!-- 筛选工具栏 -->
+  <div class="filter-bar reveal">
+    <div class="filter-group">
+      <span class="filter-label">身份：</span>
+      <button class="filter-btn active" data-filter="all" onclick="filterByStatus('all', this)">全部</button>
+      <button class="filter-btn" data-filter="lady" onclick="filterByStatus('lady', this)">小姐</button>
+      <button class="filter-btn" data-filter="master" onclick="filterByStatus('master', this)">公子</button>
+      <button class="filter-btn" data-filter="matron" onclick="filterByStatus('matron', this)">奶奶</button>
+      <button class="filter-btn" data-filter="nun" onclick="filterByStatus('nun', this)">出家人</button>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">主色：</span>
+      <button class="filter-btn" data-color="dai" onclick="filterByColor('dai', this)"><span class="color-dot" style="background:#2C3E50"></span>黛青</button>
+      <button class="filter-btn" data-color="red" onclick="filterByColor('red', this)"><span class="color-dot" style="background:#C0392B"></span>大红</button>
+      <button class="filter-btn" data-color="pink" onclick="filterByColor('pink', this)"><span class="color-dot" style="background:#E8B4B8"></span>桃红</button>
+      <button class="filter-btn" data-color="gold" onclick="filterByColor('gold', this)"><span class="color-dot" style="background:#D4AF37"></span>秋香</button>
+      <button class="filter-btn" data-color="white" onclick="filterByColor('white', this)"><span class="color-dot" style="background:#ECF0F1"></span>月白</button>
+      <button class="filter-btn" data-color="green" onclick="filterByColor('green', this)"><span class="color-dot" style="background:#6B8E6B"></span>葱绿</button>
+    </div>
+    <!-- 9. 随机抽签 -->
+    <button class="random-btn" onclick="randomCharacter()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+      随机抽签
+    </button>
+    <!-- 10. 对比模式 -->
+    <button class="compare-toggle" id="compareToggle" onclick="toggleCompareMode()">对比模式</button>
+  </div>
+
+  <!-- 人物卡片网格 -->
+  <div class="characters-grid" id="charactersGrid"></div>
+</section>
+
+<!-- 5. 人物详情弹窗 -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetailOnOverlay(event)">
+  <div class="detail-panel" id="detailPanel">
+    <button class="detail-close" onclick="closeDetail()">×</button>
+    <div class="detail-body" id="detailBody"></div>
+  </div>
+</div>
+
+<!-- 10. 对比底部栏 -->
+<div class="compare-panel" id="comparePanel">
+  <div class="compare-content">
+    <div class="compare-slot" id="compareSlot1"><div class="empty">选择第一位人物</div></div>
+    <div class="compare-vs">VS</div>
+    <div class="compare-slot" id="compareSlot2"><div class="empty">选择第二位人物</div></div>
+    <button class="compare-start" id="compareStart" onclick="startCompare()" disabled>开始对比</button>
+    <button class="compare-close" onclick="toggleCompareMode()">×</button>
+  </div>
+</div>
+
+<!-- 对比结果弹窗 -->
+<div class="compare-result" id="compareResult" onclick="closeCompareResult(event)">
+  <div class="compare-result-panel">
+    <button class="detail-close" onclick="document.getElementById('compareResult').classList.remove('open')">×</button>
+    <div id="compareResultContent"></div>
+  </div>
+</div>
+
+<!-- 13. 经典场景时间线 -->
+<section class="timeline-section" id="timeline">
+  <div class="section-header reveal">
+    <h2 class="section-title">经典场景</h2>
+    <div class="section-divider"></div>
+    <p class="section-desc">点击场景卡片展开详细描述</p>
+  </div>
+  <div class="timeline" id="timelineContainer"></div>
+</section>
+
+<!-- 14. 服饰文化 -->
+<section class="section" id="fabric">
+  <div class="section-header reveal">
+    <h2 class="section-title">服饰文化</h2>
+    <div class="section-divider"></div>
+    <p class="section-desc">点击面料卡片翻转查看详细介绍</p>
+  </div>
+  <div class="fabric-grid" id="fabricGrid"></div>
+</section>
+
+<!-- 15. 色彩体系 -->
+<section class="section" id="colors">
+  <div class="section-header reveal">
+    <h2 class="section-title">色彩体系</h2>
+    <div class="section-divider"></div>
+    <p class="section-desc">点击色板查看色彩寓意与对应人物</p>
+  </div>
+  <div class="color-palette" id="colorPalette"></div>
+  <div class="palette-detail" id="paletteDetail">
+    <p style="text-align:center;color:var(--ink-light);">请选择上方色板查看详情</p>
+  </div>
+</section>
+
+<!-- 16. 人物关系 -->
+<section class="relation-section" id="relation">
+  <div class="section-header reveal">
+    <h2 class="section-title">人物关系</h2>
+    <div class="section-divider"></div>
+    <p class="section-desc">悬停节点查看关系 · 点击节点高亮连线</p>
+  </div>
+  <div class="relation-container reveal">
+    <svg id="relation-svg" viewBox="0 0 900 500"></svg>
+    <div class="relation-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#C0392B"></div>爱情/姻缘</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#2C3E50"></div>血缘/亲情</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#D4AF37"></div>友谊/姐妹</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#6B8E6B"></div>主仆/其他</div>
+    </div>
+  </div>
+</section>
+
+<!-- 17. 大观园地图 -->
+<section class="section" id="garden">
+  <div class="section-header reveal">
+    <h2 class="section-title">大观园图</h2>
+    <div class="section-divider"></div>
+    <p class="section-desc">点击地图上的居所查看居住人物</p>
+  </div>
+  <div class="garden-map reveal">
+    <svg class="garden-svg" viewBox="0 0 800 500" id="gardenSvg">
+      <!-- 背景山水 -->
+      <rect width="800" height="500" fill="#F5F0E8"/>
+      <ellipse cx="400" cy="350" rx="300" ry="80" fill="#d4e5d4" opacity="0.5"/>
+      <path d="M0 400 Q200 350 400 380 Q600 410 800 370 L800 500 L0 500 Z" fill="#c5d5c5" opacity="0.4"/>
+      <!-- 水面 -->
+      <ellipse cx="400" cy="300" rx="180" ry="50" fill="#a8c8e8" opacity="0.3"/>
+      <!-- 路径 -->
+      <path d="M100 250 Q250 200 400 220 Q550 240 700 200" stroke="#d4c4a8" stroke-width="8" fill="none" opacity="0.6"/>
+      <!-- 山石 -->
+      <ellipse cx="150" cy="180" rx="40" ry="25" fill="#b8b8b8" opacity="0.4"/>
+      <ellipse cx="650" cy="160" rx="35" ry="20" fill="#b8b8b8" opacity="0.4"/>
+      <!-- 柳树 -->
+      <g opacity="0.5">
+        <line x1="80" y1="200" x2="80" y2="140" stroke="#8B7355" stroke-width="3"/>
+        <path d="M60 145 Q80 120 100 145" stroke="#6B8E6B" stroke-width="2" fill="none"/>
+        <path d="M65 150 Q80 130 95 150" stroke="#7a9e7a" stroke-width="2" fill="none"/>
+      </g>
+      <g opacity="0.5">
+        <line x1="720" y1="180" x2="720" y2="120" stroke="#8B7355" stroke-width="3"/>
+        <path d="M700 125 Q720 100 740 125" stroke="#6B8E6B" stroke-width="2" fill="none"/>
+      </g>
+    </svg>
+    <div class="garden-popup" id="gardenPopup"></div>
+  </div>
+</section>
+
+<!-- 21. 投票 -->
+<section class="section" id="vote">
+  <div class="section-header reveal">
+    <h2 class="section-title">人气投票</h2>
+    <div class="section-divider"></div>
+    <p class="section-desc">在人物详情页点击投票，结果实时更新</p>
+  </div>
+  <div class="vote-results reveal" id="voteResults"></div>
+</section>
+
+<!-- 22. 拼图游戏 -->
+<section class="game-section" id="game">
+  <div class="section-header reveal">
+    <h2 class="section-title">服饰拼图</h2>
+    <div class="section-divider"></div>
+    <p class="section-desc">点击相邻方块移动，还原人物服饰图</p>
+  </div>
+  <div class="game-container reveal">
+    <div class="game-board" id="gameBoard"></div>
+    <div class="game-controls">
+      <button class="game-btn" onclick="shufflePuzzle()">重新打乱</button>
+      <button class="game-btn" onclick="changePuzzleImage()">换一张图</button>
+    </div>
+    <div class="game-status">移动次数：<span class="game-moves" id="gameMoves">0</span> <span id="gameWinText" style="color:var(--yanzhi);display:none;">恭喜完成！</span></div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer>
+  <div class="footer-title">紅樓夢 · 人物服飾志</div>
+  <div class="footer-links">
+    <a href="#characters" onclick="scrollToSection('characters')">人物志</a>
+    <a href="#fabric" onclick="scrollToSection('fabric')">服饰文化</a>
+    <a href="#colors" onclick="scrollToSection('colors')">色彩体系</a>
+    <a href="#relation" onclick="scrollToSection('relation')">人物关系</a>
+    <a href="#game" onclick="scrollToSection('game')">小游戏</a>
+  </div>
+  <div class="footer-copy">参考资料：曹雪芹《红楼梦》原著 · 清代服饰制度研究 · 中国传统色彩体系</div>
+</footer>
+
+<!-- 26. 音乐播放器 -->
+<div class="music-player" id="musicPlayer">
+  <button class="music-play-btn" id="musicPlayBtn" onclick="toggleMusic()">▶</button>
+  <div class="music-info">
+    <div class="music-title">红楼梦 · 序曲</div>
+    <div style="font-size:11px;">Web Audio 合成</div>
+  </div>
+</div>
+
+<!-- 28. 回到顶部 -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== 人物数据 =====
+const characters = [
+  {
+    id: 'daiyu', name: '林黛玉', courtyard: '潇湘馆', status: 'lady',
+    mainColor: 'dai', colorHex: '#2C3E50', colorName: '黛青',
+    title: '潇湘妃子 · 绛珠仙草',
+    image: 'https://aka.doubaocdn.com/s/0Z992IRVOU',
+    brief: '生性孤傲，才情卓绝，与宝玉青梅竹马，木石前盟。',
+    costume: '月白色交领襦裙，外罩黛青色比甲，衣料有淡墨竹纹暗花，腰间系素色宫绦。头戴简单银簪，不施粉黛，清雅脱俗。',
+    costumeTags: ['月白襦裙', '黛青比甲', '竹纹暗花', '素色宫绦', '银簪'],
+    verdict: '可叹停机德，\n堪怜咏絮才。\n玉带林中挂，\n金簪雪里埋。',
+    verdictInterpret: '「玉带林中挂」倒读即「林黛玉」，暗示其命运如林中挂带，孤高而终。「咏絮才」赞其诗才，以谢道韫喻之。',
+    personality: '敏感细腻、才情横溢、孤傲清高、多愁善感',
+    classicScene: '黛玉葬花、潇湘馆题诗、魁夺菊花诗',
+    position: { x: 200, y: 150 }
+  },
+  {
+    id: 'baoyu', name: '贾宝玉', courtyard: '怡红院', status: 'master',
+    mainColor: 'red', colorHex: '#C0392B', colorName: '大红',
+    title: '怡红公子 · 神瑛侍者',
+    image: 'https://aka.doubaocdn.com/s/xKtBYIuh2v',
+    brief: '荣国府嫡孙，衔玉而生，性情温柔，厌恶仕途经济。',
+    costume: '大红色织金团花箭袖，外罩石青起花八团倭缎排穗褂，衣料有五爪龙纹和富贵牡丹织金图案。头戴束发嵌宝紫金冠，面若中秋之月。',
+    costumeTags: ['大红箭袖', '石青排穗褂', '织金龙纹', '紫金冠', '通灵宝玉'],
+    verdict: '无故寻愁觅恨，\n有时似傻如狂。\n纵然生得好皮囊，\n腹内原来草莽。',
+    verdictInterpret: '此为《西江月》批宝玉，似贬实褒，赞其不随流俗、追求真性情。「好皮囊」写其外貌俊美，「草莽」讽其不通世务。',
+    personality: '温柔多情、叛逆自由、尊重女性、厌恶功名',
+    classicScene: '梦游太虚幻境、初试云雨情、大观园试才题对额',
+    position: { x: 450, y: 100 }
+  },
+  {
+    id: 'baochai', name: '薛宝钗', courtyard: '蘅芜苑', status: 'lady',
+    mainColor: 'pink', colorHex: '#E8B4B8', colorName: '蜜合',
+    title: '蘅芜君 · 金锁之主',
+    image: 'https://aka.doubaocdn.com/s/j7GR8YZroQ',
+    brief: '薛家千金，端庄稳重，才德兼备，金玉良缘之主。',
+    costume: '蜜合色棉袄，外罩藕荷色绫缎比甲，衣料有缠枝莲暗纹，腰间系葱黄绫棉裙。头戴赤金扁方配珍珠步摇，手持团扇，唇不点而红。',
+    costumeTags: ['蜜合棉袄', '藕荷比甲', '缠枝莲纹', '葱黄棉裙', '金锁'],
+    verdict: '可叹停机德，\n堪怜咏絮才。\n玉带林中挂，\n金簪雪里埋。',
+    verdictInterpret: '「停机德」以乐羊子妻喻宝钗之贤德，「金簪雪里埋」暗示其最终独守空闺、冷落一生的命运。',
+    personality: '端庄稳重、随分从时、城府深沉、人情练达',
+    classicScene: '滴翠亭扑蝶、蘅芜苑夜拟菊花题、红麝串事件',
+    position: { x: 680, y: 160 }
+  },
+  {
+    id: 'xifeng', name: '王熙凤', courtyard: '荣国府', status: 'matron',
+    mainColor: 'pink', colorHex: '#E8B4B8', colorName: '桃红',
+    title: '琏二奶奶 · 凤辣子',
+    image: 'https://aka.doubaocdn.com/s/vyhmjmOW3m',
+    brief: '贾琏之妻，荣国府管家，精明强干，口蜜腹剑。',
+    costume: '桃红撒花软缎袄，外罩石青刻丝灰鼠披风，衣料有五彩织金凤凰牡丹图案，腰间系翡翠撒花洋绉裙。头戴金丝八宝攒珠髻，配朝阳五凤挂珠钗。',
+    costumeTags: ['桃红撒花袄', '石青灰鼠披风', '织金凤穿牡丹', '翡翠洋绉裙', '朝阳五凤钗'],
+    verdict: '凡鸟偏从末世来，\n都知爱慕此生才。\n一从二令三人木，\n哭向金陵事更哀。',
+    verdictInterpret: '「凡鸟」合为「凤」字，点其名。「一从二令三人木」暗示其命运：初顺从、后命令、终被休弃（人木为休）。',
+    personality: '精明泼辣、八面玲珑、心狠手辣、贪财好权',
+    classicScene: '协理宁国府、毒设相思局、弄权铁槛寺',
+    position: { x: 350, y: 280 }
+  },
+  {
+    id: 'xiangyun', name: '史湘云', courtyard: '枕霞阁', status: 'lady',
+    mainColor: 'green', colorHex: '#6B8E6B', colorName: '葱绿',
+    title: '枕霞旧友 · 憨湘云',
+    image: 'https://aka.doubaocdn.com/s/XOUDR9T2TJ',
+    brief: '贾母侄孙女，豪爽洒脱，英气逼人，诗思敏捷。',
+    costume: '靠色（紫酱色）织金团花袄，外罩葱绿绫缎比甲，衣料有海棠花纹，腰间系朱红洒花裙。头戴赤金点翠小簪，爱穿男装，醉卧芍药裀。',
+    costumeTags: ['靠色团花袄', '葱绿比甲', '海棠花纹', '朱红洒花裙', '点翠簪'],
+    verdict: '富贵又何为，\n襁褓之间父母违。\n展眼吊斜晖，\n湘江水逝楚云飞。',
+    verdictInterpret: '「湘江水逝楚云飞」藏其名，暗示人生短暂如流水飞云。虽出身豪门，却父母早亡，婚后不久即守寡。',
+    personality: '豪爽洒脱、英气明媚、心直口快、才华横溢',
+    classicScene: '醉卧芍药裀、芦雪庵割腥啖膻、凹晶馆联诗',
+    position: { x: 580, y: 300 }
+  },
+  {
+    id: 'tanchun', name: '贾探春', courtyard: '秋爽斋', status: 'lady',
+    mainColor: 'gold', colorHex: '#D4AF37', colorName: '秋香',
+    title: '蕉下客 · 玫瑰花',
+    image: 'https://aka.doubaocdn.com/s/Qx6sjbpUX4',
+    brief: '贾政庶女，精明干练，有政治家风范，远嫁海疆。',
+    costume: '秋香色织金缠枝莲袄，外罩紫檀色缎面比甲，衣料有芭蕉叶纹暗花，腰间系石青撒花裙。头戴累丝金凤配珠翠，喜书法，案上堆满名人法帖。',
+    costumeTags: ['秋香缠枝莲袄', '紫檀比甲', '芭蕉叶纹', '石青撒花裙', '累丝金凤'],
+    verdict: '才自精明志自高，\n生于末世运偏消。\n清明涕送江边望，\n千里东风一梦遥。',
+    verdictInterpret: '赞其才志高远，却生于家族末世。「清明涕送江边望」写其远嫁时清明时节江边送别，「千里东风一梦遥」暗示远嫁不归。',
+    personality: '精明干练、志向高远、自尊心强、有管理才能',
+    classicScene: '理家探春、抄检大观园打王善保家的、远嫁海疆',
+    position: { x: 150, y: 350 }
+  },
+  {
+    id: 'miaoyu', name: '妙玉', courtyard: '栊翠庵', status: 'nun',
+    mainColor: 'white', colorHex: '#ECF0F1', colorName: '月白',
+    title: '槛外人 · 畸人',
+    image: 'https://aka.doubaocdn.com/s/jit2VNVzrc',
+    brief: '带发修行的尼姑，出身官宦，才情高洁，性情孤僻。',
+    costume: '月白色僧袍，外罩玄色缂丝水田衣，衣料有素色莲花暗纹，腰间系素色丝绦。头戴银质莲花冠，手持青瓷茶盏，气质出尘。',
+    costumeTags: ['月白僧袍', '玄色水田衣', '莲花暗纹', '素色丝绦', '莲花冠'],
+    verdict: '欲洁何曾洁，\n云空未必空。\n可怜金玉质，\n终陷淖泥中。',
+    verdictInterpret: '「欲洁何曾洁」写其追求洁净却终不能得，「云空未必空」讽其口说空寂却六根未净。「金玉质」赞其高贵，「淖泥中」暗示被劫受辱的结局。',
+    personality: '清冷孤傲、才情高洁、有洁癖、不合时宜',
+    classicScene: '栊翠庵品茶、赠红梅、中秋夜续诗',
+    position: { x: 750, y: 350 }
+  },
+  {
+    id: 'liwan', name: '李纨', courtyard: '稻香村', status: 'matron',
+    mainColor: 'white', colorHex: '#ECF0F1', colorName: '青缎',
+    title: '稻香老农 · 珠大奶奶',
+    image: 'https://aka.doubaocdn.com/s/SpTlHUHkbA',
+    brief: '贾珠遗孀，守节教子，性情恬淡，诗社社长。',
+    costume: '青缎交领袄，外罩月白绫缎比甲，衣料有素色兰草暗纹，腰间系青缎素裙。头戴银质素簪配白绒花，手持针线，妆容素净。',
+    costumeTags: ['青缎交领袄', '月白比甲', '兰草暗纹', '青缎素裙', '素簪白绒花'],
+    verdict: '桃李春风结子完，\n到头谁似一盆兰。\n如冰水好空相妒，\n枉与他人作笑谈。',
+    verdictInterpret: '「桃李春风结子完」藏其名（李完），写其青春早逝、守节一生。「一盆兰」指其子贾兰后来成才，「如冰水好」赞其贞洁如冰水。',
+    personality: '温婉沉静、恬淡守节、善于识人、教子有方',
+    classicScene: '稻香村诗社、评诗定优劣、教子贾兰',
+    position: { x: 450, y: 400 }
+  }
+];
+
+// ===== 经典场景数据 =====
+const scenes = [
+  { chapter: '第三回', title: '林黛玉进贾府', desc: '黛玉初入荣国府，步步留心，时时在意。', detail: '黛玉弃舟登岸，进入荣国府。先见贾母，后会王熙凤，初见贾宝玉。宝玉问黛玉有没有玉，黛玉答无，宝玉便狠命摔玉。此回通过黛玉视角，铺陈贾府人物与格局，黛玉服饰素雅，与众姊妹的华丽形成对比。' },
+  { chapter: '第五回', title: '梦游太虚幻境', desc: '宝玉梦游太虚幻境，翻阅金陵十二钗判词。', detail: '宝玉随秦可卿入梦，至太虚幻境。警幻仙姑引其翻阅「金陵十二钗」正册、副册、又副册，听《红楼梦》十二曲。判词与曲文暗示了主要人物的命运结局，是全书总纲。' },
+  { chapter: '第十七回', title: '大观园试才题对额', desc: '贾政携宝玉游大观园，试其才学。', detail: '大观园建成，贾政率清客游园，命宝玉题匾额对联。宝玉大展诗才，题「沁芳」「有凤来仪」「蘅芷清芬」等，虽遭贾政呵斥，实则暗喜。此回详细描写大观园各处景致，为后文人物居所定调。' },
+  { chapter: '第二十三回', title: '西厢记妙词通戏语', desc: '宝黛共读《西厢记》，情愫暗生。', detail: '宝玉携《会真记》（即《西厢记》）在沁芳闸桥边桃花下阅读，黛玉前来葬花，二人共读。宝玉以「我就是个多愁多病身，你就是那倾国倾城貌」相戏，黛玉又羞又怒，实则心动。' },
+  { chapter: '第二十七回', title: '黛玉葬花', desc: '黛玉葬花吟《葬花吟》，悲叹身世。', detail: '黛玉因晴雯不开门一事错疑宝玉，又逢饯花之期，感花伤己，在沁芳闸边葬花，口吟《葬花吟》。「花谢花飞花满天，红消香断有谁怜」「一朝春尽红颜老，花落人亡两不知」，以花喻己，悲叹命运。宝玉闻之恸倒。' },
+  { chapter: '第三十七回', title: '海棠诗社', desc: '探春发起诗社，众人咏白海棠。', detail: '探春致书宝玉，倡议结诗社。众人在秋爽斋集会，各起别号：黛玉潇湘妃子、宝钗蘅芜君、宝玉怡红公子、探春蕉下客、李纨稻香老农。以白海棠为题赋诗，李纨评宝钗第一，黛玉第二。' },
+  { chapter: '第三十八回', title: '林潇湘魁夺菊花诗', desc: '黛玉咏菊花诗夺魁，讽和螃蟹咏。', detail: '史湘云做东邀诗社，宝钗助其设螃蟹宴。众人以菊花为题赋诗十二首，黛玉的《咏菊》《问菊》《菊梦》包揽前三名，李纨评曰「题目新，诗也新，立意更新」。宝玉、黛玉、宝钗又作螃蟹咏，宝钗诗被推为绝唱。' },
+  { chapter: '第六十二回', title: '憨湘云醉卧芍药裀', desc: '史湘云醉卧芍药花丛，成为经典画面。', detail: '宝玉生日宴，众人行酒令。史湘云多吃了酒，躲到山后一块青石板上睡着，四面芍药花飞了一身，满头脸衣襟上皆是红香散乱，手中的扇子在地下也半被落花埋了，一群蜂蝶闹嚷嚷围着她。此为红楼最美画面之一。' }
+];
+
+// ===== 面料数据 =====
+const fabrics = [
+  { name: '云锦', en: 'Yunjin Brocade', icon: '✦', desc: '南京云锦，中国四大名锦之首，始于东晋，元明清为皇家御用。用色多达十余种，以「逐花异色」著称，织金妆花，富丽堂皇。', features: ['皇家御用', '织金妆花', '逐花异色', '寸锦寸金'] },
+  { name: '缂丝', en: 'Kesi Silk Tapestry', icon: '◇', desc: '缂丝又称「刻丝」，以通经断纬技法织成，正反两面如一。宋代以来为皇家贡品，有「一寸缂丝一寸金」之说，常用于书画、服饰。', features: ['通经断纬', '两面如一', '皇家贡品', '工艺极繁'] },
+  { name: '妆花缎', en: 'Zhuanghua Satin', icon: '❋', desc: '妆花缎是云锦中最华丽的品种，在缎地上以多色彩纬挖花织成，配色自由，花纹繁复。《红楼梦》中多次出现「妆花缎」「妆花蟒缎」，为贵族服饰常用面料。', features: ['多色挖花', '花纹繁复', '配色自由', '贵族常用'] },
+  { name: '刻丝灰鼠', en: 'Kesi with Squirrel', icon: '❄', desc: '刻丝（缂丝）面料配灰鼠皮里子，是清代贵族冬季服饰的高档配置。王熙凤的「石青刻丝灰鼠披风」即此类，面料华贵，皮毛保暖，彰显身份。', features: ['缂丝面料', '灰鼠皮里', '冬季礼服', '身份象征'] },
+  { name: '洋绉', en: 'Foreign Crepe', icon: '∿', desc: '洋绉是从海外传入的绉类丝织物，质地轻薄柔软，有自然皱纹。《红楼梦》中「翡翠撒花洋绉裙」「葱绿洋绉」等，体现了清代中期海外贸易带来的新面料。', features: ['海外传入', '轻薄柔软', '自然皱纹', '时尚新料'] },
+  { name: '倭缎', en: 'Japanese Satin', icon: '◈', desc: '倭缎即日本缎，明代从日本传入，质地厚实，光泽柔和。贾宝玉的「石青起花八团倭缎排穗褂」即用此料，八团花纹为清代贵族服饰规制，排穗为下摆流苏装饰。', features: ['日本传入', '质地厚实', '八团花纹', '排穗装饰'] }
+];
+
+// ===== 色彩数据 =====
+const colorData = [
+  { name: '黛青', hex: '#2C3E50', meaning: '黛青为画眉之石色，深沉内敛，书卷气浓。林黛玉之「黛」即此色，象征其才情与孤高。', chars: ['daiyu'] },
+  { name: '大红', hex: '#C0392B', meaning: '大红为正色，喜庆华贵，是贵族礼服的主色。贾宝玉常穿大红，象征其尊贵身份与热烈性情。', chars: ['baoyu'] },
+  { name: '桃红', hex: '#E8B4B8', meaning: '桃红娇艳明媚，介于红粉之间，是年轻女性喜爱的颜色。王熙凤、薛宝钗服饰中多见，体现女性柔美。', chars: ['xifeng', 'baochai'] },
+  { name: '秋香', hex: '#D4AF37', meaning: '秋香色为暗黄带绿，沉稳大气，有秋意。贾探春喜用此色，体现其精明干练与志向高远。', chars: ['tanchun'] },
+  { name: '月白', hex: '#ECF0F1', meaning: '月白为极浅的蓝白色，洁净素雅，如月光之色。妙玉、李纨守节之人多用，黛玉亦喜，象征纯洁与超脱。', chars: ['miaoyu', 'liwan', 'daiyu'] },
+  { name: '葱绿', hex: '#6B8E6B', meaning: '葱绿为浅绿带黄，清新明快，有生机。史湘云外罩多用此色，体现其豪爽洒脱与青春活力。', chars: ['xiangyun'] },
+  { name: '石青', hex: '#34495E', meaning: '石青为深蓝近黑，庄重正式，是清代礼服常用色。贵族外褂、披风多用石青，与内里鲜艳颜色形成对比。', chars: ['baoyu', 'xifeng', 'tanchun'] },
+  { name: '蜜合', hex: '#E6C9A8', meaning: '蜜合色为浅黄带橙，如蜂蜜之色，温润柔和。薛宝钗棉袄用此色，体现其端庄温婉与随分从时。', chars: ['baochai'] }
+];
+
+// ===== 关系数据 =====
+const relations = [
+  { from: 'baoyu', to: 'daiyu', type: 'love', label: '木石前盟' },
+  { from: 'baoyu', to: 'baochai', type: 'love', label: '金玉良缘' },
+  { from: 'baoyu', to: 'xifeng', type: 'family', label: '表姐弟' },
+  { from: 'baoyu', to: 'tanchun', type: 'family', label: '兄妹' },
+  { from: 'daiyu', to: 'baochai', type: 'friend', label: '情敌·姐妹' },
+  { from: 'daiyu', to: 'xiangyun', type: 'friend', label: '诗友' },
+  { from: 'baochai', to: 'xiangyun', type: 'friend', label: '闺蜜' },
+  { from: 'xifeng', to: 'liwan', type: 'family', label: '妯娌' },
+  { from: 'tanchun', to: 'liwan', type: 'friend', label: '理家搭档' },
+  { from: 'miaoyu', to: 'baoyu', type: 'other', label: '知己' },
+  { from: 'miaoyu', to: 'daiyu', type: 'friend', label: '同气相求' },
+  { from: 'xiangyun', to: 'baoyu', type: 'family', label: '表兄妹' }
+];
+
+// ===== 大观园居所数据 =====
+const gardenSpots = [
+  { id: 'yihong', name: '怡红院', x: 600, y: 120, char: '贾宝玉', desc: '宝玉居所，富丽堂皇，海棠芭蕉相映，「怡红快绿」。' },
+  { id: 'xiaoxiang', name: '潇湘馆', x: 180, y: 150, char: '林黛玉', desc: '黛玉居所，翠竹掩映，湘帘垂地，幽静清雅。' },
+  { id: 'hengwu', name: '蘅芜苑', x: 680, y: 280, char: '薛宝钗', desc: '宝钗居所，异草牵藤，朴素无华，「蘅芷清芬」。' },
+  { id: 'qiushuang', name: '秋爽斋', x: 150, y: 320, char: '贾探春', desc: '探春居所，阔朗明亮，芭蕉梧桐，书画满室。' },
+  { id: 'daoxiang', name: '稻香村', x: 400, y: 380, char: '李纨', desc: '李纨居所，田园风光，黄泥矮墙，「杏帘在望」。' },
+  { id: 'longcui', name: '栊翠庵', x: 720, y: 380, char: '妙玉', desc: '妙玉修行处，红梅盛开，禅房幽静，茶香四溢。' },
+  { id: 'zhengxiazhen', name: '枕霞阁', x: 350, y: 100, char: '史湘云', desc: '湘云旧居，临水而建，霞光映照，诗酒流连之地。' }
+];
+
+// ===== 全局状态 =====
+let currentFilter = { status: 'all', color: null, search: '' };
+let compareMode = false;
+let compareSelections = [];
+let favorites = JSON.parse(localStorage.getItem('honglou_favorites') || '[]');
+let votes = JSON.parse(localStorage.getItem('honglou_votes') || '{}');
+let danmakuEnabled = false;
+let danmakuTimer = null;
+let musicPlaying = false;
+let audioCtx = null;
+let musicNodes = [];
+let fontSizeState = 0; // 0=normal, 1=large, 2=small
+let puzzleMoves = 0;
+let puzzleImageIndex = 0;
+
+// ===== 初始化 =====
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 1500);
+  initCharacters();
+  initTimeline();
+  initFabrics();
+  initColorPalette();
+  initRelationGraph();
+  initGardenMap();
+  initInkCanvas();
+  initPuzzle();
+  updateVoteResults();
+});
+
+// 滚动监听
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const height = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('scroll-progress').style.width = (scrolled / height * 100) + '%';
+  document.getElementById('back-to-top').classList.toggle('visible', scrolled > 300);
+  // 30. 滚动渐入
+  document.querySelectorAll('.reveal').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 80) el.classList.add('visible');
+  });
+});
+
+// ===== 2. 水墨粒子 =====
+function initInkCanvas() {
+  const canvas = document.getElementById('ink-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  let particles = [];
+  let mouseX = -100, mouseY = -100;
+
+  window.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    if (Math.random() > 0.6) {
+      particles.push({ x: mouseX, y: mouseY, r: Math.random() * 20 + 10, alpha: 0.15, decay: 0.003 });
+    }
+  });
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles = particles.filter(p => p.alpha > 0);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(44, 62, 80, ${p.alpha})`;
+      ctx.fill();
+      p.alpha -= p.decay;
+      p.r += 0.3;
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+}
+
+// ===== 人物卡片渲染 =====
+function initCharacters() {
+  const grid = document.getElementById('charactersGrid');
+  grid.innerHTML = characters.map(c => `
+    <div class="character-card" data-id="${c.id}" data-status="${c.status}" data-color="${c.mainColor}"
+         onclick="handleCardClick('${c.id}')" onmouseenter="this.classList.add('flipped')" onmouseleave="this.classList.remove('flipped')">
+      <div class="card-face card-front">
+        <img src="${c.image}" alt="${c.name}" loading="lazy">
+        <div class="card-front-info">
+          <div class="card-name">${c.name}</div>
+          <div class="card-title">${c.title.split('·')[0].trim()}</div>
+        </div>
+      </div>
+      <div class="card-face card-back">
+        <h3>${c.name}</h3>
+        <p><strong>居所：</strong>${c.courtyard}</p>
+        <p><strong>性格：</strong>${c.personality}</p>
+        <p style="margin-top:8px;">${c.brief}</p>
+        <div class="costume-tags">${c.costumeTags.slice(0,3).map(t => `<span class="costume-tag">${t}</span>`).join('')}</div>
+        <div class="card-hint">点击查看详情</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function handleCardClick(id) {
+  if (compareMode) {
+    toggleCompareSelection(id);
+  } else {
+    openDetail(id);
+  }
+}
+
+// ===== 筛选 =====
+function filterByStatus(status, btn) {
+  currentFilter.status = status;
+  document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function filterByColor(color, btn) {
+  currentFilter.color = currentFilter.color === color ? null : color;
+  document.querySelectorAll('.filter-btn[data-color]').forEach(b => b.classList.remove('active'));
+  if (currentFilter.color) btn.classList.add('active');
+  applyFilters();
+}
+function searchCharacters(val) {
+  currentFilter.search = val;
+  applyFilters();
+}
+function applyFilters() {
+  document.querySelectorAll('.character-card').forEach(card => {
+    const matchStatus = currentFilter.status === 'all' || card.dataset.status === currentFilter.status;
+    const matchColor = !currentFilter.color || card.dataset.color === currentFilter.color;
+    const char = characters.find(c => c.id === card.dataset.id);
+    const matchSearch = !currentFilter.search ||
+      char.name.includes(currentFilter.search) ||
+      char.courtyard.includes(currentFilter.search) ||
+      char.title.includes(currentFilter.search);
+    card.style.display = (matchStatus && matchColor && matchSearch) ? '' : 'none';
+  });
+}
+
+// ===== 9. 随机抽签 =====
+function randomCharacter() {
+  const c = characters[Math.floor(Math.random() * characters.length)];
+  showToast(`抽到了：${c.name} — ${c.title}`);
+  setTimeout(() => openDetail(c.id), 800);
+}
+
+// ===== 5. 人物详情 =====
+function openDetail(id) {
+  const c = characters.find(x => x.id === id);
+  if (!c) return;
+  const isFav = favorites.includes(id);
+  const voteCount = votes[id] || 0;
+  document.getElementById('detailBody').innerHTML = `
+    <div class="detail-image" id="detailImage" onmousemove="moveMagnifier(event)">
+      <img src="${c.image}" alt="${c.name}" id="detailImg">
+      <div class="magnifier" id="magnifier"></div>
+    </div>
+    <div class="detail-info">
+      <h2 class="detail-name">${c.name}</h2>
+      <div class="detail-courtyard">${c.courtyard} · ${c.title}</div>
+      <div class="detail-section">
+        <h4>人物简介</h4>
+        <p>${c.brief}</p>
+      </div>
+      <div class="detail-section">
+        <h4>服饰解析</h4>
+        <p>${c.costume}</p>
+        <div class="costume-tags" style="margin-top:8px;">${c.costumeTags.map(t => `<span class="costume-tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="detail-section">
+        <h4>18. 服饰换色体验</h4>
+        <p style="font-size:12px;margin-bottom:4px;">点击颜色改变服饰主色调（滤镜模拟）：</p>
+        <div class="colorize-tools">
+          <button class="colorize-btn active" style="background:none;border:1px dashed var(--ink-light);" onclick="colorizeImage('none',this)" title="原色"></button>
+          <button class="colorize-btn" style="background:#C0392B" onclick="colorizeImage('sepia(0.5) saturate(2) hue-rotate(-20deg)',this)"></button>
+          <button class="colorize-btn" style="background:#2C3E50" onclick="colorizeImage('sepia(0.3) saturate(0.8) hue-rotate(180deg)',this)"></button>
+          <button class="colorize-btn" style="background:#D4AF37" onclick="colorizeImage('sepia(0.8) saturate(1.5)',this)"></button>
+          <button class="colorize-btn" style="background:#6B8E6B" onclick="colorizeImage('sepia(0.4) saturate(1.2) hue-rotate(60deg)',this)"></button>
+          <button class="colorize-btn" style="background:#E8B4B8" onclick="colorizeImage('sepia(0.5) saturate(1.3) hue-rotate(-10deg) brightness(1.1)',this)"></button>
+        </div>
+      </div>
+      <div class="detail-section">
+        <h4>判词</h4>
+        <div class="verdict-box" id="verdictBox">
+          <div class="verdict-text">${c.verdict}</div>
+          <div class="verdict-interpret">${c.verdictInterpret}</div>
+          <button class="verdict-toggle" onclick="toggleVerdict()">${'查看解读'}</button>
+        </div>
+      </div>
+      <div class="detail-section">
+        <h4>经典场景</h4>
+        <p>${c.classicScene}</p>
+      </div>
+      <div class="detail-actions">
+        <button class="action-btn btn-fav ${isFav?'active':''}" onclick="toggleFavorite('${c.id}', this)">
+          ${isFav?'★ 已收藏':'☆ 收藏'}
+        </button>
+        <button class="action-btn btn-vote" onclick="voteCharacter('${c.id}')">
+          ♡ 投票 (<span id="voteCount-${c.id}">${voteCount}</span>)
+        </button>
+        <button class="action-btn btn-tts" onclick="speakVerdict('${c.id}')">
+          ▶ 朗诵判词
+        </button>
+      </div>
+    </div>
+  `;
+  document.getElementById('detailOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // 初始化放大镜
+  const img = document.getElementById('detailImg');
+  const mag = document.getElementById('magnifier');
+  mag.style.backgroundImage = `url(${c.image})`;
+  mag.style.backgroundSize = `${img.offsetWidth * 2}px ${img.offsetHeight * 2}px`;
+}
+
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeDetailOnOverlay(e) {
+  if (e.target.id === 'detailOverlay') closeDetail();
+}
+
+// ===== 11. 放大镜 =====
+function moveMagnifier(e) {
+  const img = document.getElementById('detailImg');
+  const mag = document.getElementById('magnifier');
+  if (!img || !mag) return;
+  const rect = img.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
+    mag.style.opacity = '0';
+    return;
+  }
+  mag.style.opacity = '1';
+  mag.style.left = (x - 60) + 'px';
+  mag.style.top = (y - 60) + 'px';
+  mag.style.backgroundPosition = `-${x * 2 - 60}px -${y * 2 - 60}px`;
+}
+
+// ===== 12. 判词解读切换 =====
+function toggleVerdict() {
+  const box = document.getElementById('verdictBox');
+  box.classList.toggle('show-interpret');
+  const btn = box.querySelector('.verdict-toggle');
+  btn.textContent = box.classList.contains('show-interpret') ? '收起解读' : '查看解读';
+}
+
+// ===== 18. 换色 =====
+function colorizeImage(filter, btn) {
+  document.getElementById('detailImg').style.filter = filter === 'none' ? '' : filter;
+  document.querySelectorAll('.colorize-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ===== 23. 收藏 =====
+function toggleFavorite(id, btn) {
+  const idx = favorites.indexOf(id);
+  if (idx > -1) {
+    favorites.splice(idx, 1);
+    btn.classList.remove('active');
+    btn.innerHTML = '☆ 收藏';
+    showToast('已取消收藏');
+  } else {
+    favorites.push(id);
+    btn.classList.add('active');
+    btn.innerHTML = '★ 已收藏';
+    showToast('已加入收藏');
+  }
+  localStorage.setItem('honglou_favorites', JSON.stringify(favorites));
+}
+
+// ===== 21. 投票 =====
+function voteCharacter(id) {
+  votes[id] = (votes[id] || 0) + 1;
+  localStorage.setItem('honglou_votes', JSON.stringify(votes));
+  const el = document.getElementById(`voteCount-${id}`);
+  if (el) el.textContent = votes[id];
+  updateVoteResults();
+  showToast('投票成功！');
+}
+function updateVoteResults() {
+  const sorted = characters.map(c => ({ ...c, count: votes[c.id] || 0 })).sort((a, b) => b.count - a.count);
+  const max = Math.max(...sorted.map(c => c.count), 1);
+  document.getElementById('voteResults').innerHTML = sorted.map(c => `
+    <div class="vote-bar-container">
+      <div class="vote-bar-label">
+        <span>${c.name}（${c.courtyard}）</span>
+        <span>${c.count} 票</span>
+      </div>
+      <div class="vote-bar"><div class="vote-bar-fill" style="width:${c.count/max*100}%"></div></div>
+    </div>
+  `).join('');
+}
+
+// ===== 19. 文字转语音 =====
+function speakVerdict(id) {
+  const c = characters.find(x => x.id === id);
+  if (!c) return;
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(c.name + '的判词。' + c.verdict.replace(/\n/g, '，'));
+    utter.lang = 'zh-CN';
+    utter.rate = 0.8;
+    window.speechSynthesis.speak(utter);
+    showToast('正在朗诵判词...');
+  } else {
+    showToast('您的浏览器不支持语音合成');
+  }
+}
+
+// ===== 10. 对比模式 =====
+function toggleCompareMode() {
+  compareMode = !compareMode;
+  compareSelections = [];
+  document.getElementById('compareToggle').classList.toggle('active', compareMode);
+  document.getElementById('comparePanel').classList.toggle('visible', compareMode);
+  document.querySelectorAll('.character-card').forEach(c => c.classList.remove('compare-selected'));
+  updateCompareSlots();
+  if (compareMode) showToast('对比模式：点击两个人物卡片进行对比');
+}
+function toggleCompareSelection(id) {
+  const idx = compareSelections.indexOf(id);
+  if (idx > -1) {
+    compareSelections.splice(idx, 1);
+  } else if (compareSelections.length < 2) {
+    compareSelections.push(id);
+  } else {
+    showToast('最多选择两个人物');
+    return;
+  }
+  document.querySelectorAll('.character-card').forEach(c => {
+    c.classList.toggle('compare-selected', compareSelections.includes(c.dataset.id));
+  });
+  updateCompareSlots();
+}
+function updateCompareSlots() {
+  const slot1 = document.getElementById('compareSlot1');
+  const slot2 = document.getElementById('compareSlot2');
+  const c1 = characters.find(c => c.id === compareSelections[0]);
+  const c2 = characters.find(c => c.id === compareSelections[1]);
+  slot1.innerHTML = c1 ? `<img src="${c1.image}" alt="${c1"><div><div class="name">${c1.name}</div><div style="font-size:11px;color:var(--ink-light)">${c1.courtyard}</div></div>` : '<div class="empty">选择第一位人物</div>';
+  slot2.innerHTML = c2 ? `<img src="${c2.image}" alt="${c2"><div><div class="name">${c2.name}</div><div style="font-size:11px;color:var(--ink-light)">${c2.courtyard}</div></div>` : '<div class="empty">选择第二位人物</div>';
+  document.getElementById('compareStart').disabled = compareSelections.length !== 2;
+}
+function startCompare() {
+  if (compareSelections.length !== 2) return;
+  const c1 = characters.find(c => c.id === compareSelections[0]);
+  const c2 = characters.find(c => c.id === compareSelections[1]);
+  document.getElementById('compareResultContent').innerHTML = `
+    <h2 style="text-align:center;font-family:var(--font-serif);color:var(--dai);margin-bottom:24px;letter-spacing:4px;">人物对比</h2>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <h3>${c1.name}</h3>
+        <img src="${c1.image}" alt="${c1.name}">
+        <div class="attr"><div class="attr-label">居所</div><div class="attr-value">${c1.courtyard}</div></div>
+        <div class="attr"><div class="attr-label">身份</div><div class="attr-value">${c1.title}</div></div>
+        <div class="attr"><div class="attr-label">性格</div><div class="attr-value">${c1.personality}</div></div>
+        <div class="attr"><div class="attr-label">主色</div><div class="attr-value"><span class="color-dot" style="background:${c1.colorHex}"></span>${c1.colorName}</div></div>
+        <div class="attr"><div class="attr-label">服饰特点</div><div class="attr-value">${c1.costumeTags.join('、')}</div></div>
+        <div class="attr"><div class="attr-label">经典场景</div><div class="attr-value">${c1.classicScene}</div></div>
+      </div>
+      <div class="compare-middle"><div class="vs">VS</div></div>
+      <div class="compare-col">
+        <h3>${c2.name}</h3>
+        <img src="${c2.image}" alt="${c2.name}">
+        <div class="attr"><div class="attr-label">居所</div><div class="attr-value">${c2.courtyard}</div></div>
+        <div class="attr"><div class="attr-label">身份</div><div class="attr-value">${c2.title}</div></div>
+        <div class="attr"><div class="attr-label">性格</div><div class="attr-value">${c2.personality}</div></div>
+        <div class="attr"><div class="attr-label">主色</div><div class="attr-value"><span class="color-dot" style="background:${c2.colorHex}"></span>${c2.colorName}</div></div>
+        <div class="attr"><div class="attr-label">服饰特点</div><div class="attr-value">${c2.costumeTags.join('、')}</div></div>
+        <div class="attr"><div class="attr-label">经典场景</div><div class="attr-value">${c2.classicScene}</div></div>
+      </div>
+    </div>
+  `;
+  document.getElementById('compareResult').classList.add('open');
+}
+function closeCompareResult(e) {
+  if (e.target.id === 'compareResult') e.target.classList.remove('open');
+}
+
+// ===== 13. 时间线 =====
+function initTimeline() {
+  document.getElementById('timelineContainer').innerHTML = scenes.map((s, i) => `
+    <div class="timeline-item" onclick="this.classList.toggle('expanded')">
+      <div class="timeline-chapter">${s.chapter}</div>
+      <div class="timeline-title">${s.title}</div>
+      <div class="timeline-desc">${s.desc}</div>
+      <div class="timeline-detail"><p style="font-size:13px;color:var(--ink-light);line-height:1.9;">${s.detail}</p></div>
+    </div>
+  `).join('');
+}
+
+// ===== 14. 面料卡片 =====
+function initFabrics() {
+  document.getElementById('fabricGrid').innerHTML = fabrics.map(f => `
+    <div class="fabric-card" onclick="this.classList.toggle('flipped')">
+      <div class="fabric-face fabric-front">
+        <div class="icon">${f.icon}</div>
+        <h3>${f.name}</h3>
+        <div class="en">${f.en}</div>
+      </div>
+      <div class="fabric-face fabric-back">
+        <p>${f.desc}</p>
+        <div style="margin-top:8px;">${f.features.map(ft => `<span class="feature">${ft}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== 15. 色彩色板 =====
+function initColorPalette() {
+  document.getElementById('colorPalette').innerHTML = colorData.map((c, i) => `
+    <div class="palette-color" style="background:${c.hex};color:${isLight(c.hex)?'#333':'#fff'}" onclick="selectColor(${i})">
+      <div class="color-name">${c.name}</div>
+      <div class="color-hex">${c.hex}</div>
+    </div>
+  `).join('');
+}
+function isLight(hex) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return (r*299 + g*587 + b*114) / 1000 > 150;
+}
+function selectColor(idx) {
+  const c = colorData[idx];
+  document.querySelectorAll('.palette-color').forEach((el, i) => el.classList.toggle('active', i === idx));
+  const chars = c.chars.map(id => characters.find(x => x.id === id)).filter(Boolean);
+  document.getElementById('paletteDetail').innerHTML = `
+    <h3 style="color:${c.hex}">${c.name} <span style="font-size:14px;color:var(--ink-light);font-weight:400;">${c.hex}</span></h3>
+    <p>${c.meaning}</p>
+    <div style="font-size:13px;color:var(--ink-light);margin-bottom:8px;">对应人物：</div>
+    <div class="palette-characters">
+      ${chars.map(ch => `<div class="palette-char" onclick="openDetail('${ch.id}')"><img src="${ch.image}" alt="${ch"><span>${ch.name}</span></div>`).join('')}
+    </div>
+  `;
+}
+
+// ===== 16. 关系图谱 =====
+function initRelationGraph() {
+  const svg = document.getElementById('relation-svg');
+  const typeColors = { love: '#C0392B', family: '#2C3E50', friend: '#D4AF37', other: '#6B8E6B' };
+
+  // 画线
+  let linesHtml = '';
+  relations.forEach((r, i) => {
+    const from = characters.find(c => c.id === r.from);
+    const to = characters.find(c => c.id === r.to);
+    if (from && to) {
+      linesHtml += `<line class="relation-line" data-from="${r.from}" data-to="${r.to}" data-type="${r.type}"
+        x1="${from.position.x}" y1="${from.position.y}" x2="${to.position.x}" y2="${to.position.y}"
+        style="stroke:${typeColors[r.type]}30;"/>`;
+    }
+  });
+
+  // 画节点
+  let nodesHtml = '';
+  characters.forEach(c => {
+    nodesHtml += `
+      <g class="relation-node" data-id="${c.id}" onclick="highlightRelations('${c.id}')">
+        <circle cx="${c.position.x}" cy="${c.position.y}" r="30" fill="${c.colorHex}" stroke="#D4AF37" stroke-width="2"/>
+        <text x="${c.position.x}" y="${c.position.y + 4}" fill="#fff" style="font-family:var(--font-serif);font-size:13px;font-weight:700;">${c.name}</text>
+      </g>`;
+  });
+
+  svg.innerHTML = linesHtml + nodesHtml;
+}
+function highlightRelations(id) {
+  document.querySelectorAll('.relation-line').forEach(line => {
+    const active = line.dataset.from === id || line.dataset.to === id;
+    line.classList.toggle('highlight', active);
+    line.style.opacity = active ? '1' : '0.2';
+  });
+}
+
+// ===== 17. 大观园地图 =====
+function initGardenMap() {
+  const svg = document.getElementById('gardenSvg');
+  gardenSpots.forEach(s => {
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('class', 'garden-hotspot');
+    g.setAttribute('data-id', s.id);
+    g.innerHTML = `
+      <circle cx="${s.x}" cy="${s.y}" r="10"/>
+      <text x="${s.x}" y="${s.y - 16}" text-anchor="middle" style="font-family:var(--font-serif);font-size:13px;fill:var(--dai);font-weight:700;">${s.name}</text>
+    `;
+    g.addEventListener('click', () => showGardenPopup(s));
+    svg.appendChild(g);
+  });
+}
+function showGardenPopup(spot) {
+  const popup = document.getElementById('gardenPopup');
+  const svgRect = document.getElementById('gardenSvg').getBoundingClientRect();
+  const mapRect = document.querySelector('.garden-map').getBoundingClientRect();
+  popup.innerHTML = `<h4>${spot.name}</h4><p><strong>居住：</strong>${spot.char}</p><p>${spot.desc}</p>`;
+  popup.style.left = (spot.x / 800 * svgRect.width + 20) + 'px';
+  popup.style.top = (spot.y / 500 * svgRect.height + 20) + 'px';
+  popup.classList.add('show');
+  setTimeout(() => popup.classList.remove('show'), 4000);
+}
+
+// ===== 22. 拼图游戏 =====
+function initPuzzle() {
+  renderPuzzle();
+}
+function renderPuzzle() {
+  const board = document.getElementById('gameBoard');
+  const img = characters[puzzleImageIndex].image;
+  // 3x3, 最后一格为空
+  let order = [0,1,2,3,4,5,6,7,8];
+  // 简单打乱（保证可解）
+  for (let i = 0; i < 30; i++) {
+    const emptyIdx = order.indexOf(8);
+    const neighbors = getNeighbors(emptyIdx);
+    const swap = neighbors[Math.floor(Math.random() * neighbors.length)];
+    [order[emptyIdx], order[swap]] = [order[swap], order[emptyIdx]];
+  }
+  board.innerHTML = order.map((piece, idx) => {
+    if (piece === 8) return `<div class="puzzle-piece empty" data-idx="${idx}"></div>`;
+    const row = Math.floor(piece / 3), col = piece % 3;
+    return `<div class="puzzle-piece" data-idx="${idx}" data-piece="${piece}"
+      style="background-image:url('${img}');background-position:${col*50}% ${row*50}%;"
+      onclick="movePuzzlePiece(${idx})"></div>`;
+  }).join('');
+  puzzleMoves = 0;
+  document.getElementById('gameMoves').textContent = '0';
+  document.getElementById('gameWinText').style.display = 'none';
+}
+function getNeighbors(idx) {
+  const row = Math.floor(idx / 3), col = idx % 3;
+  const n = [];
+  if (row > 0) n.push(idx - 3);
+  if (row < 2) n.push(idx + 3);
+  if (col > 0) n.push(idx - 1);
+  if (col < 2) n.push(idx + 1);
+  return n;
+}
+function movePuzzlePiece(idx) {
+  const board = document.getElementById('gameBoard');
+  const pieces = Array.from(board.children);
+  const emptyEl = pieces.find(p => p.classList.contains('empty'));
+  const emptyIdx = parseInt(emptyEl.dataset.idx);
+  if (!getNeighbors(emptyIdx).includes(idx)) return;
+  // 交换
+  const clickedEl = pieces[idx];
+  const clickedPiece = clickedEl.dataset.piece;
+  const img = characters[puzzleImageIndex].image;
+  if (clickedPiece !== undefined) {
+    const row = Math.floor(parseInt(clickedPiece) / 3), col = parseInt(clickedPiece) % 3;
+    emptyEl.classList.remove('empty');
+    emptyEl.dataset.piece = clickedPiece;
+    emptyEl.style.backgroundImage = `url('${img}')`;
+    emptyEl.style.backgroundPosition = `${col*50}% ${row*50}%`;
+    emptyEl.onclick = () => movePuzzlePiece(emptyIdx);
+  }
+  clickedEl.classList.add('empty');
+  delete clickedEl.dataset.piece;
+  clickedEl.style.backgroundImage = '';
+  clickedEl.onclick = null;
+  puzzleMoves++;
+  document.getElementById('gameMoves').textContent = puzzleMoves;
+  checkPuzzleWin();
+}
+function checkPuzzleWin() {
+  const pieces = Array.from(document.getElementById('gameBoard').children);
+  let won = true;
+  pieces.forEach((p, i) => {
+    if (i === 8) { if (!p.classList.contains('empty')) won = false; }
+    else if (parseInt(p.dataset.piece) !== i) won = false;
+  });
+  if (won) {
+    document.getElementById('gameWinText').style.display = 'inline';
+    showToast(`恭喜！用了 ${puzzleMoves} 步完成拼图！`);
+  }
+}
+function shufflePuzzle() { renderPuzzle(); }
+function changePuzzleImage() {
+  puzzleImageIndex = (puzzleImageIndex + 1) % characters.length;
+  showToast(`切换到：${characters[puzzleImageIndex].name}`);
+  renderPuzzle();
+}
+
+// ===== 20. 弹幕 =====
+const danmakuTexts = [
+  '花谢花飞花满天，红消香断有谁怜',
+  '一个是阆苑仙葩，一个是美玉无瑕',
+  '满纸荒唐言，一把辛酸泪',
+  '假作真时真亦假，无为有处有还无',
+  '世事洞明皆学问，人情练达即文章',
+  '嫩寒锁梦因春冷，芳气笼人是酒香',
+  '寒塘渡鹤影，冷月葬花魂',
+  '偷来梨蕊三分白，借得梅花一缕魂',
+  '孤标傲世偕谁隐，一样花开为底迟',
+  '好风凭借力，送我上青云',
+  '机关算尽太聪明，反算了卿卿性命',
+  '纵有千年铁门槛，终须一个土馒头'
+];
+function toggleDanmaku() {
+  danmakuEnabled = !danmakuEnabled;
+  document.getElementById('danmaku-btn').classList.toggle('active', danmakuEnabled);
+  if (danmakuEnabled) {
+    showToast('弹幕已开启');
+    startDanmaku();
+  } else {
+    showToast('弹幕已关闭');
+    stopDanmaku();
+  }
+}
+function startDanmaku() {
+  const container = document.getElementById('danmaku-container');
+  function spawn() {
+    if (!danmakuEnabled) return;
+    const text = danmakuTexts[Math.floor(Math.random() * danmakuTexts.length)];
+    const el = document.createElement('div');
+    el.className = 'danmaku-item';
+    el.textContent = text;
+    el.style.top = (Math.random() * 160) + 'px';
+    el.style.animationDuration = (10 + Math.random() * 8) + 's';
+    container.appendChild(el);
+    setTimeout(() => el.remove(), 18000);
+  }
+  spawn();
+  danmakuTimer = setInterval(spawn, 2500);
+}
+function stopDanmaku() {
+  clearInterval(danmakuTimer);
+  document.getElementById('danmaku-container').innerHTML = '';
+}
+
+// ===== 24. 夜间模式 =====
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  showToast(isDark ? '日间模式' : '夜间模式');
+}
+
+// ===== 25. 字体大小 =====
+function toggleFontSize() {
+  fontSizeState = (fontSizeState + 1) % 3;
+  document.body.classList.remove('font-large', 'font-small');
+  if (fontSizeState === 1) document.body.classList.add('font-large');
+  if (fontSizeState === 2) document.body.classList.add('font-small');
+  const labels = ['标准字体', '大字体', '小字体'];
+  showToast(labels[fontSizeState]);
+}
+
+// ===== 26. 背景音乐（Web Audio 合成） =====
+function toggleMusic() {
+  const player = document.getElementById('musicPlayer');
+  if (!musicPlaying) {
+    player.classList.add('visible');
+    startMusic();
+  } else {
+    stopMusic();
+  }
+}
+function startMusic() {
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    musicPlaying = true;
+    document.getElementById('musicPlayBtn').textContent = '⏸';
+    // 简单的五声音阶旋律（红楼梦风格）
+    const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25]; // C D E G A C
+    const melody = [0, 2, 4, 2, 3, 1, 0, 2, 4, 5, 4, 2, 3, 1, 0, -1];
+    let step = 0;
+    function playNote() {
+      if (!musicPlaying) return;
+      const idx = melody[step % melody.length];
+      if (idx >= 0) {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = notes[idx];
+        gain.gain.setValueAtTime(0, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.8);
+        musicNodes.push(osc);
+      }
+      step++;
+      setTimeout(playNote, 500);
+    }
+    playNote();
+    showToast('音乐播放中');
+  } catch (e) {
+    showToast('音频初始化失败');
+  }
+}
+function stopMusic() {
+  musicPlaying = false;
+  document.getElementById('musicPlayBtn').textContent = '▶';
+  if (audioCtx) {
+    audioCtx.close();
+    audioCtx = null;
+  }
+}
+
+// ===== 27. 全屏 =====
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => showToast('无法进入全屏'));
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+// ===== 29. 分享 =====
+function sharePage() {
+  const url = window.location.href;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => showToast('链接已复制到剪贴板'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('链接已复制到剪贴板');
+  }
+}
+
+// ===== 6. 搜索框切换 =====
+function toggleSearch() {
+  document.getElementById('searchBox').classList.toggle('open');
+  setTimeout(() => document.getElementById('searchInput').focus(), 100);
+}
+
+// ===== 滚动到区块 =====
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - 64;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+}
+
+// ===== Toast =====
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// 键盘 ESC 关闭弹窗
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeDetail();
+    document.getElementById('compareResult').classList.remove('open');
+  }
+});
+
+// 拦截所有锚点链接，使用带导航栏偏移的平滑滚动
+document.addEventListener('click', e => {
+  const link = e.target.closest('a[href^="#"]');
+  if (link) {
+    const id = link.getAttribute('href').slice(1);
+    if (id && document.getElementById(id)) {
+      e.preventDefault();
+      scrollToSection(id);
+    }
+  }
+});
+</script>
+</body>
+</html>
