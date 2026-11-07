@@ -206,9 +206,12 @@
 .to-top svg{width:20px;height:20px}
 
 /* header 文字導覽（桌機 ≥900px 顯示；手機由目錄鈕取代） */
-.header-nav{display:none}
+.header-nav{display:none !important}
+@media(max-width:899.98px){
+  .header-nav{display:none !important}
+}
 @media(min-width:900px){
-  .header-nav{display:flex;align-items:center;gap:1.5rem;margin-left:auto;margin-right:1.1rem}
+  .header-nav{display:flex !important;align-items:center;gap:1.5rem;margin-left:auto;margin-right:1.1rem}
   .header-actions{margin-left:0}
 }
 .header-nav a{font-size:.92rem;font-weight:600;letter-spacing:.01em;color:var(--ink-dim);
