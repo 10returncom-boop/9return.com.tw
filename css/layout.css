@@ -145,7 +145,8 @@
 /* ---------- Footer ---------- */
 .site-footer{border-top:1px solid var(--line);background:var(--bg-1);margin-top:2rem}
 .footer-top{display:grid;gap:2rem;padding:3.2rem 0}
-@media(min-width:860px){.footer-top{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+@media(min-width:860px){.footer-top{grid-template-columns:1.5fr 1fr 1.15fr}
+.footer-nav ul{columns:2;column-gap:1.4rem}}
 .footer-col h4{font-size:.98rem;margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
 .footer-col h4 svg{width:16px;height:16px;color:var(--cool-bright)}
 .footer-col li{margin-bottom:.55rem}
